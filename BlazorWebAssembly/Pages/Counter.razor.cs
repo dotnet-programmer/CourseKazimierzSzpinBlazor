@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorWebAssembly.Services;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorWebAssembly.Pages;
 
@@ -12,11 +13,17 @@ public partial class Counter
 	public int Header { get; set; }
 	[Parameter]
 	public bool? IsDeleted { get; set; }
-
 	// ta właściwość z takm atrybutem służy do przekazywania parametrów przez adres doklejając po znaku zapytania jego nazwę z przypisaniem wartości:
 	// localhost/counter-par?arg1=1
 	[SupplyParameterFromQuery(Name = "Header2")]
 	public string Header2 { get; set; }
+
+	// atrybut DI [Inject] - oznacza wstrzyknięcie/użycie implementacji serwisu zarejestrowanego w Program.cs
+	[Inject]
+	public IStudentRepo StudentRepo { get; set; }
+	private void AddStudent()
+		=> StudentRepo.Add();
+
 
 	private void IncrementCount()
 		=> _currentCount++;

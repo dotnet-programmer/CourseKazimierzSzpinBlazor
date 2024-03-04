@@ -69,6 +69,18 @@ else
 
 <hr />
 
+<button class="btn btn-primary mb-3" @onclick="AddStudent">Dodaj studenta</button>
+<p>Ilość uczniów: @StudentRepo.Get().Count</p>
+<h3>Studenci:</h3>
+<ul>
+	@foreach (var item in StudentRepo.Get())
+	{
+		<li>@item.Name</li>
+	}
+</ul>
+
+<hr />
+
 @* Navigation Manager - przemieszczanie się w kodzie między stronami *@
 <button class="btn btn-primary my-3" @onclick="GoToIndex">Strona główna</button>
 <button class="btn btn-primary my-3" @onclick="GoToSiteWithParameters">Przekaż parametry</button>
