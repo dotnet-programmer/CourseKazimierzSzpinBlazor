@@ -1,8 +1,43 @@
-﻿@page "/counter"
+﻿@* routing - strona_główna/counter *@
+@page "/counter"
+
+@* 
+	routing - wiele ścieżek do 1 strony:
+	@page "/counter"
+	@page "/counter-test" 
+*@
+
+@* 
+	Przekazanie parametru do strony poprzez ścieżkę:
+	header - nazwa parametru, żeby go użyć trzeba w code-behind dodać nową właściwość o takiej nazwie z atrybutem [Parameter]
+	Jeżeli parametr ma być opcjonalny, to po nazwie trzeba dodać znak zapytania.
+	Jeżeli nie zostanie wskazany typ parametru, to domyślnie jest to string.
+	Żeby wskazać typ parametru trzeba po nazwie parametru dopisać ":int" dla inta itp.
+	Parametrów może byc wiele, oddziela się je ukośnikami.
+	*@
+@page "/counter-par/{header:int}/{isDeleted:bool?}"
 
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
+
+@* Odczytanie parametru podanego do strony poprzez ścieżkę: *@
+<h2>Wartość parametru przekazanego poprzez ścieżkę: @Header</h2>
+<h2>Druga wartość parametru przekazanego poprzez ścieżkę:</h2>
+@if (!IsDeleted.HasValue)
+{
+	<p>NULL</p>
+}
+else if (IsDeleted.GetValueOrDefault())
+{
+	<p>TRUE</p>
+}
+else
+{
+	<p>FALSE</p>
+}
+
+<h2>Wartość parametru przekazanego poprzez ścieżkę z podaniem nazwy właściwości: @Header2</h2>
 
 <p role="status">Current count: @_currentCount</p>
 
@@ -29,8 +64,13 @@ else
 
 @* Użycie komponentu bez użycia Globa Using *@
 <BlazorWebAssembly.Components.Common.Table></BlazorWebAssembly.Components.Common.Table>
-
 @* Użycie komponentu używając using *@
 <Table></Table>
+
+<hr />
+
+@* Navigation Manager - przemieszczanie się w kodzie między stronami *@
+<button class="btn btn-primary my-3" @onclick="GoToIndex">Strona główna</button>
+<button class="btn btn-primary my-3" @onclick="GoToSiteWithParameters">Przekaż parametry</button>
 
 @* Sekcja @code przeniesiona do pliku code-behind: Counter.razor.cs *@
