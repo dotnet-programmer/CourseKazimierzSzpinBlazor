@@ -1,9 +1,16 @@
-﻿@page "/"
+﻿@*
+	strona główna oznaczona jako @page "/".
+	Kod tej strony trafia do Layoutu i jest wstawiany tam gdzie @Body.
+*@
 
+@page "/"
+
+@* Tytuł strony *@
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
+@* Komponent o nazwie "SurveyPrompt", dodatkowo można przekazać do niego argumenty wywołania, tutaj "Title" *@
 <SurveyPrompt Title="How is Blazor working for you?" />

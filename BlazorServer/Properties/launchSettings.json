@@ -1,3 +1,5 @@
+// Plik konfiguracyjny uruchomienia projektu
+
 {
   "iisSettings": {
     "windowsAuthentication": false,

@@ -1,12 +1,23 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-    </Found>
-    <NotFound>
-        <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
+﻿@* Główny składnik aplikacji. *@
+
+<Router AppAssembly="@typeof(App).Assembly">
+
+	@* Konfiguruje routing klienta, dzięki temu można poprawnie wyświetlić szukaną stronę w przeglądarce. *@
+	<Found Context="routeData">
+
+		@* Definicja domyślnego Layoutu *@
+		<RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+
+		<FocusOnNavigate RouteData="@routeData" Selector="h1" />
+
+	</Found>
+
+	@*  Wygląd aplikacji gdy nie uda się odnaleźć szukanego adresu (404 not found) *@
+	<NotFound>
+		<PageTitle>Not found</PageTitle>
+		<LayoutView Layout="@typeof(MainLayout)">
+			<p role="alert">Sorry, there's nothing at this address.</p>
+		</LayoutView>
+	</NotFound>
+
 </Router>
