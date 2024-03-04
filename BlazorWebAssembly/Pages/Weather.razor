@@ -1,4 +1,6 @@
 ﻿@page "/weather"
+
+@* Wstrzyknięcie serwisu HttpClient przez DI *@
 @inject HttpClient Http
 
 <PageTitle>Weather</PageTitle>
@@ -7,6 +9,11 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
+@* 
+	ta instrukcja działa tak, że po wejściu na stronę tablica forecasts jest pusta więc wywietli się "Loading"
+	ale jak w części code dane się załadują to warunk jest sprawdzany jeszcze raz i wtedy wyświetli się cała tabela 
+	w zwykłym ASP.NET Core do takich zmian trzeba było używać ajaxa
+*@
 @if (forecasts == null)
 {
     <p><em>Loading...</em></p>
@@ -36,11 +43,14 @@ else
     </table>
 }
 
+@* Wstrzyknięty serwis HttpClient można używać w tej sekcji z kodem C# *@
 @code {
     private WeatherForecast[]? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
+		// sztuczne opóźnienie do testów
+		await Task.Delay(2000);
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
     }
 
