@@ -25,4 +25,12 @@ else
 <p class="text-light bg-info p-2">Ten produkt jest: @(_isActive ? "AKTYWNY" : "NIEAKTYWNY") </p>
 <p class="text-light @(_isActive ? "bg-success" : "bg-danger") p-2">Ten produkt jest: @(_isActive ? "AKTYWNY" : "NIEAKTYWNY") </p>
 
+<hr />
+
+@* Użycie komponentu bez użycia Globa Using *@
+<BlazorWebAssembly.Components.Common.Table></BlazorWebAssembly.Components.Common.Table>
+
+@* Użycie komponentu używając using *@
+<Table></Table>
+
 @* Sekcja @code przeniesiona do pliku code-behind: Counter.razor.cs *@
