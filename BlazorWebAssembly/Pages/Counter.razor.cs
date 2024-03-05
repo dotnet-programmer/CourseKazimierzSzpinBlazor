@@ -25,7 +25,17 @@ public partial class Counter
 		=> StudentRepo.Add();
 
 	private void IncrementCount()
-		=> _currentCount++;
+	{
+		try
+		{
+			_currentCount++;
+			throw new Exception("Error 123");
+		}
+		catch (Exception ex)
+		{
+            Console.WriteLine(ex.Message);
+        }
+	}
 
 	private void ToggleActive()
 		=> _isActive = !_isActive;

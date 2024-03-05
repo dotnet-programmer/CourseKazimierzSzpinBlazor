@@ -11,7 +11,24 @@
 
         <article class="content px-4">
 			<h1>Nagłówek z MainLayout.razor</h1>
-			@Body
+
+			@* Globalna obsługa wyjątków *@
+			@* @ref - wiązanie pola z komponentem *@
+			<ErrorBoundary @ref="_errorBoundary">
+
+				@* tutaj określa się kod który ma być objęty obsługą wyjątków *@
+				<ChildContent>
+					@Body
+				</ChildContent>
+
+				@* tutaj określa się jak ma wyglądać wyświetlana strona z błędem *@
+				<ErrorContent>
+					<h1 class="text-danger">Wystąpił nieoczekiwany wyjątek</h1>
+					<p>Spróbuj ponownie lub skontaktuj się z administratorem</p>
+				</ErrorContent>
+
+			</ErrorBoundary>
+
         </article>
     </main>
 </div>
