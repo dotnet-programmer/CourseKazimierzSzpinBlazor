@@ -1,13 +1,13 @@
 ﻿@* routing - strona_główna/counter *@
 @page "/counter"
 
-@* 
+@*
 	routing - wiele ścieżek do 1 strony:
 	@page "/counter"
-	@page "/counter-test" 
+	@page "/counter-test"
 *@
 
-@* 
+@*
 	Przekazanie parametru do strony poprzez ścieżkę:
 	header - nazwa parametru, żeby go użyć trzeba w code-behind dodać nową właściwość o takiej nazwie z atrybutem [Parameter]
 	Jeżeli parametr ma być opcjonalny, to po nazwie trzeba dodać znak zapytania.
@@ -24,6 +24,11 @@
 	<meta name="description" content="Strona Blazor - meta desc" />
 	<meta name="keywords" content="programowanie, aplikacja, blazor" />
 </HeadContent>
+
+@* Sekcje - to co jest w SectionContent trafia do SectionOutlet o podanym Id i będzie tam wyświetlone *@
+<SectionContent SectionId="MainLayout.TopSection">
+	<p>Podstrona counter. Licznik: @_currentCount</p>
+</SectionContent>
 
 <h1>Counter</h1>
 

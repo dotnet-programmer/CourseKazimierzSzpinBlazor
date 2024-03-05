@@ -6,6 +6,18 @@
 
     <main>
         <div class="top-row px-4">
+
+			@* 
+				sekcje - można je tworzyć na 2 sposoby:
+				- używając nazwy - SectionName, np. <SectionOutlet SectionName="top" />
+				- używając Id (lepsza rozwiązanie) np. <SectionOutlet SectionId="TopSection" />
+					najpierw stworzyć nowy obiekt z odpowiednią nazwą w kodzie C#
+					dzięki temu można odnosić się do tej konkretnej sekcji nie po stringu tylko po nazwie obiektu
+				SectionOutlet oznacza utworzenie takiego miejsca na sekcję, w którym na pozostałych stronach można wyświetlić ich własne sekcje za pomocą SectionContent
+				czyli to taki placeholder mówiący że tutaj można dodać własną sekcję
+			*@
+			<SectionOutlet SectionId="TopSection" />
+
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 

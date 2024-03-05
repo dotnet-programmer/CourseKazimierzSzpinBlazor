@@ -11,4 +11,7 @@ public partial class MainLayout
 		// wygaszenie wyjątku
 		_errorBoundary?.Recover();
 	}
+
+	// obiekt dla sekcji z Id
+	public static object TopSection = new();
 }
