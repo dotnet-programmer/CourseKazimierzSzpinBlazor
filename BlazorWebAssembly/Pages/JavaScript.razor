@@ -19,3 +19,16 @@ else
 <br />
 
 <button class="btn btn-info btn-lg mt-3" @onclick="DisplayResultJS">Wyświetl wynik dodawania (JavaScript)</button>
+
+<br />
+
+<button class="btn btn-dark btn-lg mt-3" @onclick="DisplayResultCSharp">Wyświetl wynik dodawania (Wywołaj C# w JavaScript)</button>
+
+<br />
+
+<button class="btn btn-dark btn-lg mt-3" @onclick="DisplayDateCSharp">Wyświetl datę (Wywołaj C# w JavaScript)</button>
+
+@if (!string.IsNullOrWhiteSpace(_currentDate))
+{
+	<p class="text-success mt-2">Date: @_currentDate</p>
+}

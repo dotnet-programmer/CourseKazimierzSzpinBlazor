@@ -28,4 +28,28 @@ public partial class JavaScript
 	{
 		await JSRuntime.InvokeVoidAsync("addNumberJS", 1, 2);
 	}
+
+	// dodanie metody w C# i użycie jej w JavaScript
+	// taka metoda musi być publiczna i statyczna
+	// musi mieć atrybut [JSInvokable], żeby była dostępna w skryptach JS
+	[JSInvokable]
+	public static int Add(int number1, int number2)
+	{
+		return number1 + number2;
+	}
+	private async Task DisplayResultCSharp()
+	{
+		await JSRuntime.InvokeVoidAsync("addNumberCSharp", 2, 4);
+	}
+	[JSInvokable]
+	public static string GetCurrentDate()
+	{
+		return DateTime.Now.ToString("d");
+	}
+	private string _currentDate = string.Empty;
+	private async Task DisplayDateCSharp()
+	{
+		_currentDate = await JSRuntime.InvokeAsync<string>("GetCurrentDateCSharp");
+	}
+
 }
