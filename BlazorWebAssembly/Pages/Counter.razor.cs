@@ -24,7 +24,6 @@ public partial class Counter
 	private void AddStudent()
 		=> StudentRepo.Add();
 
-
 	private void IncrementCount()
 		=> _currentCount++;
 

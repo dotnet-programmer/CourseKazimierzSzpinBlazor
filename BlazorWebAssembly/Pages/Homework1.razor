@@ -1,0 +1,7 @@
+﻿@page "/homework1/{myparameter?}"
+
+<PageTitle>Homework 1</PageTitle>
+
+<h1>@(string.IsNullOrWhiteSpace(MyParameter) ? "Praca domowa" : MyParameter)</h1>
+
+<button class="btn btn-primary my-3" @onclick="GoToIndex">Strona główna</button>
