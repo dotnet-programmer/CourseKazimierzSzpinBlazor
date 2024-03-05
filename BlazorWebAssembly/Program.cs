@@ -14,4 +14,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 // zarejestrowanie serwisu IStudentRepo w DI
 builder.Services.AddScoped<IStudentRepo, StudentRepo>();
 
+// zarejestrowanie serwisu IToastrService - biblioteka JS - ToastR dzi³aj¹ca w Blazorze
+builder.Services.AddScoped<IToastrService, ToastrService>();
+
 await builder.Build().RunAsync();

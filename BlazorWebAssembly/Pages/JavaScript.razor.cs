@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorWebAssembly.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BlazorWebAssembly.Pages;
@@ -61,5 +62,14 @@ public partial class JavaScript
 	private async Task DisplayResultJsModule()
 	{
 		await _jsModule.InvokeVoidAsync("addNumberJSModule", 5, 5);
+	}
+
+
+	// używanie bibliotek JS w C#
+	[Inject]
+	public IToastrService ToastrService { get; set; }
+	private async Task DisplayToastrNotification()
+	{
+		await ToastrService.ShowInfoMessage("Toastr wywołany w Blazor!");
 	}
 }
