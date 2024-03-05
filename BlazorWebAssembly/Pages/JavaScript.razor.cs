@@ -52,4 +52,14 @@ public partial class JavaScript
 		_currentDate = await JSRuntime.InvokeAsync<string>("GetCurrentDateCSharp");
 	}
 
+	// moduł JS
+	private IJSObjectReference _jsModule;
+	protected override async Task OnInitializedAsync()
+	{
+		_jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./scripts/jsTestModule.js");
+	}
+	private async Task DisplayResultJsModule()
+	{
+		await _jsModule.InvokeVoidAsync("addNumberJSModule", 5, 5);
+	}
 }
