@@ -64,12 +64,23 @@ public partial class JavaScript
 		await _jsModule.InvokeVoidAsync("addNumberJSModule", 5, 5);
 	}
 
-
 	// używanie bibliotek JS w C#
 	[Inject]
 	public IToastrService ToastrService { get; set; }
 	private async Task DisplayToastrNotification()
 	{
 		await ToastrService.ShowInfoMessage("Toastr wywołany w Blazor!");
+	}
+
+	// praca domowa 2
+	private string _newString = string.Empty;
+	private async Task DisplayNewString()
+	{
+		// TValue oznacza typ wartości zwracanej
+		_newString = await JSRuntime.InvokeAsync<string>("joinStrings", "Funkcja", "String", "-");
+	}
+	private async Task ChangeBackgroundColor()
+	{
+		await JSRuntime.InvokeVoidAsync("changeBackgroundColor");
 	}
 }

@@ -40,3 +40,15 @@ else
 <br />
 
 <button class="btn btn-success btn-lg mt-3" @onclick="DisplayToastrNotification">Wyświetl notyfikację (toastr)</button>
+
+<br />
+
+<button class="btn btn-success btn-lg mt-3" @onclick="DisplayNewString">Wyświetl połączone wyrazy (JS)</button>
+@if (!string.IsNullOrWhiteSpace(_newString))
+{
+	<p class="text-success mt-2">Text: @_newString</p>
+}
+
+<br />
+
+<button class="btn btn-success btn-lg mt-3" @onclick="ChangeBackgroundColor">Zmień kolor tła</button>
