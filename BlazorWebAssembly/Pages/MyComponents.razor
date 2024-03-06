@@ -40,10 +40,14 @@
 	}
 </div>
 
+<button class="btn btn-danger" @onclick="ChangeBtnText">
+	Zmień tekst przycisku
+</button>
+
 <h3>komponent z argumentem kaskadowym - przekazana wartość z elementu nadrzędnego</h3>
 <CascadingValue Value="@_info">
 	<Card Image="files/kowalski.png"
-		  BtnText="Więcej">
+		  BtnText="@_btnText">
 		<Title>
 			<b>Jan Kowalski</b>
 		</Title>

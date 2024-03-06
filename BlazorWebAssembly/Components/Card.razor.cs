@@ -75,4 +75,37 @@ public partial class Card
 	// trzeba dodać w typie generycznym parametry które są przekazywane dla konkretnego zdarzenia
 	// w nadrzędnym komponenie trzeba też dodać takie sam parametr do metody
 	public EventCallback<MouseEventArgs> JustParameterWithoutMethodWithParameter { get; set; }
+
+
+	// kolejność metod wywoływanych podczas cyklu życia komponentu
+	// ta metoda ustawia parametry, które zostały przekazane przez nadrzędny komponent
+	public override async Task SetParametersAsync(ParameterView parameters)
+	{
+        Console.WriteLine("SetParametersAsync");
+        await base.SetParametersAsync(parameters);
+	}
+	// ta metoda jest wywoływana po tym gdy parametry zostały już ustawione, a komponent został prawidłowo zainicjalizowany
+	// tutaj robiona jest inicjalizacja moich obiektów, pobieranie danych z bazy danych itd
+	protected override async Task OnInitializedAsync()
+	{
+        Console.WriteLine("OnInitializedAsync");
+		await base.OnInitializedAsync();
+	}
+	// ta metoda jest wywoływana po tym jak komponent został zainicjalizowany i za każdym razem gdy parametry zostaną zmienione i komponent zostanie ponownie przerenderowany
+	protected override async Task OnParametersSetAsync()
+	{
+        Console.WriteLine("OnParametersSetAsync");
+		await base.OnParametersSetAsync();
+	}
+	// ta metoda zostanie wywołana gdy komponent kończy renderowanie,
+	// dodatkowo na podstawie wartości parmetru firstRender można zweryfikować czy było to pierwsze renderowanie (firstRender=true) czy kolejne (firstRender=false)
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			Console.WriteLine("OnAfterRenderAsync - firstRender");
+		}
+		Console.WriteLine("OnAfterRenderAsync");
+		await base.OnAfterRenderAsync(firstRender);
+	}
 }
