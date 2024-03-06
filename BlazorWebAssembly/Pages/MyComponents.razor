@@ -2,13 +2,20 @@
 
 <h3>Komponenty</h3>
 
+<h3>odwołanie do podrzędnego komponentu</h3>
+<button class="btn btn-secondary my-2" @onclick="AddCardBorder">
+	Dodaj obramowanie
+</button>
+
 <h3>komponent z parametrami</h3>
 @* <Card Image="files/kowalski.png"
 	  Title="Jak Kowalski"
 	  BtnText="Więcej"
 	  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" /> *@
 <h3>Szablon HTML jako parametr przekazywany do komponentu</h3>
-<Card Image="files/kowalski.png"
+<Card 
+	  @ref="_card"
+	  Image="files/kowalski.png"
 	  BtnText="Więcej">
 	<Title>
 		<b>Jan Kowalski</b>

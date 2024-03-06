@@ -12,7 +12,6 @@ public partial class Card
 	// jako parametr do komponentu można przekazać szablony czyli kod w HTML,
 	// czyli lista, tabela, nagłówek itp jako parametr, który zostanie wyrenderowany wewnątrz komponentu
 	// w tym przypadku trzeba użyć typu RenderFragment zamiast np. string
-
 	[Parameter]
     public string Image { get; set; }
 	[Parameter]
@@ -107,5 +106,13 @@ public partial class Card
 		}
 		Console.WriteLine("OnAfterRenderAsync");
 		await base.OnAfterRenderAsync(firstRender);
+	}
+
+
+	//odwołanie do podrzędnego komponentu
+	private string _additionalCardClasses;
+	public void AddCardBorder()
+	{
+		_additionalCardClasses = "border-3 border-success";
 	}
 }

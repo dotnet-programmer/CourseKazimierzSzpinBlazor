@@ -1,4 +1,5 @@
-﻿using BlazorWebAssembly.Models;
+﻿using BlazorWebAssembly.Components;
+using BlazorWebAssembly.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -76,4 +77,12 @@ public partial class MyComponents
 		{ "disabled", false },
 		{ "type", "button" },
 	};
+
+
+	//odwołanie do podrzędnego komponentu
+	private Card _card;
+	private void AddCardBorder()
+	{
+		_card.AddCardBorder();
+	}
 }
