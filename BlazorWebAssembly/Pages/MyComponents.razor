@@ -2,4 +2,19 @@
 
 <h3>Komponenty</h3>
 
-<Card></Card>
+@* komponent z parametrami *@
+<Card Image="files/kowalski.png"
+	  Title="Jak Kowalski"
+	  BtnText="Więcej"
+	  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
+
+@* komponent z parametrami w pętli *@
+<div class="d-flex gap-2">
+	@foreach (var item in _authors)
+	{
+		<Card Image="@item.Image"
+			  Title="@item.Title"
+			  BtnText="@item.BtnText"
+			  Content="@item.Content" />
+	}
+</div>
