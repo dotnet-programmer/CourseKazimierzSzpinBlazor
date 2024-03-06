@@ -12,4 +12,9 @@ public partial class MyComponents
 		new CardModel { Title = "Anna Nowak", Content = "Programista C#/.NET z 10 letnim doświadczeniem.Specjalizacje: WPF", Image = "/files/nowak.png", BtnText = "Więcej"},
 		new CardModel { Title = "Błażej Kwiatkowski", Content = "Programista C#/.NET z 3 letnim doświadczeniem.Specjalizacje: Frontend", Image = "/files/kwiatkowski.png", BtnText = "Więcej" }
 	];
+
+	// parametr kaskadowy
+	private string _info = "Komunikat - parametr kaskadowy";
+	// więcej niż 1 parametr kaskadowy 
+	private string _title = "Tytuł - kolejny parametr kaskadowy";
 }

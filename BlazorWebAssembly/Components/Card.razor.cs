@@ -17,4 +17,6 @@ public partial class Card
 	[Parameter]
 	public string BtnText { get; set; }
 
+	// parametr kaskadowy
+	private string _info = "Komunikat z CARD";
 }

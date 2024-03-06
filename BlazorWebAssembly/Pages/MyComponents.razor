@@ -18,3 +18,21 @@
 			  Content="@item.Content" />
 	}
 </div>
+
+@* komponent z argumentem kaskadowym - przekazana wartość z elementu nadrzędnego *@
+<CascadingValue Value="@_info">
+	<Card Image="files/kowalski.png"
+		  Title="Jak Kowalski"
+		  BtnText="Więcej"
+		  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
+</CascadingValue>
+
+@* komponent z wieloma argumentami kaskadowymi - przekazana wartość z elementu nadrzędnego *@
+<CascadingValue Name="Title" Value="@_title">
+	<CascadingValue Name="Info" Value="@_info">
+		<Card Image="files/kowalski.png"
+			  Title="Jak Kowalski"
+			  BtnText="Więcej"
+			  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
+	</CascadingValue>
+</CascadingValue>

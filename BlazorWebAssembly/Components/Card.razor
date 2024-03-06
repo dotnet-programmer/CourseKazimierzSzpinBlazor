@@ -1,8 +1,17 @@
-﻿<div class="card my-2 mx-1" style="width: 18rem;">
-	<img src="@Image" class="card-img-top" alt="@Title">
-	<div class="card-body">
-		<h5 class="card-title">@Title</h5>
-		<p class="card-text">@Content</p>
-		<button class="btn btn-primary">@BtnText</button>
+﻿<div class="flex-column">
+	<div class="card my-2 mx-1" style="width: 18rem;">
+		<img src="@Image" class="card-img-top" alt="@Title">
+		<div class="card-body">
+			<h5 class="card-title">@Title</h5>
+			<p class="card-text">@Content</p>
+			<button class="btn btn-primary">@BtnText</button>
+		</div>
 	</div>
+
+	@* parametr kaskadowy *@
+	@* 	<CascadingValue Value="@_info">
+	<AdditionalInfo />
+	</CascadingValue> *@
+
+	<AdditionalInfo />
 </div>
