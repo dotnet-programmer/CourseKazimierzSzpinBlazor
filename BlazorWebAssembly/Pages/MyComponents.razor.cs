@@ -42,4 +42,24 @@ public partial class MyComponents
 		// po kliknięciu przekierowanie na stronę główną
 		NavigationManager.NavigateTo("/");
 	}
+
+	// przekazanie atrybutów HTML
+	// wywołanie w HTML: @attributes="_cardAttributes"
+	private Dictionary<string, object> _cardAttributes = new()
+	{
+		{ "BtnClass", "btn btn-success" },
+		{ "BtnTitle", "Więcej..." },
+		{ "BtnDisabled", false },
+		{ "Style", "" },
+	};
+
+	// można też pozwolić na przekazanie dowolnych atrybutów komponentu nadrzędnego, nawet takich, które nie są zaimplementowane w komponencie
+	// dzięki temu wszystkie przekazane tutaj atrybuty zostaną wstawione do odpowiednio oznaczonego buttona
+	private Dictionary<string, object> _cardBtnAttributes = new()
+	{
+		{ "class", "btn btn-success" },
+		{ "title", "Więcej..." },
+		{ "disabled", false },
+		{ "type", "button" },
+	};
 }

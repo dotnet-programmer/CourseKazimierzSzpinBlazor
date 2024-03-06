@@ -1,22 +1,30 @@
-﻿<div class="flex-column">
-	<div class="card my-2 mx-1" style="width: 18rem;">
-		<img src="@Image" class="card-img-top" alt="@Title">
-		<div class="card-body">
-			<h5 class="card-title">@Title</h5>
-			<p class="card-text">@Content</p>
-			@* wywołanie funkcji *@
-			<button @onclick="ClickMore" class="btn btn-primary">@BtnText</button>
-			@* wywołanie funkcji z parametrem *@
-			<button @onclick="ClickMoreString" class="btn btn-primary">@BtnText</button>
-			@* jeżeli logika komponentu niczego nie robi w wywoływanej metodzie, to można pominąć tworzenie metody i przypisać tu bezpośrednio właściwość typu EventCallback*@
-			<button @onclick="JustParameterWithoutMethod" class="btn btn-primary">@BtnText</button>
+﻿<div style="@Style">
+	<div class="flex-column">
+		<div class="card my-2 mx-1" style="width: 18rem;">
+			<img src="@Image" class="card-img-top" alt="@Title">
+			<div class="card-body">
+				<h5 class="card-title">@Title</h5>
+				<p class="card-text">@Content</p>
+				@* wywołanie funkcji *@
+				@* <button @onclick="ClickMore" class="btn btn-primary">@BtnText</button> *@
+				<button @onclick="ClickMore" class="@BtnClass" title="@BtnTitle">@BtnText</button>
+				@* wywołanie funkcji z parametrem *@
+				@* <button @onclick="ClickMoreString" class="btn btn-primary">@BtnText</button> *@
+				<button @onclick="ClickMoreString" class="@BtnClass" disabled="@BtnDisabled">@BtnText</button>
+				@* jeżeli logika komponentu niczego nie robi w wywoływanej metodzie, to można pominąć tworzenie metody i przypisać tu bezpośrednio właściwość typu EventCallback*@
+				@* <button @onclick="JustParameterWithoutMethod" class="btn btn-primary">@BtnText</button> *@
+				<button @onclick="JustParameterWithoutMethod" class="@BtnClass">@BtnText</button>
+
+				@* można też pozwolić na przekazanie dowolnych atrybutów komponentu nadrzędnego, nawet takich, które nie są zaimplementowane w komponencie *@
+				<button @attributes="BtnAttributes" @onclick="JustParameterWithoutMethod">@BtnText</button>
+			</div>
 		</div>
+
+		@* parametr kaskadowy *@
+		@* 	<CascadingValue Value="@_info">
+		<AdditionalInfo />
+		</CascadingValue> *@
+
+		<AdditionalInfo />
 	</div>
-
-	@* parametr kaskadowy *@
-	@* 	<CascadingValue Value="@_info">
-	<AdditionalInfo />
-	</CascadingValue> *@
-
-	<AdditionalInfo />
 </div>

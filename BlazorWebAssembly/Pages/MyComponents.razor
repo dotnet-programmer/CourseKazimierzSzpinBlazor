@@ -107,6 +107,33 @@
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
 			  BtnText="Więcej"
+			  BtnClass="btn btn-danger"
+			  BtnTitle="BtnTitle"
+			  @attributes="_cardAttributes"
+			  OnClickMoreString="MyClickMoreString">
+			<Title>
+				<b>Jan Kowalski</b>
+			</Title>
+			<Content>
+				<u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
+				<br />
+				<u>Specjalizacje:</u>
+				<ul>
+					<li>Blazor</li>
+					<li>ASP.NET Core</li>
+				</ul>
+			</Content>
+		</Card>
+	</CascadingValue>
+</CascadingValue>
+
+<CascadingValue Name="Title" Value="@_title">
+	<CascadingValue Name="Info" Value="@_info">
+		<Card Image="files/kowalski.png"
+			  BtnText="Więcej"
+			  BtnClass="btn btn-danger"
+			  BtnTitle="BtnTitle"
+			  BtnAttributes="_cardBtnAttributes"
 			  OnClickMoreString="MyClickMoreString">
 			<Title>
 				<b>Jan Kowalski</b>

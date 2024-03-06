@@ -23,6 +23,26 @@ public partial class Card
 	public string BtnText { get; set; }
 
 
+	// do komponentów można przekazywać różne atrybuty HTML i jest na to kilka sposobów
+	// pierwszy - najprostszy - dodanie nowych parametrów, wada tego rozwiązania że trzeba później każdy taki atrybut przypisywać osobno
+	[Parameter]
+	public string Style { get; set; }
+	[Parameter]
+	public string BtnClass { get; set; } = "btn btn-primary";
+	[Parameter]
+	public bool BtnDisabled { get; set; }
+	// atrybut title w THML oznacza dymek po najechaniu kursorem
+	[Parameter]
+	public string BtnTitle { get; set; }
+	// druga metoda to przekazanie słownika C# z parami klucz-wartość, gdzie klucz to string, a wartość to object
+	// taki słownik jest utworzony w komponencie nadrzędnym w jego code-behind
+
+	// można też pozwolić na przekazanie dowolnych atrybutów komponentu nadrzędnego, nawet takich, które nie są zaimplementowane w komponencie
+	// dzięki temu wszystkie przekazane tutaj atrybuty zostaną wstawione do odpowiednio oznaczonego buttona
+	[Parameter(CaptureUnmatchedValues = true)]
+	public Dictionary<string, object> BtnAttributes { get; set; }
+
+
 	// parametr kaskadowy
 	private string _info = "Komunikat z CARD";
 
