@@ -1,4 +1,6 @@
 ﻿using BlazorWebAssembly.Models;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorWebAssembly.Pages;
 
@@ -17,4 +19,27 @@ public partial class MyComponents
 	private string _info = "Komunikat - parametr kaskadowy";
 	// więcej niż 1 parametr kaskadowy 
 	private string _title = "Tytuł - kolejny parametr kaskadowy";
+
+	// zdarzenia w komponentach
+	[Inject]
+	public NavigationManager NavigationManager { get; set; }
+	// metoda która ma zostać wykonana w komponencie nadrzędnym po kliknięciu przycisku w komponencie podrzędnym
+	private void MyClickMore()
+	{
+		// po kliknięciu przekierowanie na stronę główną
+		NavigationManager.NavigateTo("/");
+	}
+	// metoda z parametrem, która ma zostać wywołana w komponencie podrzędnym
+	private void MyClickMoreString(string message)
+	{
+		// po kliknięciu przekierowanie na stronę główną
+		NavigationManager.NavigateTo($"/{message}");
+	}
+	// jeżeli są parametry a w komponencie podrzędnym nie ma metody tylko bezpośrednie przypisanie właściwości wywołującej metodę, 
+	// to trzeba tu dodać parametr odpowiadający typowi konkretnego zdarzenia
+	private void MyClickMoreWithoutMethodWithParameter(MouseEventArgs e)
+	{
+		// po kliknięciu przekierowanie na stronę główną
+		NavigationManager.NavigateTo("/");
+	}
 }

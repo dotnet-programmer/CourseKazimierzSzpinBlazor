@@ -4,7 +4,12 @@
 		<div class="card-body">
 			<h5 class="card-title">@Title</h5>
 			<p class="card-text">@Content</p>
-			<button class="btn btn-primary">@BtnText</button>
+			@* wywołanie funkcji *@
+			<button @onclick="ClickMore" class="btn btn-primary">@BtnText</button>
+			@* wywołanie funkcji z parametrem *@
+			<button @onclick="ClickMoreString" class="btn btn-primary">@BtnText</button>
+			@* jeżeli logika komponentu niczego nie robi w wywoływanej metodzie, to można pominąć tworzenie metody i przypisać tu bezpośrednio właściwość typu EventCallback*@
+			<button @onclick="JustParameterWithoutMethod" class="btn btn-primary">@BtnText</button>
 		</div>
 	</div>
 

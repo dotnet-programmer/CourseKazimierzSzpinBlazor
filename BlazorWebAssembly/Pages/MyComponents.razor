@@ -2,13 +2,13 @@
 
 <h3>Komponenty</h3>
 
-@* komponent z parametrami *@
+<h3>komponent z parametrami</h3>
 <Card Image="files/kowalski.png"
 	  Title="Jak Kowalski"
 	  BtnText="Więcej"
 	  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
 
-@* komponent z parametrami w pętli *@
+<h3>komponent z parametrami w pętli</h3>
 <div class="d-flex gap-2">
 	@foreach (var item in _authors)
 	{
@@ -19,7 +19,7 @@
 	}
 </div>
 
-@* komponent z argumentem kaskadowym - przekazana wartość z elementu nadrzędnego *@
+<h3>komponent z argumentem kaskadowym - przekazana wartość z elementu nadrzędnego</h3>
 <CascadingValue Value="@_info">
 	<Card Image="files/kowalski.png"
 		  Title="Jak Kowalski"
@@ -27,12 +27,34 @@
 		  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
 </CascadingValue>
 
-@* komponent z wieloma argumentami kaskadowymi - przekazana wartość z elementu nadrzędnego *@
+<h3>komponent z wieloma argumentami kaskadowymi - przekazana wartość z elementu nadrzędnego</h3>
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
 			  Title="Jak Kowalski"
 			  BtnText="Więcej"
 			  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
+	</CascadingValue>
+</CascadingValue>
+
+<h3>zdarzenia w komponentach - wywołanie metody</h3>
+<CascadingValue Name="Title" Value="@_title">
+	<CascadingValue Name="Info" Value="@_info">
+		<Card Image="files/kowalski.png"
+			  Title="Jak Kowalski"
+			  BtnText="Więcej"
+			  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" 
+			  OnClickMore="MyClickMore"/>
+	</CascadingValue>
+</CascadingValue>
+
+<h3>zdarzenia w komponentach - wywołanie metody z parametrem</h3>
+<CascadingValue Name="Title" Value="@_title">
+	<CascadingValue Name="Info" Value="@_info">
+		<Card Image="files/kowalski.png"
+			  Title="Jak Kowalski"
+			  BtnText="Więcej"
+			  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core"
+			  OnClickMoreString="MyClickMoreString" />
 	</CascadingValue>
 </CascadingValue>
