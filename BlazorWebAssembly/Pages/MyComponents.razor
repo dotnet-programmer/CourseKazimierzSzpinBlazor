@@ -3,37 +3,80 @@
 <h3>Komponenty</h3>
 
 <h3>komponent z parametrami</h3>
-<Card Image="files/kowalski.png"
+@* <Card Image="files/kowalski.png"
 	  Title="Jak Kowalski"
 	  BtnText="Więcej"
-	  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
+	  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" /> *@
+<h3>Szablon HTML jako parametr przekazywany do komponentu</h3>
+<Card Image="files/kowalski.png"
+	  BtnText="Więcej">
+	<Title>
+		<b>Jan Kowalski</b>
+	</Title>
+	<Content>
+		<u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
+		<br />
+		<u>Specjalizacje:</u>
+		<ul>
+			<li>Blazor</li>
+			<li>ASP.NET Core</li>
+		</ul>
+	</Content>
+</Card>
 
 <h3>komponent z parametrami w pętli</h3>
 <div class="d-flex gap-2">
 	@foreach (var item in _authors)
 	{
 		<Card Image="@item.Image"
-			  Title="@item.Title"
-			  BtnText="@item.BtnText"
-			  Content="@item.Content" />
+			  BtnText="@item.BtnText">
+			<Title>
+				@item.Title
+			</Title>
+			<Title>
+				@item.Content
+			</Title>
+		</Card>
 	}
 </div>
 
 <h3>komponent z argumentem kaskadowym - przekazana wartość z elementu nadrzędnego</h3>
 <CascadingValue Value="@_info">
 	<Card Image="files/kowalski.png"
-		  Title="Jak Kowalski"
-		  BtnText="Więcej"
-		  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
+		  BtnText="Więcej">
+		<Title>
+			<b>Jan Kowalski</b>
+		</Title>
+		<Content>
+			<u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
+			<br />
+			<u>Specjalizacje:</u>
+			<ul>
+				<li>Blazor</li>
+				<li>ASP.NET Core</li>
+			</ul>
+		</Content>
+	</Card>
 </CascadingValue>
 
 <h3>komponent z wieloma argumentami kaskadowymi - przekazana wartość z elementu nadrzędnego</h3>
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
-			  Title="Jak Kowalski"
-			  BtnText="Więcej"
-			  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" />
+			  BtnText="Więcej">
+			<Title>
+				<b>Jan Kowalski</b>
+			</Title>
+			<Content>
+				<u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
+				<br />
+				<u>Specjalizacje:</u>
+				<ul>
+					<li>Blazor</li>
+					<li>ASP.NET Core</li>
+				</ul>
+			</Content>
+		</Card>
 	</CascadingValue>
 </CascadingValue>
 
@@ -41,10 +84,21 @@
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
-			  Title="Jak Kowalski"
 			  BtnText="Więcej"
-			  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" 
-			  OnClickMore="MyClickMore"/>
+			  OnClickMore="MyClickMore">
+			<Title>
+				<b>Jan Kowalski</b>
+			</Title>
+			<Content>
+				<u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
+				<br />
+				<u>Specjalizacje:</u>
+				<ul>
+					<li>Blazor</li>
+					<li>ASP.NET Core</li>
+				</ul>
+			</Content>
+		</Card>
 	</CascadingValue>
 </CascadingValue>
 
@@ -52,9 +106,20 @@
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
-			  Title="Jak Kowalski"
 			  BtnText="Więcej"
-			  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core"
-			  OnClickMoreString="MyClickMoreString" />
+			  OnClickMoreString="MyClickMoreString">
+			<Title>
+				<b>Jan Kowalski</b>
+			</Title>
+			<Content>
+				<u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
+				<br />
+				<u>Specjalizacje:</u>
+				<ul>
+					<li>Blazor</li>
+					<li>ASP.NET Core</li>
+				</ul>
+			</Content>
+		</Card>
 	</CascadingValue>
 </CascadingValue>

@@ -7,18 +7,21 @@ namespace BlazorWebAssembly.Components;
 
 public partial class Card
 {
-	//żeby przekazać parametry do komponentu trzeba zrobić właściwość z atrybutem [Parameter]
+	// żeby przekazać parametry do komponentu trzeba zrobić właściwość z atrybutem [Parameter]
+
+	// jako parametr do komponentu można przekazać szablony czyli kod w HTML,
+	// czyli lista, tabela, nagłówek itp jako parametr, który zostanie wyrenderowany wewnątrz komponentu
+	// w tym przypadku trzeba użyć typu RenderFragment zamiast np. string
+
 	[Parameter]
     public string Image { get; set; }
-
 	[Parameter]
-	public string Title { get; set; }
-
+	public RenderFragment Title { get; set; }
 	[Parameter]
-	public string Content { get; set; }
-
+	public RenderFragment Content { get; set; }
 	[Parameter]
 	public string BtnText { get; set; }
+
 
 	// parametr kaskadowy
 	private string _info = "Komunikat z CARD";
