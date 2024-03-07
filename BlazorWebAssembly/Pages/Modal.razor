@@ -1,0 +1,11 @@
+﻿@page "/modal"
+
+<h3 class="my-2">Okna modalne</h3>
+
+<button @onclick="ShowModalWindow"></button>
+
+<ModalWindow Title="Nowe okno modalne"
+			 Content="Jakiś tekst, najczęściej pytanie o potwierdzenie czegoś."
+			 OnConfirm="Confirm"
+			 OnCancel="Cancel">
+</ModalWindow>
