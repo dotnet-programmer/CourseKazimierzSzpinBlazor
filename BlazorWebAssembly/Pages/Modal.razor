@@ -2,21 +2,23 @@
 
 <h3 class="my-2">Okna modalne</h3>
 
-<button class="btn btn-primary" @onclick="ShowModalWindow">Pokaż okno modalne</button>
-
-@* <ModalWindow Title="Nowe okno modalne"
-			 Content="Jakiś tekst, najczęściej pytanie o potwierdzenie czegoś."
-			 OnConfirm="Confirm"
-			 OnCancel="Cancel">
-</ModalWindow> *@
+<button class="btn btn-primary" @onclick="ShowModalWindow">Pokaż moje okno modalne</button>
+<button class="btn btn-primary" @onclick="ShowModalWindowCourse">Pokaż okno modalne z kursu</button>
 
 <ModalWindow Show="_showModalWindow"
-			 OnAccept="ModalAccept"
+			 Title="Nowe okno modalne"
+			 Content="Jakiś tekst, najczęściej pytanie o potwierdzenie czegoś."
+			 OnConfirm="ModalAccept"
 			 OnCancel="ModalCancel">
+</ModalWindow>
+
+<ModalWindowCourse Show="_showModalWindowCourse"
+				   OnAccept="ModalAccept"
+				   OnCancel="ModalCancel">
 	<Title>
 		Potwierdź operację
 	</Title>
 	<Body>
 		Czy na pewno chcesz usunąć?
 	</Body>
-</ModalWindow>
+</ModalWindowCourse>

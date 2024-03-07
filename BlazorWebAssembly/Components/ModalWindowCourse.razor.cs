@@ -3,20 +3,20 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorWebAssembly.Components;
 
-public partial class ModalWindow
+public partial class ModalWindowCourse
 {
 	[Parameter]
 	public bool Show { get; set; }
 
 	[Parameter]
-	public string Title { get; set; }
+	public RenderFragment Title { get; set; }
 
 	[Parameter]
-	public string Content { get; set; }
+	public RenderFragment Body { get; set; }
 
 	[Parameter]
 	public EventCallback<MouseEventArgs> OnCancel { get; set; }
 
 	[Parameter]
-	public EventCallback<MouseEventArgs> OnConfirm { get; set; }
+	public EventCallback<MouseEventArgs> OnAccept { get; set; }
 }
