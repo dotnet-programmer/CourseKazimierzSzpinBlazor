@@ -1,0 +1,98 @@
+﻿@page "/forms"
+
+<h3>@_header</h3>
+
+
+@* zwykłe inputy HTML: *@
+
+<button @onclick="ChangeHeader" class="btn btn-primary">Zmień nagłówek</button>
+<br />
+@* po wpisaniu danych do inputa aktualizacja danych w polu nastąpi po opuszczeniu focusa (czyli kliknięcie gdziekolwiek poza inputem) *@
+<input @bind="_name" />
+<br />
+@* zapis powyżej to skrót od: *@
+<input @bind-value="_name" @bind-value:event="onchange" />
+@*
+	oznacza to że jeżeli wywoła się zdarzenie onchange to aktualizowana jest wartość pola
+	zdarzenie - onchange - wywołuje się po utracie fokusa kontrolki, czyli dopiero po kliknięciu poza nią
+	zdarzenie - oninput - wywołuje się po każdej zmianie wartości
+*@
+<br />
+<input @bind-value="_name" @bind-value:event="oninput" />
+<br />
+<p>Wartość pola _name: @_name</p>
+<br />
+
+
+
+<div class="row my-4">
+	<h4>Nowy pracownik</h4>
+	<div class="col-6">
+
+		@* komponent formularza *@
+		<EditForm Model="_employee" OnValidSubmit="Save">
+
+			<DataAnnotationsValidator />
+
+			<ValidationSummary />
+
+			<div class="form-group mt-3">
+				<label class="form-label">Nazwa</label>
+				@* <input type="text" class="form-control" value="@_employee.Name"/> *@
+				@*
+				dedykowana kontrolka Blazora do wprowadzania danych tekstowych,
+				do bindowania używa się @bind-Value (Value musi być z dużej litery)
+				*@
+				<InputText @bind-Value="_employee.Name" class="form-control" />
+				<ValidationMessage For="() => _employee.Name" />
+			</div>
+
+			<div class="form-group mt-3">
+				<label class="form-label">Notatki</label>
+				<InputTextArea @bind-Value="_employee.Notes" class="form-control" rows="4" />
+			</div>
+
+			<div class="form-group mt-3">
+				<label class="form-label">Wynagrodzenie</label>
+				<InputNumber @bind-Value="_employee.Salary" class="form-control" />
+			</div>
+
+			<div class="form-check mt-3">
+				<InputCheckbox @bind-Value="_employee.IsNew" class="form-check-input" />
+				<label class="form-check-label">Czy nowy pracownik?</label>
+			</div>
+
+			<div class="form-group mt-3">
+				<label class="form-label">Stanowisko</label>
+				<InputSelect @bind-Value="_employee.PositionId" class="form-select">
+					<option value="0" disabled="disabled" selected>-- Wybierz stanowisko --</option>
+					@foreach (var item in _positions)
+					{
+						<option value="@item.Id">@item.Name</option>
+					}
+				</InputSelect>
+				<ValidationMessage For="() => _employee.PositionId" />
+			</div>
+
+			<div class="form-group mt-3">
+				<label class="form-label">Data zatrudnienia</label>
+				<InputDate @bind-Value="_employee.DateOfEmployment" class="form-control" />
+			</div>
+			<div class="form-group mt-3">
+
+				@if (true)
+				{
+					<button class="btn btn-primary btn-lg btn-spinner" disabled>
+						<img src="~/loading.gif" />
+						<span>Zapisywanie...</span>
+					</button>
+				}
+				else
+				{
+					<button class="btn btn-primary btn-lg">Zapisz</button>
+				}
+			</div>
+
+		</EditForm>
+	</div>
+</div>
