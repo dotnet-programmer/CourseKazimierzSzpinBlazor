@@ -1,0 +1,47 @@
+﻿@page "/kanban"
+
+@using BlazorWebAssembly.Models;
+
+<PageTitle>Tablica kanban</PageTitle>
+
+<h1>Tablica kanban</h1>
+
+<div class="row my-4">
+	<h4>Nowa notatka</h4>
+	<div class="col-6">
+
+		<EditForm Model="_newItem" OnValidSubmit="Save">
+
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+
+			<div class="input-group">
+				<InputText @bind-Value="_newItem.Description" class="form-control" placeholder="Opis..." />
+				<button class="btn btn-primary btn-lg">
+					Zapisz
+				</button>
+			</div>
+
+		</EditForm>
+
+	</div>
+</div>
+
+<div class="row my-4">
+
+	<KanbanItem State="State.New"
+				Items="_items"
+				OnDrop="OnDrop"
+				OnStartDrag="OnStartDrag" />
+
+	<KanbanItem State="State.Active"
+				Items="_items"
+				OnDrop="OnDrop"
+				OnStartDrag="OnStartDrag" />
+
+	<KanbanItem State="State.Closed"
+				Items="_items"
+				OnDrop="OnDrop"
+				OnStartDrag="OnStartDrag" />
+
+</div>

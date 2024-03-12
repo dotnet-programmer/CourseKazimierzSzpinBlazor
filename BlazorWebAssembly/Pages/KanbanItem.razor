@@ -1,0 +1,17 @@
+﻿@using BlazorWebAssembly.Extensions
+
+<div class="col-4">
+	<h2>@State.GetDisplayName()</h2>
+	<div class="dropzone bg-light p-3 my-3 border border-1 rounded"
+		 ondragover="event.preventDefault();"
+		 @ondrop="OnDropHandler">
+		@foreach (var item in Items.Where(x => x.State == State))
+		{
+			<div class="draggable alert @_classes"
+				 draggable="true"
+				 @ondragstart="@(() => OnStartDragHandler(item))">
+				@item.Description
+			</div>
+		}
+	</div>
+</div>
