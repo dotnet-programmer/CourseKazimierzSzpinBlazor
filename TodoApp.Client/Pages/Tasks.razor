@@ -41,9 +41,19 @@ else
 					</td>
 					<td>
 						<a href="/task/edit/@item.Id" class="btn btn-warning btn-sm me-2 my-1">Edytuj</a>
-						<button type="button" class="btn btn-danger btn-sm my-1">Usuń</button>
+						<button @onclick="() => DeleteTask(item.Id, item.Title)" type="button" class="btn btn-danger btn-sm my-1">Usuń</button>
 					</td>
 				</tr>
 			}
 		</tbody>
-	</table>}
+	</table>
+}
+
+<Modal Show="_showDeleteDialog" OnAccept="DeleteConfirmed" OnCancel="DeleteCanceled">
+	<Title>
+		Potwierdź proszę
+	</Title>
+	<Body>
+		@_deleteDialogBody
+	</Body>
+</Modal>
