@@ -1,0 +1,49 @@
+﻿@page "/"
+
+<PageTitle>Moje zadania</PageTitle>
+
+<h1>Moje zadania</h1>
+
+@if (_tasks == null)
+{
+	<div>Ładowanie danych...</div>
+}
+else if (!_tasks.Any())
+{
+	<div>Brak zadań do wykonania.</div>
+}
+else
+{
+	<table class="table table-responsive text-center align-middle my-5">
+		<thead class="table-light">
+			<tr>
+				<th width="25%">Tytuł</th>
+				<th width="25%">Termin</th>
+				<th width="25%">Czy wykonany?</th>
+				<th width="25%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in _tasks)
+			{
+				<tr>
+					<td>
+						<a href="/task/edit/@item.Id" class="fw-bold link-primary">@item.Title</a>
+					</td>
+					<td>
+						@(item.Term.HasValue ? item.Term.Value.ToString("d") : "-")
+					</td>
+					<td>
+						@* jeżeli HTML ze stringa ma być potrktowany jako znacznik HTML, trzeba stringa oznaczyć: (MarkupString) *@
+						@(item.IsExecuted 
+						? (MarkupString)"<span class='badge bg-success rounded-pill'>TAK</span>"
+						: (MarkupString)"<span class='badge bg-danger rounded-pill'>NIE</span>")
+					</td>
+					<td>
+						<a href="/task/edit/@item.Id" class="btn btn-warning btn-sm me-2 my-1">Edytuj</a>
+						<button type="button" class="btn btn-danger btn-sm my-1">Usuń</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>}
