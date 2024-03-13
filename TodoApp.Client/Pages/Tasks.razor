@@ -24,8 +24,15 @@ else
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in _tasks)
-			{
+			@*
+				wyświetlenie tabeli z zastosowanie wirtualizacji
+				Items - kolekcja z danymi
+				Context - element z kolekcji
+				SpacerElement - element, który oddziela poszczególne rekordy
+			*@
+			@* @foreach (var item in _tasks) *@
+			@* { *@
+			<Virtualize Items="_tasks" Context="item" SpacerElement="tr">
 				<tr>
 					<td>
 						<a href="/task/edit/@item.Id" class="fw-bold link-primary">@item.Title</a>
@@ -35,16 +42,18 @@ else
 					</td>
 					<td>
 						@* jeżeli HTML ze stringa ma być potrktowany jako znacznik HTML, trzeba stringa oznaczyć: (MarkupString) *@
-						@(item.IsExecuted 
-						? (MarkupString)"<span class='badge bg-success rounded-pill'>TAK</span>"
-						: (MarkupString)"<span class='badge bg-danger rounded-pill'>NIE</span>")
+						@(item.IsExecuted
+							? (MarkupString)"<span class='badge bg-success rounded-pill'>TAK</span>"
+							: (MarkupString)"<span class='badge bg-danger rounded-pill'>NIE</span>")
 					</td>
 					<td>
 						<a href="/task/edit/@item.Id" class="btn btn-warning btn-sm me-2 my-1">Edytuj</a>
 						<button @onclick="() => DeleteTask(item.Id, item.Title)" type="button" class="btn btn-danger btn-sm my-1">Usuń</button>
 					</td>
 				</tr>
-			}
+			</Virtualize>
+			@* } *@
+
 		</tbody>
 	</table>
 }

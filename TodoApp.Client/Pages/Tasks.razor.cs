@@ -22,8 +22,18 @@ public partial class Tasks
 	protected override async Task OnInitializedAsync() 
 		=> await RefreshTasks();
 
-	private async Task RefreshTasks() 
-		=> _tasks = await TaskHttpRepository.GetAll();
+	private async Task RefreshTasks()
+	{
+		_tasks = await TaskHttpRepository.GetAll();
+
+		// do pokazania jak działa wirtualizacja danych 
+		//var tasks = await TaskHttpRepository.GetAll();
+		//_tasks = [];
+		//for (int i = 0; i < 100; i++)
+		//{
+		//	_tasks.AddRange(tasks);
+		//}
+	}
 
 	private void DeleteTask(int id, string title)
 	{
