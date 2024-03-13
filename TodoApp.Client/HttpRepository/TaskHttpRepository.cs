@@ -14,6 +14,11 @@ public class TaskHttpRepository : ITaskHttpRepository
 		=> _client = client;
 
 	public async Task Add(AddTaskCommand command)
+		// https://localhost:7214 - bazowy adres Api pobrany z konfiguracji
+		// /api/ - dodanie tego doklejenia w Program.cs przy konfiguracji serwisów
+		// tasks - nazwa endpointa z WebApi który ma zostać wykonany
+		// command - parametr który ma zostać przekazany
+		// efekt-https://localhost:7214/api/tasks - POST
 		=> await _client.PostAsJsonAsync("tasks", command);
 
 	public async Task Delete(int id)

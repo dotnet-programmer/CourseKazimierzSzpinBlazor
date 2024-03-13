@@ -1,0 +1,54 @@
+﻿@page "/task/add"
+
+<PageTitle>Dodaj zadanie</PageTitle>
+
+<h1>Dodaj zadanie</h1>
+
+<div class="row my-4">
+	<div class="col-6">
+		<EditForm Model="_addTaskCommand" OnValidSubmit="Save">
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+
+			<div class="form-group mt-3">
+				<label class="form-label">Tytuł</label>
+				<InputText @bind-Value="_addTaskCommand.Title" class="form-control" />
+			</div>
+
+			<div class="form-group mt-3">
+				<label class="form-label">Opis</label>
+				<InputTextArea @bind-Value="_addTaskCommand.Description" class="form-control" rows="4" />
+			</div>
+
+			<div class="form-check mt-3">
+				<InputCheckbox @bind-Value="_addTaskCommand.IsExecuted" class="form-check-input" />
+				<label class="form-check-label">Czy wykonano?</label>
+			</div>
+
+			<div class="form-group mt-3">
+				<label class="form-label">Termin wykonania</label>
+				<InputDate @bind-Value="_addTaskCommand.Term" class="form-control" />
+			</div>
+
+			<div class="form-group mt-3">
+				@if (_isLoading)
+				{
+					<button class="btn btn-primary btn-lg btn-spinner" disabled>
+						<img src="/loading.gif" />
+						<span>Zapisywanie...</span>
+					</button>
+				}
+				else
+				{
+					<a href="/" class="btn btn-secondary btn-lg">
+						Anuluj
+					</a>
+					<button class="btn btn-primary btn-lg">
+						Zapisz
+					</button>
+				}
+			</div>
+
+		</EditForm>
+	</div>
+</div>
