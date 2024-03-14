@@ -11,14 +11,31 @@
     <link rel="icon" type="image/png" href="favicon.png" />
 
 	@* INFO - określenie interaktywności - Server - dla całej aplikacji *@
-	<HeadOutlet @rendermode="InteractiveServer" />
+	@* <HeadOutlet @rendermode="RenderMode.InteractiveServer" /> *@
+
+	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania *@
+	@* <HeadOutlet @rendermode="new InteractiveServerRenderMode(prerender: false)" /> *@
+
+	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania używając zmiennej z kodu C# *@
+	<HeadOutlet @rendermode="_renderMode" />
+
 </head>
 
 <body>
 	@* INFO - określenie interaktywności - Server - globalnie dla całej aplikacji *@
-    <Routes @rendermode="InteractiveServer" />
+	@* <Routes @rendermode="RenderMode.InteractiveServer" /> *@
+
+	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania *@
+	<Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
+	
+	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania używając zmiennej z kodu C# *@
+	<Routes @rendermode="_renderMode" />
 
     <script src="_framework/blazor.web.js"></script>
 </body>
 
 </html>
+
+@code {
+	private static IComponentRenderMode _renderMode = new InteractiveServerRenderMode(prerender: false);
+}
