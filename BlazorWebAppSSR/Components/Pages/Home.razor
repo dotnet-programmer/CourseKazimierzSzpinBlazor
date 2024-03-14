@@ -1,0 +1,47 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<br />
+
+<button @onclick="Increment" class="btn btn-primary my-3">
+	Increment count
+</button>
+
+<p>Wartość:</p>
+<p>@_counter</p>
+
+<br />
+
+<div class="row">
+	<div class="col-6">
+		<EditForm Model="@Employee" OnValidSubmit="Save" FormName="NewEmployee">
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+			<div class="form-group mt-3">
+				<label class="form-label">Nazwa</label>
+				<InputText class="form-control" @bind-Value="Employee.Name" />
+				<button class="btn btn-primary mt-3">Submit</button>
+			</div>
+		</EditForm>
+	</div>
+</div>
+
+@code {
+	private int _counter = 0;
+	private void Increment()
+		=> _counter++;
+
+	// dzięki temu parametrowi ten model w wersji Server Side Rendering zostanie poprawnie uzupełniony
+	[SupplyParameterFromForm(FormName = "NewEmployee")]
+	public Employee Employee { get; set; } = new();
+	private void Save()
+	{
+		Employee = new();
+		_counter = 11;
+	}
+}
