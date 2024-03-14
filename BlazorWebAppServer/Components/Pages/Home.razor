@@ -1,0 +1,16 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@* INFO - określenie trybu renderowania dla komponentu w miejscu wywołania *@
+<Test @rendermode="RenderMode.InteractiveServer"></Test>
+@* 
+	zapis ten można uprościć, dodając w _Imports wpis: 
+	@using static Microsoft.AspNetCore.Components.Web.RenderMode 
+	wtedy:
+	<Test @rendermode="InteractiveServer"></Test>
+*@
