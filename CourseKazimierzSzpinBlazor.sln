@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppWebAssembly", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppWebAssembly.Client", "BlazorWebAppWebAssembly\BlazorWebAppWebAssembly.Client\BlazorWebAppWebAssembly.Client.csproj", "{6D1D4025-9156-44E0-9A05-8D67C8524F5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppAuto", "BlazorWebAppAuto\BlazorWebAppAuto\BlazorWebAppAuto.csproj", "{32412A82-9CC4-472A-8F3B-2C0EEBAB785F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppAuto.Client", "BlazorWebAppAuto\BlazorWebAppAuto.Client\BlazorWebAppAuto.Client.csproj", "{CE4F5735-310F-4910-9175-FC3902F2A7A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{6D1D4025-9156-44E0-9A05-8D67C8524F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D1D4025-9156-44E0-9A05-8D67C8524F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D1D4025-9156-44E0-9A05-8D67C8524F5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32412A82-9CC4-472A-8F3B-2C0EEBAB785F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32412A82-9CC4-472A-8F3B-2C0EEBAB785F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32412A82-9CC4-472A-8F3B-2C0EEBAB785F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32412A82-9CC4-472A-8F3B-2C0EEBAB785F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE4F5735-310F-4910-9175-FC3902F2A7A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE4F5735-310F-4910-9175-FC3902F2A7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE4F5735-310F-4910-9175-FC3902F2A7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE4F5735-310F-4910-9175-FC3902F2A7A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
