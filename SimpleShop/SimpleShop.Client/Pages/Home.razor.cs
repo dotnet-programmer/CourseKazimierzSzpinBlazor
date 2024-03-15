@@ -1,29 +1,48 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using SimpleShop.Client.HttpRepository.Interfaces;
+using SimpleShop.Client.Models;
 using SimpleShop.Shared.Products.Dtos;
 
-namespace SimpleShop.Client.Pages
+namespace SimpleShop.Client.Pages;
+
+public partial class Home
 {
-    public partial class Home
-    {
-		// wyłączenie prerenderowania
-		//static IComponentRenderMode _renderMode = new InteractiveAutoRenderMode(prerender: false);
+	// wyłączenie prerenderowania
+	//static IComponentRenderMode _renderMode = new InteractiveAutoRenderMode(prerender: false);
 
-        private IEnumerable<ProductDto> _products;
+	private PaginationInfo _paginationInfo = new();
 
-		// do pobierania danych przez WebApi
-		[Inject]
-		public IProductHttpRepository ProductRepo { get; set; }
+	private IEnumerable<ProductDto> _products;
 
-		public int PageNumber { get; set; } = 1;
-		public string OrderInfo { get; set; }
-		public string SearchValue { get; set; }
+	// do pobierania danych przez WebApi
+	[Inject]
+	public IProductHttpRepository ProductRepo { get; set; }
 
-		protected override async Task OnInitializedAsync()
+	public int PageNumber { get; set; } = 1;
+	public string OrderInfo { get; set; }
+	public string SearchValue { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		await RefreshProducts();
+	}
+
+	private async Task OnSelectedPage(int pageNumber)
+	{
+		PageNumber = pageNumber;
+		await RefreshProducts();
+	}
+
+	private async Task RefreshProducts()
+	{
+		var paginatedList = await ProductRepo.GetAll(PageNumber, OrderInfo, SearchValue);
+
+		_products = paginatedList.Items;
+		_paginationInfo = new PaginationInfo
 		{
-			var paginatedList = await ProductRepo.GetAll(PageNumber, OrderInfo, SearchValue);
-			_products = paginatedList.Items;
-		}
+			PageIndex = paginatedList.PageIndex,
+			TotalCount = paginatedList.TotalCount,
+			TotalPages = paginatedList.TotalPages
+		};
 	}
 }
