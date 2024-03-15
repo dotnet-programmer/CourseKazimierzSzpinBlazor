@@ -1,4 +1,4 @@
-using SimpleShop.Client.Pages;
+using SimpleShop.Client;
 using SimpleShop.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents()
 	.AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddClient();
 
 var app = builder.Build();
 
