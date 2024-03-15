@@ -57,4 +57,11 @@ public partial class Home
 			_isLoading = false;
 		}
 	}
+
+	private async Task OnSearchValueChanged(string searchValue)
+	{
+		SearchValue = searchValue;
+		PageNumber = 1;
+		await RefreshProducts();
+	}
 }
