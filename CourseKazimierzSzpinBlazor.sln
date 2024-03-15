@@ -19,17 +19,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.Shared", "TodoApp.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.WebApi", "TodoApp.WebApi\TodoApp.WebApi.csproj", "{5F7E7CBF-3233-4625-8372-08044A5F3FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppSSR", "BlazorWebAppSSR\BlazorWebAppSSR.csproj", "{686C041D-A4D8-4AD1-8EFB-9FB90086794F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppSSR", "BlazorWebAppSSR\BlazorWebAppSSR.csproj", "{686C041D-A4D8-4AD1-8EFB-9FB90086794F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppServer", "BlazorWebAppServer\BlazorWebAppServer.csproj", "{88B3D724-6CDB-461B-9E8E-970EDEA0F4CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppServer", "BlazorWebAppServer\BlazorWebAppServer.csproj", "{88B3D724-6CDB-461B-9E8E-970EDEA0F4CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppWebAssembly", "BlazorWebAppWebAssembly\BlazorWebAppWebAssembly\BlazorWebAppWebAssembly.csproj", "{9BBB8E33-DF4E-4417-BA54-AF2B790CD898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppWebAssembly", "BlazorWebAppWebAssembly\BlazorWebAppWebAssembly\BlazorWebAppWebAssembly.csproj", "{9BBB8E33-DF4E-4417-BA54-AF2B790CD898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppWebAssembly.Client", "BlazorWebAppWebAssembly\BlazorWebAppWebAssembly.Client\BlazorWebAppWebAssembly.Client.csproj", "{6D1D4025-9156-44E0-9A05-8D67C8524F5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppWebAssembly.Client", "BlazorWebAppWebAssembly\BlazorWebAppWebAssembly.Client\BlazorWebAppWebAssembly.Client.csproj", "{6D1D4025-9156-44E0-9A05-8D67C8524F5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppAuto", "BlazorWebAppAuto\BlazorWebAppAuto\BlazorWebAppAuto.csproj", "{32412A82-9CC4-472A-8F3B-2C0EEBAB785F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppAuto", "BlazorWebAppAuto\BlazorWebAppAuto\BlazorWebAppAuto.csproj", "{32412A82-9CC4-472A-8F3B-2C0EEBAB785F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppAuto.Client", "BlazorWebAppAuto\BlazorWebAppAuto.Client\BlazorWebAppAuto.Client.csproj", "{CE4F5735-310F-4910-9175-FC3902F2A7A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppAuto.Client", "BlazorWebAppAuto\BlazorWebAppAuto.Client\BlazorWebAppAuto.Client.csproj", "{CE4F5735-310F-4910-9175-FC3902F2A7A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop", "SimpleShop\SimpleShop\SimpleShop.csproj", "{DFD780D6-5EE0-48DC-A61D-143E71B2BE9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop.Client", "SimpleShop\SimpleShop.Client\SimpleShop.Client.csproj", "{2ABE0C97-0DDF-406E-9358-94B8CDA4CB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,14 @@ Global
 		{CE4F5735-310F-4910-9175-FC3902F2A7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE4F5735-310F-4910-9175-FC3902F2A7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE4F5735-310F-4910-9175-FC3902F2A7A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD780D6-5EE0-48DC-A61D-143E71B2BE9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD780D6-5EE0-48DC-A61D-143E71B2BE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD780D6-5EE0-48DC-A61D-143E71B2BE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD780D6-5EE0-48DC-A61D-143E71B2BE9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ABE0C97-0DDF-406E-9358-94B8CDA4CB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ABE0C97-0DDF-406E-9358-94B8CDA4CB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ABE0C97-0DDF-406E-9358-94B8CDA4CB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ABE0C97-0DDF-406E-9358-94B8CDA4CB34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
