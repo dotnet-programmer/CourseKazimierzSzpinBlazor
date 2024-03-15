@@ -64,4 +64,11 @@ public partial class Home
 		PageNumber = 1;
 		await RefreshProducts();
 	}
+
+	private async Task OnSortChanged(string orderInfo)
+	{
+		OrderInfo = orderInfo;
+		PageNumber = 1;
+		await RefreshProducts();
+	}
 }
