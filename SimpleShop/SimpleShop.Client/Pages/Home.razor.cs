@@ -41,8 +41,8 @@ public partial class Home : IDisposable
 		Interceptor.RegisterEvent();
 		await RefreshProducts();
 
-		var authState = await AuthState;
-		_userName = authState.User.FindFirst(ClaimTypes.Name).Value;
+		//var authState = await AuthState;
+		//_userName = authState.User.FindFirst(ClaimTypes.Name).Value;
 	}
 
 	private async Task OnSelectedPage(int pageNumber)

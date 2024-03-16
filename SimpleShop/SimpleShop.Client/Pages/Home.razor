@@ -16,34 +16,34 @@ UWAGA - nie działa z prerenderowaniem, żeby to zadziałało, trzeba wyłączy�
 @* znacznik CascadingAuthenticationState może być dodany tutaj lokalnie, lub w DependencyIndection.cs globalnie *@
 @* <CascadingAuthenticationState> *@
 
-	<AuthorizeView>
+	@* <AuthorizeView> *@
 
 		@* określenie treści dla zalogowanych użytkowników *@
-		<Authorized>
+		@* <Authorized>
 			Użytkownik jest zalogowany... Nazwa: @context.User.FindFirst(ClaimTypes.Name).Value
-		</Authorized>
+		</Authorized> *@
 
 		@* określenie treści dla niezalogowanych użytkowników *@
-		<NotAuthorized>
+		@* <NotAuthorized>
 			Użytkownik nie jest zalogowany!!!
-		</NotAuthorized>
+		</NotAuthorized> *@
 
-	</AuthorizeView>
+	@* </AuthorizeView> *@
 
 @* </CascadingAuthenticationState> *@
 
 <br />
 
 @* wyświetlanie widoków dla zalogowanych z uwzględnieniem roli *@
-<AuthorizeView Roles="Administrator">
+@* <AuthorizeView Roles="Administrator">
 	<Authorized>
 		Użytkownik jest administratorem... Nazwa: @context.User.FindFirst(ClaimTypes.Name).Value
 	</Authorized>
-</AuthorizeView>
+</AuthorizeView> *@
 
 <br />
 
-Wartość pola _userName z kodu C#: @_userName
+@* Wartość pola _userName z kodu C#: @_userName *@
 
 <br />
 
