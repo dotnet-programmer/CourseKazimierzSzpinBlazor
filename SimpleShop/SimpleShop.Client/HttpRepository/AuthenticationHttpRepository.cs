@@ -4,7 +4,9 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.WebUtilities;
+using SimpleShop.Client.AuthStateProviders;
 using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Shared.Authentication.Commands;
 using SimpleShop.Shared.Authentication.Dtos;
@@ -17,16 +19,19 @@ public class AuthenticationHttpRepository : IAuthenticationHttpRepository
 	private readonly HttpClient _client;
 	private readonly ILocalStorageService _localStorage;
 	private readonly NavigationManager _navManager;
+	private readonly AuthenticationStateProvider _authStateProvider;
 	private readonly JsonSerializerOptions _options = new() { PropertyNameCaseInsensitive = true };
 
 	public AuthenticationHttpRepository(
-		HttpClient client, 
+		HttpClient client,
 		ILocalStorageService localStorage,
-		NavigationManager navManager)
+		NavigationManager navManager,
+		AuthenticationStateProvider authStateProvider)
 	{
 		_client = client;
 		_localStorage = localStorage;
 		_navManager = navManager;
+		_authStateProvider = authStateProvider;
 	}
 
 	public async Task<string> RefreshToken()
@@ -73,5 +78,23 @@ public class AuthenticationHttpRepository : IAuthenticationHttpRepository
 
 		var response = await _client.GetAsync(QueryHelpers.AddQueryString("account/emailconfirmation", queryStringParam));
 		return response.StatusCode;
+	}
+
+	public async Task<LoginUserDto> Login(LoginUserCommand userForAuthentication)
+	{
+		var response = await _client.PostAsJsonAsync("account/login", userForAuthentication);
+		var content = await response.Content.ReadAsStringAsync();
+		var result = JsonSerializer.Deserialize<LoginUserDto>(content, _options);
+
+		if (!response.IsSuccessStatusCode)
+		{
+			return result;
+		}
+
+		await _localStorage.SetItemAsync("authToken", result.Token);
+		await _localStorage.SetItemAsync("refreshToken", result.RefreshToken);
+		((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.Token);
+		_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
+		return new LoginUserDto { IsAuthSuccessful = true };
 	}
 }

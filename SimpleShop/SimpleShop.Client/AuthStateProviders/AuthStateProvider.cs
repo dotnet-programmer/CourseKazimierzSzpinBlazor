@@ -44,4 +44,11 @@ public class AuthStateProvider : AuthenticationStateProvider
 		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
 		return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
 	}
+
+	public void NotifyUserAuthentication(string token)
+	{
+		ClaimsPrincipal authenticatedUser = new(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType"));
+		var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
+		NotifyAuthenticationStateChanged(authState);
+	}
 }
