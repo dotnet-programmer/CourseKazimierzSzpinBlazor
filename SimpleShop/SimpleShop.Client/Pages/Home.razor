@@ -1,37 +1,77 @@
 ﻿@page "/"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authorization
 
 @rendermode InteractiveAuto
 
 @* wyłączenie prerenderowania *@
 @* @rendermode _renderMode *@
 
+@* ustawienie że cała strona jest dostępna tylko dla zalogowanych użytkowników,
+UWAGA - nie działa z prerenderowaniem, żeby to zadziałało, trzeba wyłączyć prerendering dla całej aplikacji *@
+@* @attribute [Authorize] *@
+
 <PageTitle>Strona Główna - Rowery.xyz</PageTitle>
 
+@* znacznik CascadingAuthenticationState może być dodany tutaj lokalnie, lub w DependencyIndection.cs globalnie *@
+@* <CascadingAuthenticationState> *@
+
+	<AuthorizeView>
+
+		@* określenie treści dla zalogowanych użytkowników *@
+		<Authorized>
+			Użytkownik jest zalogowany... Nazwa: @context.User.FindFirst(ClaimTypes.Name).Value
+		</Authorized>
+
+		@* określenie treści dla niezalogowanych użytkowników *@
+		<NotAuthorized>
+			Użytkownik nie jest zalogowany!!!
+		</NotAuthorized>
+
+	</AuthorizeView>
+
+@* </CascadingAuthenticationState> *@
+
+<br />
+
+@* wyświetlanie widoków dla zalogowanych z uwzględnieniem roli *@
+<AuthorizeView Roles="Administrator">
+	<Authorized>
+		Użytkownik jest administratorem... Nazwa: @context.User.FindFirst(ClaimTypes.Name).Value
+	</Authorized>
+</AuthorizeView>
+
+<br />
+
+Wartość pola _userName z kodu C#: @_userName
+
+<br />
+
 <div class="row mb-4">
-    <div class=col-6>
-        <Search SearchValueChanged="OnSearchValueChanged"></Search>
-    </div>
 	<div class=col-6>
-        <Sort SortChanged="OnSortChanged"></Sort>
-    </div>
+		<Search SearchValueChanged="OnSearchValueChanged"></Search>
+	</div>
+	<div class=col-6>
+		<Sort SortChanged="OnSortChanged"></Sort>
+	</div>
 </div>
 
 <div class="row">
 
-    @if (_products == null || _isLoading)
-    {
-        <Loading></Loading>
-    }
-    else if (!_products.Any())
-    {
-        <p>Brak produktów.</p>
-    }
-    else
-    {
-        @foreach (var item in _products)
-        {
-            <Product ProductModel="item"></Product>
-        }
-        <Pagination PaginationInfo="_paginationInfo" SelectedPage="OnSelectedPage"></Pagination>
-    }
+	@if (_products == null || _isLoading)
+	{
+		<Loading></Loading>
+	}
+	else if (!_products.Any())
+	{
+		<p>Brak produktów.</p>
+	}
+	else
+	{
+		@foreach (var item in _products)
+		{
+			<Product ProductModel="item"></Product>
+		}
+		<Pagination PaginationInfo="_paginationInfo" SelectedPage="OnSelectedPage"></Pagination>
+	}
 </div>

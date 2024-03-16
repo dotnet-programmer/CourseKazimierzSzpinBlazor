@@ -3,6 +3,8 @@ using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Client.HttpInterceptor;
 using Blazored.LocalStorage;
 using SimpleShop.Client.HttpRepository;
+using Microsoft.AspNetCore.Components.Authorization;
+using SimpleShop.Client.AuthStateProviders;
 
 namespace SimpleShop.Client;
 
@@ -37,6 +39,12 @@ public static class DependencyInjection
 		services.AddScoped<IPaymentHttpRepository, PaymentHttpRepository>();
 
 		services.AddBlazoredLocalStorage();
+
+		// konfiguracja serwisów dla autoryzacji
+		services.AddOptions();
+		services.AddAuthorizationCore();
+		services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
+		services.AddCascadingAuthenticationState();
 
 		return services;
 	}

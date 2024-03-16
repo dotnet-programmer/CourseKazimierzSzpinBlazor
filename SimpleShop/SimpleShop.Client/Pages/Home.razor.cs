@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using SimpleShop.Client.HttpInterceptor;
 using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Client.Models;
@@ -17,6 +19,8 @@ public partial class Home : IDisposable
 
 	private bool _isLoading = false;
 
+	private string _userName;
+
 	// do pobierania danych przez WebApi
 	[Inject]
 	public IProductHttpRepository ProductRepo { get; set; }
@@ -24,7 +28,11 @@ public partial class Home : IDisposable
 	[Inject]
 	public HttpInterceptorService Interceptor { get; set; }
 
-	public int PageNumber { get; set; } = 1;
+	// potrzebne żeby dostać się do danych użytkownika w kodzie C#
+	[CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    public int PageNumber { get; set; } = 1;
 	public string OrderInfo { get; set; }
 	public string SearchValue { get; set; }
 
@@ -32,6 +40,9 @@ public partial class Home : IDisposable
 	{
 		Interceptor.RegisterEvent();
 		await RefreshProducts();
+
+		var authState = await AuthState;
+		_userName = authState.User.FindFirst(ClaimTypes.Name).Value;
 	}
 
 	private async Task OnSelectedPage(int pageNumber)
