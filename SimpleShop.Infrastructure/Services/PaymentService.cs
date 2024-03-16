@@ -7,11 +7,15 @@ internal class PaymentService : IPaymentService
 {
 	public string Create(string clientUrl, decimal value)
 	{
-		var options = new SessionCreateOptions
+		SessionCreateOptions options = new()
 		{
+			// adres Url, który ma zostać wywołany po dokonaniu płatności (tutaj adres Blazora + doklejone "potwierdzenie")
 			SuccessUrl = $"{clientUrl}potwierdzenie",
+			
+			// produkty, za które będzie realizowana płatność
 			LineItems =
 			[
+				// to powinno być pobierane z koszyka, na razie na sztywno wpisany 1 produkt
 				new SessionLineItemOptions
 				{
 					Quantity = 1,
@@ -32,9 +36,11 @@ internal class PaymentService : IPaymentService
 		var service = new SessionService();
 		var session = service.Create(options);
 
+		// identyfikator sesji, czyli płatności
 		return session.Id;
 	}
 
+	// na podstawie przekazanego identyfikatora sesji zwraca info czy zamówienie jest zapłacone 
 	public bool IsPaid(string sessionId)
 	{
 		var service = new SessionService();

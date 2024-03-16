@@ -12,5 +12,6 @@ internal class AddPaymentCommandHandler : IRequestHandler<AddPaymentCommand, str
 		=> _paymentService = paymentService;
 
 	public async Task<string> Handle(AddPaymentCommand request, CancellationToken cancellationToken) 
+		// metoda Create zwraca SessionId
 		=> _paymentService.Create(request.ClientUrl, request.Value);
 }

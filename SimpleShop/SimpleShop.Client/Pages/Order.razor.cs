@@ -1,8 +1,10 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using SimpleShop.Client.HttpInterceptor;
 using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Shared.Orders.Commands;
+using SimpleShop.Shared.Payments.Commands;
 using SimpleShop.Shared.Products.Dtos;
 
 namespace SimpleShop.Client.Pages;
@@ -22,6 +24,12 @@ public partial class Order : IDisposable
 
 	[Inject]
 	public HttpInterceptorService Interceptor { get; set; }
+
+	[Inject]
+	public IPaymentHttpRepository PaymentRepo { get; set; }
+
+	[Inject]
+	public IJSRuntime JS { get; set; }
 
 	// przechwycenie wszystkich requestów do API
 	protected override async Task OnInitializedAsync()
@@ -49,7 +57,11 @@ public partial class Order : IDisposable
 			return;
 		}
 
+		var sesionId = await PaymentRepo.Add(new AddPaymentCommand { Value = _command.Value, ClientUrl = NavigationManager.BaseUri });
+		_command.SessionId = sesionId;
 		await OrderRepo.Add(_command);
+		await LocalStorage.SetItemAsync("sessionId", sesionId);
+		await JS.InvokeVoidAsync("redirectToCheckout", sesionId);
 	}
 
 	public void Dispose()

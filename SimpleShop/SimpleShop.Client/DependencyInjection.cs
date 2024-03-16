@@ -34,6 +34,8 @@ public static class DependencyInjection
 
 		services.AddScoped<IOrderHttpRepository, OrderHttpRepository>();
 
+		services.AddScoped<IPaymentHttpRepository, PaymentHttpRepository>();
+
 		services.AddBlazoredLocalStorage();
 
 		return services;
