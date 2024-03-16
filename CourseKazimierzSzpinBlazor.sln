@@ -31,19 +31,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppAuto", "BlazorW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppAuto.Client", "BlazorWebAppAuto\BlazorWebAppAuto.Client\BlazorWebAppAuto.Client.csproj", "{CE4F5735-310F-4910-9175-FC3902F2A7A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop", "SimpleShop\SimpleShop\SimpleShop.csproj", "{DFD780D6-5EE0-48DC-A61D-143E71B2BE9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop", "SimpleShop\SimpleShop\SimpleShop.csproj", "{DFD780D6-5EE0-48DC-A61D-143E71B2BE9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop.Client", "SimpleShop\SimpleShop.Client\SimpleShop.Client.csproj", "{2ABE0C97-0DDF-406E-9358-94B8CDA4CB34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.Client", "SimpleShop\SimpleShop.Client\SimpleShop.Client.csproj", "{2ABE0C97-0DDF-406E-9358-94B8CDA4CB34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop.Application", "SimpleShop.Application\SimpleShop.Application.csproj", "{8BD583F5-AA70-496B-95DC-4492FDFCBD77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.Application", "SimpleShop.Application\SimpleShop.Application.csproj", "{8BD583F5-AA70-496B-95DC-4492FDFCBD77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop.Domain", "SimpleShop.Domain\SimpleShop.Domain.csproj", "{9F2F6991-2B09-4248-B091-E4DDA04DC5FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.Domain", "SimpleShop.Domain\SimpleShop.Domain.csproj", "{9F2F6991-2B09-4248-B091-E4DDA04DC5FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop.Infrastructure", "SimpleShop.Infrastructure\SimpleShop.Infrastructure.csproj", "{97185E06-3DBB-4317-802E-177F2E6622DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.Infrastructure", "SimpleShop.Infrastructure\SimpleShop.Infrastructure.csproj", "{97185E06-3DBB-4317-802E-177F2E6622DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop.Shared", "SimpleShop.Shared\SimpleShop.Shared.csproj", "{8CD07CE8-7A6B-4093-998E-73109E496C63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.Shared", "SimpleShop.Shared\SimpleShop.Shared.csproj", "{8CD07CE8-7A6B-4093-998E-73109E496C63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleShop.WebApi", "SimpleShop.WebApi\SimpleShop.WebApi.csproj", "{1F0AEE6A-1587-448F-BEE1-2CEA5E8F81D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.WebApi", "SimpleShop.WebApi\SimpleShop.WebApi.csproj", "{1F0AEE6A-1587-448F-BEE1-2CEA5E8F81D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
