@@ -105,4 +105,19 @@ public class AuthenticationHttpRepository : IAuthenticationHttpRepository
 		((AuthStateProvider)_authStateProvider).NotifyUserLogout();
 		_client.DefaultRequestHeaders.Authorization = null;
 	}
+
+	public async Task<HttpStatusCode> ForgotPassword(ForgotPasswordCommand command)
+	{
+		command.ClientURI = Path.Combine(_navManager.BaseUri, "reset-hasla");
+		var result = await _client.PostAsJsonAsync("account/forgotpassword", command);
+		return result.StatusCode;
+	}
+
+	public async Task<ResponseDto> ResetPassword(ResetPasswordCommand command)
+	{
+		var resetResult = await _client.PostAsJsonAsync("account/resetpassword", command);
+		var resetContent = await resetResult.Content.ReadAsStringAsync();
+		var result = JsonSerializer.Deserialize<ResponseDto>(resetContent, _options);
+		return result;
+	}
 }

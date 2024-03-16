@@ -12,4 +12,6 @@ public interface IAuthenticationHttpRepository
 	Task<HttpStatusCode> EmailConfirmation(string email, string token);
 	Task<LoginUserDto> Login(LoginUserCommand userForAuthentication);
 	Task Logout();
+	Task<HttpStatusCode> ForgotPassword(ForgotPasswordCommand command);
+	Task<ResponseDto> ResetPassword(ResetPasswordCommand command);
 }
