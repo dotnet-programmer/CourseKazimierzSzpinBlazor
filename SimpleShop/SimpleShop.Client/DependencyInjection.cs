@@ -2,6 +2,7 @@
 using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Client.HttpInterceptor;
 using Blazored.LocalStorage;
+using SimpleShop.Client.HttpRepository;
 
 namespace SimpleShop.Client;
 
@@ -30,6 +31,8 @@ public static class DependencyInjection
 		services.AddScoped<HttpInterceptorService>();
 
 		services.AddScoped<IProductHttpRepository, ProductHttpRepository>();
+
+		services.AddScoped<IOrderHttpRepository, OrderHttpRepository>();
 
 		services.AddBlazoredLocalStorage();
 
