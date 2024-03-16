@@ -2,9 +2,11 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components;
 using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Shared.Authentication.Commands;
 using SimpleShop.Shared.Authentication.Dtos;
+using SimpleShop.Shared.Common.Models;
 
 namespace SimpleShop.Client.HttpRepository;
 
@@ -12,12 +14,17 @@ public class AuthenticationHttpRepository : IAuthenticationHttpRepository
 {
 	private readonly HttpClient _client;
 	private readonly ILocalStorageService _localStorage;
+	private readonly NavigationManager _navManager;
 	private readonly JsonSerializerOptions _options = new() { PropertyNameCaseInsensitive = true };
 
-	public AuthenticationHttpRepository(HttpClient client, ILocalStorageService localStorage)
+	public AuthenticationHttpRepository(
+		HttpClient client, 
+		ILocalStorageService localStorage,
+		NavigationManager navManager)
 	{
 		_client = client;
 		_localStorage = localStorage;
+		_navManager = navManager;
 	}
 
 	public async Task<string> RefreshToken()
@@ -37,5 +44,20 @@ public class AuthenticationHttpRepository : IAuthenticationHttpRepository
 		await _localStorage.SetItemAsync("refreshToken", result.RefreshToken);
 		_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
 		return result.Token;
+	}
+
+	public async Task<ResponseDto> RegisterUser(RegisterUserCommand registerUserCommand)
+	{
+		registerUserCommand.ClientURI = Path.Combine(_navManager.BaseUri, "potwierdzenie-email");
+		var response = await _client.PostAsJsonAsync("account/register", registerUserCommand);
+
+		if (!response.IsSuccessStatusCode)
+		{
+			var content = await response.Content.ReadAsStringAsync();
+			var result = JsonSerializer.Deserialize<ResponseDto>(content, _options);
+			return result;
+		}
+
+		return new ResponseDto { IsSuccess = true };
 	}
 }
