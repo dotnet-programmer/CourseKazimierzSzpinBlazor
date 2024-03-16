@@ -97,4 +97,12 @@ public class AuthenticationHttpRepository : IAuthenticationHttpRepository
 		_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
 		return new LoginUserDto { IsAuthSuccessful = true };
 	}
+
+	public async Task Logout()
+	{
+		await _localStorage.RemoveItemAsync("authToken");
+		await _localStorage.RemoveItemAsync("refreshToken");
+		((AuthStateProvider)_authStateProvider).NotifyUserLogout();
+		_client.DefaultRequestHeaders.Authorization = null;
+	}
 }

@@ -11,4 +11,5 @@ public interface IAuthenticationHttpRepository
 	Task<ResponseDto> RegisterUser(RegisterUserCommand registerUserCommand);
 	Task<HttpStatusCode> EmailConfirmation(string email, string token);
 	Task<LoginUserDto> Login(LoginUserCommand userForAuthentication);
+	Task Logout();
 }

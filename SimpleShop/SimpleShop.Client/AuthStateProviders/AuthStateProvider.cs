@@ -51,4 +51,10 @@ public class AuthStateProvider : AuthenticationStateProvider
 		var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
 		NotifyAuthenticationStateChanged(authState);
 	}
+
+	public void NotifyUserLogout()
+	{
+		var authState = Task.FromResult(_anonymous);
+		NotifyAuthenticationStateChanged(authState);
+	}
 }
