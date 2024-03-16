@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SimpleShop.Shared.Payments.Commands;
 
 namespace SimpleShop.WebApi.Controllers;
@@ -8,6 +9,7 @@ namespace SimpleShop.WebApi.Controllers;
 public class PaymentsController : BaseApiController
 {
 	[HttpPost]
+	[Authorize]
 	public async Task<IActionResult> Add(AddPaymentCommand command) 
 		=> Ok(await Mediator.Send(command));
 }
