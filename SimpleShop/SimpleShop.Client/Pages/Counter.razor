@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@using Blazored.LocalStorage
 @using SimpleShop.Shared.Products.Dtos
 @rendermode InteractiveAuto
 
@@ -22,9 +23,31 @@
 			ImageUrl = "content/images/rower-1.png"
 		};
 
+	// INFO - Local Storage
+	[Inject]
+	public ILocalStorageService LocalStorage { get; set; }
 
-	private void IncrementCount()
+	private async Task IncrementCount()
 	{
 		currentCount++;
+		await LocalStorage.SetItemAsync("counter", currentCount);
+	}
+
+	// // jeżeli włączony prerendering, to w OnInitialize nie można pobrać danych z LocalStorage
+	// protected override async Task OnInitializedAsync()
+	// {
+	// 	// przy takim zapisie będzie błąd - JavaScript nie może zostać wykonany
+	// 	var counter = await LocalStorage.GetItemAsync<int>("counter");
+	// 	currentCount = counter;
+	// }
+	// można to naprawić wywołując LocalStorage w OnAfterRenderAsync
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			var counter = await LocalStorage.GetItemAsync<int>("counter");
+			currentCount = counter;
+			StateHasChanged();
+		}
 	}
 }

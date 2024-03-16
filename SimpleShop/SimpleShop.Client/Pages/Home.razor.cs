@@ -77,8 +77,6 @@ public partial class Home : IDisposable
 		await RefreshProducts();
 	}
 
-	public void Dispose()
-	{
-		Interceptor.DisposeEvent();
-	}
+	public void Dispose() 
+		=> Interceptor.DisposeEvent();
 }

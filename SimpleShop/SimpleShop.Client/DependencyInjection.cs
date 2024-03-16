@@ -1,6 +1,7 @@
 ﻿using Toolbelt.Blazor.Extensions.DependencyInjection;
 using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Client.HttpInterceptor;
+using Blazored.LocalStorage;
 
 namespace SimpleShop.Client;
 
@@ -29,6 +30,8 @@ public static class DependencyInjection
 		services.AddScoped<HttpInterceptorService>();
 
 		services.AddScoped<IProductHttpRepository, ProductHttpRepository>();
+
+		services.AddBlazoredLocalStorage();
 
 		return services;
 	}
