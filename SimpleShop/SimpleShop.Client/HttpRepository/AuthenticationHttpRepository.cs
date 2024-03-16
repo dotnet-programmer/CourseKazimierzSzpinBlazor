@@ -1,8 +1,10 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.WebUtilities;
 using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Shared.Authentication.Commands;
 using SimpleShop.Shared.Authentication.Dtos;
@@ -59,5 +61,17 @@ public class AuthenticationHttpRepository : IAuthenticationHttpRepository
 		}
 
 		return new ResponseDto { IsSuccess = true };
+	}
+
+	public async Task<HttpStatusCode> EmailConfirmation(string email, string token)
+	{
+		Dictionary<string, string> queryStringParam = new()
+		{
+			["email"] = email,
+			["token"] = token
+		};
+
+		var response = await _client.GetAsync(QueryHelpers.AddQueryString("account/emailconfirmation", queryStringParam));
+		return response.StatusCode;
 	}
 }
