@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@using BlazorWebAssemblyRadzen.Models
 
 <PageTitle>Counter</PageTitle>
 
@@ -8,6 +9,18 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<br/>
+<br />
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+    Data="@employees" TItem="Employee" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single" @bind-Value=@selectedEmployees>
+    <Columns>
+        <RadzenDataGridColumn TItem="Employee" Property="FirstName" Title="First Name" Width="160px" />
+        <RadzenDataGridColumn TItem="Employee" Property="LastName" Title="Last Name" Width="160px"/>
+        <RadzenDataGridColumn TItem="Employee" Property="BirthDate" Title="Birth Date" FormatString="{0:d}" Width="160px" />
+    </Columns>
+</RadzenDataGrid>
+
 @code {
     private int currentCount = 0;
 
@@ -15,4 +28,25 @@
     {
         currentCount++;
     }
+
+
+	IEnumerable<Employee> employees;
+	IList<Employee> selectedEmployees;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		employees = employees = new List<Employee>
+		{
+			new Employee { FirstName = "Jan", LastName = "Kowalski", BirthDate = new DateTime(1966, 11, 11)},
+			new Employee { FirstName = "Marek", LastName = "Nowak", BirthDate = new DateTime(1976, 3, 2)},
+			new Employee { FirstName = "Joanna", LastName = "Kwiatkowska", BirthDate = new DateTime(2000, 1, 4)},
+			new Employee { FirstName = "Dominik", LastName = "Kowalski", BirthDate = new DateTime(1996, 12, 12)},
+			new Employee { FirstName = "Bogdan", LastName = "Kowalski", BirthDate = new DateTime(2001, 4, 22)},
+			new Employee { FirstName = "Błażej", LastName = "Kowalski", BirthDate = new DateTime(1999, 4, 22)}
+		};
+
+		selectedEmployees = new List<Employee>() { employees.FirstOrDefault() };
+	}
 }
