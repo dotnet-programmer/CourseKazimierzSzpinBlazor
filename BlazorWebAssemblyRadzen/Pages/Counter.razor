@@ -13,13 +13,38 @@
 <br />
 
 <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-    Data="@employees" TItem="Employee" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single" @bind-Value=@selectedEmployees>
+				Data="@employees" TItem="Employee" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single" @bind-Value=@selectedEmployees @ref="_radzenDataGrid">
     <Columns>
         <RadzenDataGridColumn TItem="Employee" Property="FirstName" Title="First Name" Width="160px" />
         <RadzenDataGridColumn TItem="Employee" Property="LastName" Title="Last Name" Width="160px"/>
         <RadzenDataGridColumn TItem="Employee" Property="BirthDate" Title="Birth Date" FormatString="{0:d}" Width="160px" />
     </Columns>
 </RadzenDataGrid>
+
+<br />
+<br />
+
+<RadzenTemplateForm Data="@_employee" Submit="@((Employee args) => { Submit(args); })">
+
+    <div class="mb-3">
+        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Imię</RadzenText>
+        <RadzenTextBox Style="display: block" Name="FirstName" @bind-Value=@_employee.FirstName class="w-50" />
+        <RadzenRequiredValidator Component="FirstName" Text="Imię jest wymagane" Style="position: absolute" />
+    </div>
+
+    <div class="mb-3">
+        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Nazwisko</RadzenText>
+        <RadzenTextBox @bind-Value=@_employee.LastName class="w-50" />
+    </div>
+
+    <div class="mb-3">
+        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Data urodzenia</RadzenText>
+        <RadzenDatePicker @bind-Value=@_employee.BirthDate class="w-50" DateFormat="dd-MM-yyyyy" />
+    </div>
+
+    <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Save" />
+
+</RadzenTemplateForm>
 
 @code {
     private int currentCount = 0;
@@ -30,8 +55,9 @@
     }
 
 
-	IEnumerable<Employee> employees;
+	IList<Employee> employees;
 	IList<Employee> selectedEmployees;
+	private RadzenDataGrid<Employee> _radzenDataGrid;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -48,5 +74,22 @@
 		};
 
 		selectedEmployees = new List<Employee>() { employees.FirstOrDefault() };
+	}
+
+	[Inject]
+	public NotificationService NotificationService { get; set; }
+	private Employee _employee = new Employee();
+	async Task Submit(Employee arg)
+	{
+		// dodaj do listy nowego pracownika
+		employees.Add(_employee);
+
+		// wyzeruj obiekt powiązany z formularzem
+		_employee = new Employee();
+
+		// odświeżenie widoku grida
+		await _radzenDataGrid.Reload();
+
+		NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Sukces", Detail = "Użytkownicy zostali zaktualizowani", Duration = 4000 });
 	}
 }
