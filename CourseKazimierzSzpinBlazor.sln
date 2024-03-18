@@ -45,9 +45,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.Shared", "Simple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleShop.WebApi", "SimpleShop.WebApi\SimpleShop.WebApi.csproj", "{1F0AEE6A-1587-448F-BEE1-2CEA5E8F81D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAssemblyBootstrap", "BlazorWebAssemblyBootstrap\BlazorWebAssemblyBootstrap.csproj", "{B9B39E06-6C1E-4820-840C-AE03097E4EFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAssemblyBootstrap", "BlazorWebAssemblyBootstrap\BlazorWebAssemblyBootstrap.csproj", "{B9B39E06-6C1E-4820-840C-AE03097E4EFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAssemblyRadzen", "BlazorWebAssemblyRadzen\BlazorWebAssemblyRadzen.csproj", "{DA6EA901-C15F-4718-BB83-2E3B80DFDEEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAssemblyRadzen", "BlazorWebAssemblyRadzen\BlazorWebAssemblyRadzen.csproj", "{DA6EA901-C15F-4718-BB83-2E3B80DFDEEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAssemblySyncfusion", "BlazorWebAssemblySyncfusion\BlazorWebAssemblySyncfusion.csproj", "{151794CC-F02E-4D76-B997-6450C229CE82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,10 @@ Global
 		{DA6EA901-C15F-4718-BB83-2E3B80DFDEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA6EA901-C15F-4718-BB83-2E3B80DFDEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA6EA901-C15F-4718-BB83-2E3B80DFDEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{151794CC-F02E-4D76-B997-6450C229CE82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{151794CC-F02E-4D76-B997-6450C229CE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{151794CC-F02E-4D76-B997-6450C229CE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{151794CC-F02E-4D76-B997-6450C229CE82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
