@@ -5,5 +5,5 @@ namespace BlazorWebAppSSR;
 public class Employee
 {
 	[Required]
-    public string Name { get; set; }
+	public string Name { get; set; }
 }

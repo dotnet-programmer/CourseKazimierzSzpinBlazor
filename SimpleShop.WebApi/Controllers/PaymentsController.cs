@@ -10,6 +10,6 @@ public class PaymentsController : BaseApiController
 {
 	[HttpPost]
 	[Authorize]
-	public async Task<IActionResult> Add(AddPaymentCommand command) 
+	public async Task<IActionResult> Add(AddPaymentCommand command)
 		=> Ok(await Mediator.Send(command));
 }

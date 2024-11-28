@@ -8,7 +8,7 @@ public class PaymentHttpRepository : IPaymentHttpRepository
 {
 	private readonly HttpClient _client;
 
-	public PaymentHttpRepository(HttpClient client) 
+	public PaymentHttpRepository(HttpClient client)
 		=> _client = client;
 
 	public async Task<string> Add(AddPaymentCommand command)

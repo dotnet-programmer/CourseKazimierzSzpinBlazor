@@ -8,7 +8,7 @@ public partial class Pagination
 	private List<PaginationLink> _links;
 
 	// ilość przycisków w górę i w dół od aktualnej pozycji
-	private int _linkCount = 2;
+	private readonly int _linkCount = 2;
 
 	[Parameter]
 	public PaginationInfo PaginationInfo { get; set; }
@@ -19,10 +19,11 @@ public partial class Pagination
 	// wywołuje się zawsze gdy parametry zostaną zmienione
 	protected override void OnParametersSet()
 	{
-		_links = new List<PaginationLink>();
-
-		//poprzednia
-		_links.Add(new PaginationLink { Text = "Poprzednia", PageIndex = PaginationInfo.PageIndex - 1, Enabled = PaginationInfo.HasPreviousPage });
+		_links =
+		[
+			//poprzednia
+			new PaginationLink { Text = "Poprzednia", PageIndex = PaginationInfo.PageIndex - 1, Enabled = PaginationInfo.HasPreviousPage },
+		];
 
 		//1 2 3 - konkretny przycisk dla każdej z podstron
 		for (int i = 1; i <= PaginationInfo.TotalPages; i++)

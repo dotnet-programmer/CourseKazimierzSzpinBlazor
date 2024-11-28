@@ -15,7 +15,7 @@ namespace SimpleShop.Client.Pages;
 public partial class Order : IDisposable
 {
 	// wyłączenie prerenderingu żeby można było używać zalogowanych użytkowników
-	static IComponentRenderMode _renderMode = new InteractiveAutoRenderMode(prerender: false);
+	private static readonly IComponentRenderMode _renderMode = new InteractiveAutoRenderMode(prerender: false);
 
 	private readonly AddOrderCommand _command = new() { UserId = "1" };
 

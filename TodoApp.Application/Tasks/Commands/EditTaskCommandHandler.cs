@@ -9,7 +9,7 @@ public class EditTaskCommandHandler : IRequestHandler<EditTaskCommand>
 {
 	private readonly IApplicationDbContext _context;
 
-	public EditTaskCommandHandler(IApplicationDbContext context) 
+	public EditTaskCommandHandler(IApplicationDbContext context)
 		=> _context = context;
 
 	public async Task Handle(EditTaskCommand request, CancellationToken cancellationToken)

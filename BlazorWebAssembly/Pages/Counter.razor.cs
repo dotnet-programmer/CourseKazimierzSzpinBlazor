@@ -33,8 +33,8 @@ public partial class Counter
 		}
 		catch (Exception ex)
 		{
-            Console.WriteLine(ex.Message);
-        }
+			Console.WriteLine(ex.Message);
+		}
 	}
 
 	private void ToggleActive()

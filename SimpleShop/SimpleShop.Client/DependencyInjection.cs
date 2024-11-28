@@ -1,11 +1,11 @@
-﻿using Toolbelt.Blazor.Extensions.DependencyInjection;
-using SimpleShop.Client.HttpRepository.Interfaces;
-using SimpleShop.Client.HttpInterceptor;
-using Blazored.LocalStorage;
-using SimpleShop.Client.HttpRepository;
+﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using SimpleShop.Client.AuthStateProviders;
+using SimpleShop.Client.HttpInterceptor;
+using SimpleShop.Client.HttpRepository;
+using SimpleShop.Client.HttpRepository.Interfaces;
 using SimpleShop.Client.Services;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace SimpleShop.Client;
 

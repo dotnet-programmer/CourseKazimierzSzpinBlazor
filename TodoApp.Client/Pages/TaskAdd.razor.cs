@@ -10,10 +10,10 @@ public partial class TaskAdd
 {
 	private bool _isLoading = false;
 	private string _imageFullUrl;
-	private AddTaskCommand _addTaskCommand = new() { Term = DateTime.Now };
+	private readonly AddTaskCommand _addTaskCommand = new() { Term = DateTime.Now };
 
 	[Inject]
-    public ITaskHttpRepository TaskHttpRepository { get; set; }
+	public ITaskHttpRepository TaskHttpRepository { get; set; }
 
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }

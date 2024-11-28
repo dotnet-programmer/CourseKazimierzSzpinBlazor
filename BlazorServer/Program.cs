@@ -3,8 +3,6 @@
 //tutaj równie¿ rejestruje siê ró¿ne us³ugi (dependency injection).
 
 using BlazorServer.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 

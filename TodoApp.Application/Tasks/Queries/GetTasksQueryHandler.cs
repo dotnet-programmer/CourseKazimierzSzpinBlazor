@@ -10,7 +10,7 @@ public class GetTasksQueryHandler : IRequestHandler<GetTasksQuery, IEnumerable<T
 {
 	private readonly IApplicationDbContext _context;
 
-	public GetTasksQueryHandler(IApplicationDbContext context) 
+	public GetTasksQueryHandler(IApplicationDbContext context)
 		=> _context = context;
 
 	public async Task<IEnumerable<TaskDto>> Handle(GetTasksQuery request, CancellationToken cancellationToken)

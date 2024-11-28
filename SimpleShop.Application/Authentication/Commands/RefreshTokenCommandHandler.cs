@@ -25,7 +25,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
 		var principal = _authenticationService.GetPrincipalFromExpiredToken(request.Token);
 		var name = principal.Identity.Name;
 		var user = await _userManager.FindByEmailAsync(name);
-		
+
 		if (user == null || user.Email != name)
 		{
 			return new LoginUserDto { ErrorMessage = "Nieprawidłowe żądanie." };

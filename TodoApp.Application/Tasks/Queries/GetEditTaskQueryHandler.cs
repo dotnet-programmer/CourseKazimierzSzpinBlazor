@@ -10,7 +10,7 @@ public class GetEditTaskQueryHandler : IRequestHandler<GetEditTaskQuery, EditTas
 {
 	private readonly IApplicationDbContext _context;
 
-	public GetEditTaskQueryHandler(IApplicationDbContext context) 
+	public GetEditTaskQueryHandler(IApplicationDbContext context)
 		=> _context = context;
 
 	public async Task<EditTaskCommand> Handle(GetEditTaskQuery request, CancellationToken cancellationToken)

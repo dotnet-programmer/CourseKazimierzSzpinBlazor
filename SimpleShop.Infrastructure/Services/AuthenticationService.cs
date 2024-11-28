@@ -58,7 +58,7 @@ public class AuthenticationService : IAuthenticationService
 
 	private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, IEnumerable<Claim> claims)
 	{
-		JwtSecurityToken tokenOptions = new (
+		JwtSecurityToken tokenOptions = new(
 			issuer: _configuration["JWTSettings:ValidIssuer"],
 			audience: _configuration["JWTSettings:ValidAudience"],
 			claims: claims,

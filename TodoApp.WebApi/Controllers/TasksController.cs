@@ -23,7 +23,7 @@ public class TasksController : BaseApiController
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> GetTasks() 
+	public async Task<IActionResult> GetTasks()
 		=> Ok(await Mediator.Send(new GetTasksQuery()));
 
 	[HttpPut]

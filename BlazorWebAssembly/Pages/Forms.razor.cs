@@ -7,7 +7,7 @@ namespace BlazorWebAssembly.Pages;
 
 public partial class Forms
 {
-	private Employee _employee = new Employee { DateOfEmployment = DateTime.Now };
+	private Employee _employee = new() { DateOfEmployment = DateTime.Now };
 
 	private string _header = "Formularz";
 	private string _name;
@@ -15,17 +15,14 @@ public partial class Forms
 	private bool _isLoading = false;
 
 	// to jest onew-way binding - zmiana w kodzie powoduje zmianę na widoku
-	private void ChangeHeader()
-	{
-		_header = "Nowy nagłówek";
-	}
+	private void ChangeHeader() => _header = "Nowy nagłówek";
 
-	private IEnumerable<Position> _positions = new List<Position>()
-	{
+	private readonly IEnumerable<Position> _positions =
+	[
 		new Position { Id = 1, Name = "It" },
 		new Position { Id = 2, Name = "Magazynier" },
 		new Position { Id = 3, Name = "Kierowca" },
-	};
+	];
 
 	[Inject]
 	public IToastrService ToastrService { get; set; }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorWebAssembly.Components;
@@ -13,7 +11,7 @@ public partial class Card
 	// czyli lista, tabela, nagłówek itp jako parametr, który zostanie wyrenderowany wewnątrz komponentu
 	// w tym przypadku trzeba użyć typu RenderFragment zamiast np. string
 	[Parameter]
-    public string Image { get; set; }
+	public string Image { get; set; }
 	[Parameter]
 	public RenderFragment Title { get; set; }
 	[Parameter]
@@ -43,7 +41,7 @@ public partial class Card
 
 
 	// parametr kaskadowy
-	private string _info = "Komunikat z CARD";
+	private readonly string _info = "Komunikat z CARD";
 
 	// zdarzenie w komponencie
 	// komponent wywołujący jako parametr może przekazać metodę, która ma zostać wywołana po kliknięciu danego przycisku
@@ -51,21 +49,17 @@ public partial class Card
 	[Parameter]
 	public EventCallback OnClickMore { get; set; }
 	// zazwyczaj potrzeba poinformować komponent nadrzędny, czyli ten wywołujący dany komponent, o tym że dany przycisk został kliknięty
-	private void ClickMore(MouseEventArgs e)
-	{
+	private void ClickMore(MouseEventArgs e) =>
 		// logika
 
 		// poinformowanie elementu nadrzędnego że ten przycisk został kliknięty
 		OnClickMore.InvokeAsync();
-	}
 	// jeżeli komponent wywołujący przekazuje jakieś parametry do metody, to trzeba użyć typa generycznego
 	[Parameter]
 	public EventCallback<string> OnClickMoreString { get; set; }
-	private void ClickMoreString(MouseEventArgs e)
-	{
+	private void ClickMoreString(MouseEventArgs e) =>
 		// przekazanie argumentu do wywoływanej metody
 		OnClickMoreString.InvokeAsync("ABC");
-	}
 	// jeżeli logika komponentu niczego nie robi w wywoływanej metodzie, to można pominąć tworzenie metody i przypisać tu bezpośrednio właściwość typu EventCallback
 	[Parameter]
 	public EventCallback JustParameterWithoutMethod { get; set; }
@@ -80,20 +74,20 @@ public partial class Card
 	// ta metoda ustawia parametry, które zostały przekazane przez nadrzędny komponent
 	public override async Task SetParametersAsync(ParameterView parameters)
 	{
-        Console.WriteLine("SetParametersAsync");
-        await base.SetParametersAsync(parameters);
+		Console.WriteLine("SetParametersAsync");
+		await base.SetParametersAsync(parameters);
 	}
 	// ta metoda jest wywoływana po tym gdy parametry zostały już ustawione, a komponent został prawidłowo zainicjalizowany
 	// tutaj robiona jest inicjalizacja moich obiektów, pobieranie danych z bazy danych itd
 	protected override async Task OnInitializedAsync()
 	{
-        Console.WriteLine("OnInitializedAsync");
+		Console.WriteLine("OnInitializedAsync");
 		await base.OnInitializedAsync();
 	}
 	// ta metoda jest wywoływana po tym jak komponent został zainicjalizowany i za każdym razem gdy parametry zostaną zmienione i komponent zostanie ponownie przerenderowany
 	protected override async Task OnParametersSetAsync()
 	{
-        Console.WriteLine("OnParametersSetAsync");
+		Console.WriteLine("OnParametersSetAsync");
 		await base.OnParametersSetAsync();
 	}
 	// ta metoda zostanie wywołana gdy komponent kończy renderowanie,
@@ -111,8 +105,5 @@ public partial class Card
 
 	//odwołanie do podrzędnego komponentu
 	private string _additionalCardClasses;
-	public void AddCardBorder()
-	{
-		_additionalCardClasses = "border-3 border-success";
-	}
+	public void AddCardBorder() => _additionalCardClasses = "border-3 border-success";
 }

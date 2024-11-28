@@ -1,10 +1,9 @@
 ﻿using SimpleShop.Shared.Orders.Commands;
 
-namespace SimpleShop.Client.HttpRepository.Interfaces
+namespace SimpleShop.Client.HttpRepository.Interfaces;
+
+public interface IOrderHttpRepository
 {
-    public interface IOrderHttpRepository
-    {
-        Task Add(AddOrderCommand command);
-		Task Confirm(ConfirmOrderCommand command);
-	}
+	Task Add(AddOrderCommand command);
+	Task Confirm(ConfirmOrderCommand command);
 }

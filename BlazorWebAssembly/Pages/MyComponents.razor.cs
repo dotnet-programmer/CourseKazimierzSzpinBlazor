@@ -23,44 +23,35 @@ public partial class MyComponents
 	}
 
 	// parametr kaskadowy
-	private string _info = "Komunikat - parametr kaskadowy";
+	private readonly string _info = "Komunikat - parametr kaskadowy";
 	// więcej niż 1 parametr kaskadowy 
-	private string _title = "Tytuł - kolejny parametr kaskadowy";
+	private readonly string _title = "Tytuł - kolejny parametr kaskadowy";
 
 
 	private string _btnText = "Więcej";
-	private void ChangeBtnText()
-	{
-		_btnText = "Mniej";
-	}
+	private void ChangeBtnText() => _btnText = "Mniej";
 
 
 	// zdarzenia w komponentach
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }
 	// metoda która ma zostać wykonana w komponencie nadrzędnym po kliknięciu przycisku w komponencie podrzędnym
-	private void MyClickMore()
-	{
+	private void MyClickMore() =>
 		// po kliknięciu przekierowanie na stronę główną
 		NavigationManager.NavigateTo("/");
-	}
 	// metoda z parametrem, która ma zostać wywołana w komponencie podrzędnym
-	private void MyClickMoreString(string message)
-	{
+	private void MyClickMoreString(string message) =>
 		// po kliknięciu przekierowanie na stronę główną
 		NavigationManager.NavigateTo($"/{message}");
-	}
 	// jeżeli są parametry a w komponencie podrzędnym nie ma metody tylko bezpośrednie przypisanie właściwości wywołującej metodę, 
 	// to trzeba tu dodać parametr odpowiadający typowi konkretnego zdarzenia
-	private void MyClickMoreWithoutMethodWithParameter(MouseEventArgs e)
-	{
+	private void MyClickMoreWithoutMethodWithParameter(MouseEventArgs e) =>
 		// po kliknięciu przekierowanie na stronę główną
 		NavigationManager.NavigateTo("/");
-	}
 
 	// przekazanie atrybutów HTML
 	// wywołanie w HTML: @attributes="_cardAttributes"
-	private Dictionary<string, object> _cardAttributes = new()
+	private readonly Dictionary<string, object> _cardAttributes = new()
 	{
 		{ "BtnClass", "btn btn-success" },
 		{ "BtnTitle", "Więcej..." },
@@ -70,7 +61,7 @@ public partial class MyComponents
 
 	// można też pozwolić na przekazanie dowolnych atrybutów komponentu nadrzędnego, nawet takich, które nie są zaimplementowane w komponencie
 	// dzięki temu wszystkie przekazane tutaj atrybuty zostaną wstawione do odpowiednio oznaczonego buttona
-	private Dictionary<string, object> _cardBtnAttributes = new()
+	private readonly Dictionary<string, object> _cardBtnAttributes = new()
 	{
 		{ "class", "btn btn-success" },
 		{ "title", "Więcej..." },
@@ -81,8 +72,5 @@ public partial class MyComponents
 
 	//odwołanie do podrzędnego komponentu
 	private Card _card;
-	private void AddCardBorder()
-	{
-		_card.AddCardBorder();
-	}
+	private void AddCardBorder() => _card.AddCardBorder();
 }

@@ -45,7 +45,7 @@ public class AccountController : BaseApiController
 
 		return Ok(new ResponseDto { IsSuccess = true });
 	}
-	
+
 	[HttpPost("ResetPassword")]
 	public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand command)
 	{

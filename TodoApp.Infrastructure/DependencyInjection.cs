@@ -16,7 +16,7 @@ public static class DependencyInjection
 
 		var connectionString = configuration.GetConnectionString("DefaultConnection");
 		services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
-		
+
 		return services;
 	}
 }

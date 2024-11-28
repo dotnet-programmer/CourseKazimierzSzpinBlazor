@@ -24,7 +24,7 @@ public partial class Register
 
 		if (!response.IsSuccess)
 		{
-			_errors = new List<string> { response.Errors };
+			_errors = [response.Errors];
 			_showErrors = true;
 			return;
 		}

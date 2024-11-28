@@ -1,5 +1,5 @@
-using TodoApp.Infrastructure;
 using TodoApp.Application;
+using TodoApp.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

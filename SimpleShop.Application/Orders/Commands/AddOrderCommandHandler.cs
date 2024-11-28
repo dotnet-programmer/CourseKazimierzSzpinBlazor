@@ -9,7 +9,7 @@ internal class AddOrderCommandHandler : IRequestHandler<AddOrderCommand>
 {
 	private readonly IApplicationDbContext _context;
 
-	public AddOrderCommandHandler(IApplicationDbContext context) 
+	public AddOrderCommandHandler(IApplicationDbContext context)
 		=> _context = context;
 
 	public async Task Handle(AddOrderCommand request, CancellationToken cancellationToken)

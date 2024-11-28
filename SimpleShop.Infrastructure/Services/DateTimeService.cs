@@ -4,6 +4,6 @@ namespace SimpleShop.Infrastructure.Services;
 
 public class DateTimeService : IDateTimeService
 {
-	public DateTime Now 
+	public DateTime Now
 		=> DateTime.UtcNow;
 }

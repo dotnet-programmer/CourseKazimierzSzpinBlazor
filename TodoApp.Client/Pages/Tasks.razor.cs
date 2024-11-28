@@ -19,21 +19,10 @@ public partial class Tasks
 	[Inject]
 	public IToastrService ToastrService { get; set; }
 
-	protected override async Task OnInitializedAsync() 
+	protected override async Task OnInitializedAsync()
 		=> await RefreshTasks();
 
-	private async Task RefreshTasks()
-	{
-		_tasks = await TaskHttpRepository.GetAll();
-
-		// do pokazania jak działa wirtualizacja danych 
-		//var tasks = await TaskHttpRepository.GetAll();
-		//_tasks = [];
-		//for (int i = 0; i < 100; i++)
-		//{
-		//	_tasks.AddRange(tasks);
-		//}
-	}
+	private async Task RefreshTasks() => _tasks = await TaskHttpRepository.GetAll();// do pokazania jak działa wirtualizacja danych //var tasks = await TaskHttpRepository.GetAll();//_tasks = [];//for (int i = 0; i < 100; i++)//{//	_tasks.AddRange(tasks);//}
 
 	private void DeleteTask(int id, string title)
 	{
@@ -50,6 +39,6 @@ public partial class Tasks
 		_showDeleteDialog = false;
 	}
 
-	private void DeleteCanceled(MouseEventArgs e) 
+	private void DeleteCanceled(MouseEventArgs e)
 		=> _showDeleteDialog = false;
 }

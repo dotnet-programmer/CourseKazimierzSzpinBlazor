@@ -8,10 +8,10 @@ internal class AddPaymentCommandHandler : IRequestHandler<AddPaymentCommand, str
 {
 	private readonly IPaymentService _paymentService;
 
-	public AddPaymentCommandHandler(IPaymentService paymentService) 
+	public AddPaymentCommandHandler(IPaymentService paymentService)
 		=> _paymentService = paymentService;
 
-	public async Task<string> Handle(AddPaymentCommand request, CancellationToken cancellationToken) 
+	public async Task<string> Handle(AddPaymentCommand request, CancellationToken cancellationToken)
 		// metoda Create zwraca SessionId
 		=> _paymentService.Create(request.ClientUrl, request.Value);
 }

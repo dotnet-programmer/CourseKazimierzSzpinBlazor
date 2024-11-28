@@ -19,7 +19,7 @@ public partial class PaymentConfirm : IDisposable
 	[Inject]
 	public IOrderHttpRepository OrderRepo { get; set; }
 
-	protected override async Task OnInitializedAsync() 
+	protected override async Task OnInitializedAsync()
 		=> Interceptor.RegisterEvent();
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -35,6 +35,6 @@ public partial class PaymentConfirm : IDisposable
 		}
 	}
 
-	public void Dispose() 
+	public void Dispose()
 		=> Interceptor.DisposeEvent();
 }

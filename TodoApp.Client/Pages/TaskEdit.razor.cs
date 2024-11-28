@@ -22,10 +22,7 @@ public partial class TaskEdit
 	[Inject]
 	public IToastrService ToastrService { get; set; }
 
-	protected override async Task OnInitializedAsync()
-	{
-		_editTaskCommand = await TaskHttpRepository.GetEdit(Id);
-	}
+	protected override async Task OnInitializedAsync() => _editTaskCommand = await TaskHttpRepository.GetEdit(Id);
 
 	private async Task Save()
 	{

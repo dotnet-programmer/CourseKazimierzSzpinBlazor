@@ -6,9 +6,6 @@ namespace SimpleShop.Infrastructure.Configurations;
 
 internal class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
-	public void Configure(EntityTypeBuilder<Order> builder)
-	{
-		builder
+	public void Configure(EntityTypeBuilder<Order> builder) => builder
 			.ToTable("Orders");
-	}
 }

@@ -8,7 +8,7 @@ public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskCommand>
 {
 	private readonly IApplicationDbContext _context;
 
-	public DeleteTaskCommandHandler(IApplicationDbContext context) 
+	public DeleteTaskCommandHandler(IApplicationDbContext context)
 		=> _context = context;
 
 	public async Task Handle(DeleteTaskCommand request, CancellationToken cancellationToken)

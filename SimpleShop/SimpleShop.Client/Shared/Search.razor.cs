@@ -12,10 +12,7 @@ public partial class Search
 
 	public string SearchValue { get; set; }
 
-	private void OnSearchValueChanged(KeyboardEventArgs e)
-	{
-		SearchValueChanged.InvokeAsync(SearchValue);
-	}
+	private void OnSearchValueChanged(KeyboardEventArgs e) => SearchValueChanged.InvokeAsync(SearchValue);
 
 	// TODO - wersja z timerem powoduje błąd:
 	// The current thread is not associated with the Dispatcher. Use InvokeAsync() to switch execution to the Dispatcher when triggering rendering or component state.

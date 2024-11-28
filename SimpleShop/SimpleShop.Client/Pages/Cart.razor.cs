@@ -20,7 +20,7 @@ public partial class Cart
 	public NavigationManager NavigationManager { get; set; }
 
 	// pobranie z konfiguracji adresu do API
-	protected override async Task OnInitializedAsync() 
+	protected override async Task OnInitializedAsync()
 		=> _baseUrl = Configuration["ApiConfiguration:BaseAddress"];
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -54,7 +54,7 @@ public partial class Cart
 		await LocalStorage.SetItemAsync("cart", _products);
 	}
 
-	private void GoHome() 
+	private void GoHome()
 		=> NavigationManager.NavigateTo("/");
 
 	private void ConfirmOrder()

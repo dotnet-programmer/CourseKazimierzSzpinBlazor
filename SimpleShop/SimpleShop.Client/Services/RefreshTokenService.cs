@@ -24,8 +24,8 @@ public class RefreshTokenService
 			var expTime = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(expClaim));
 			var diff = expTime - DateTime.UtcNow;
 
-			return diff.TotalMinutes <= 2 
-				? await _authenticationHttpRepository.RefreshToken() 
+			return diff.TotalMinutes <= 2
+				? await _authenticationHttpRepository.RefreshToken()
 				: string.Empty;
 		}
 		catch (Exception)

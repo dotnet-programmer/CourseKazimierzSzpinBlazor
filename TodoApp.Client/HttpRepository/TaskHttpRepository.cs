@@ -10,7 +10,7 @@ public class TaskHttpRepository : ITaskHttpRepository
 {
 	private readonly HttpClient _client;
 
-	public TaskHttpRepository(HttpClient client) 
+	public TaskHttpRepository(HttpClient client)
 		=> _client = client;
 
 	public async Task Add(AddTaskCommand command)

@@ -6,7 +6,7 @@ public partial class AdditionalInfo
 {
 	// parametr kaskadowy, można go przekazać z dowolnego elementu nadrzędnego do tego komponentu
 	[CascadingParameter(Name = "Info")]
-    public string Info { get; set; }
+	public string Info { get; set; }
 
 	// jeżeli trzeba przekazać więcej niż 1 parametr to nie wystarczy dodać nowej właściwości:
 	//[CascadingParameter]

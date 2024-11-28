@@ -11,7 +11,7 @@ internal class PaymentService : IPaymentService
 		{
 			// adres Url, który ma zostać wywołany po dokonaniu płatności (tutaj adres Blazora + doklejone "potwierdzenie")
 			SuccessUrl = $"{clientUrl}potwierdzenie",
-			
+
 			// produkty, za które będzie realizowana płatność
 			LineItems =
 			[

@@ -8,6 +8,6 @@ public class LoginUserDto
 
 	// token dostępu
 	public string Token { get; set; }
-	
+
 	public string RefreshToken { get; set; }
 }
