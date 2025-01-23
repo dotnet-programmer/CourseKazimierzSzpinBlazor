@@ -1,5 +1,12 @@
-﻿@page "/fetchdata"
+﻿@*
+	strona "fetchdata" oznaczona jako @page "/fetchdata", dostępna pod adresem www.adres.pl/fetchdata.
+	Kod tej strony trafia do Layoutu i jest wstawiany tam gdzie @Body.
+*@
+
+@page "/fetchdata"
+
 @using BlazorServer.Data
+
 @inject WeatherForecastService ForecastService
 
 <PageTitle>Weather forecast</PageTitle>

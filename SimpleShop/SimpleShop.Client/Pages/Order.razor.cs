@@ -53,7 +53,7 @@ public partial class Order : IDisposable
 		{
 			var products = await LocalStorage.GetItemAsync<List<ProductDto>>("cart");
 
-			if (products == null && !products.Any())
+			if (products == null || products.Count == 0)
 			{
 				NavigationManager.NavigateTo("/");
 			}

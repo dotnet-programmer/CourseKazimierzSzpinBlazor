@@ -1,5 +1,10 @@
 ﻿@page "/weather"
-@attribute [StreamRendering]
+
+@* 
+	dodanie tego atrybutu poprawia płynność strony, jeżeli wczytanie danych trwa jakiś czas
+	dzięki temu strona reaguje od razu, a w DOM podmieniana jest tylko zawartość samych załadowanych danych 
+*@
+@attribute [StreamRendering(true)]
 
 <PageTitle>Weather</PageTitle>
 

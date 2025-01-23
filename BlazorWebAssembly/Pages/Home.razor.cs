@@ -8,5 +8,5 @@ public partial class Home
 	public NavigationManager NavigationManager { get; set; }
 
 	private void GoToHomework1()
-		=> NavigationManager.NavigateTo("/homework1/ParametrHome");
+		=> NavigationManager.NavigateTo("/homework1/ParametrStronaGlowna");
 }

@@ -4,13 +4,8 @@ using TodoApp.Shared.Tasks.Commands;
 
 namespace TodoApp.Application.Tasks.Commands;
 
-public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand>
+public class AddTaskCommandHandler(IApplicationDbContext context) : IRequestHandler<AddTaskCommand>
 {
-	private readonly IApplicationDbContext _context;
-
-	public AddTaskCommandHandler(IApplicationDbContext context)
-		=> _context = context;
-
 	public async Task Handle(AddTaskCommand request, CancellationToken cancellationToken)
 	{
 		var task = new Domain.Entities.Task
@@ -21,7 +16,7 @@ public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand>
 			Term = request.Term
 		};
 
-		_context.Tasks.Add(task);
-		await _context.SaveChangesAsync(cancellationToken);
+		context.Tasks.Add(task);
+		await context.SaveChangesAsync(cancellationToken);
 	}
 }

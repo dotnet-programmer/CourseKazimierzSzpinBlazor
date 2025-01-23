@@ -11,22 +11,11 @@ using SimpleShop.Shared.Authentication.Commands;
 namespace SimpleShop.Application.Authentication.Commands;
 
 // rejestracja nowego użytkownika
-public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
+public class RegisterUserCommandHandler(
+	UserManager<ApplicationUser> userManager,
+	IEmail emailSender,
+	IApplicationDbContext context) : IRequestHandler<RegisterUserCommand>
 {
-	private readonly UserManager<ApplicationUser> _userManager;
-	private readonly IEmail _emailSender;
-	private readonly IApplicationDbContext _context;
-
-	public RegisterUserCommandHandler(
-		UserManager<ApplicationUser> userManager,
-		IEmail emailSender,
-		IApplicationDbContext context)
-	{
-		_userManager = userManager;
-		_emailSender = emailSender;
-		_context = context;
-	}
-
 	public async Task Handle(RegisterUserCommand request, CancellationToken cancellationToken)
 	{
 		ApplicationUser user = new()
@@ -36,9 +25,8 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
 		};
 
 		// sprawdzenie czy dany adres email jest wolny
-		var userExists = await _context.Users
-			.AnyAsync(x =>
-				x.Email == user.Email);
+		var userExists = await context.Users
+			.AnyAsync(x => x.Email == user.Email, cancellationToken);
 
 		// jeśli email już zajęty, to informowanie użytkownika
 		if (userExists)
@@ -46,7 +34,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
 			throw new ValidationException("Wybrany email jest już zajęty.");
 		}
 		// jeśli email jest dostępny to utwórz nowego użytkownika
-		var result = await _userManager.CreateAsync(user, request.Password);
+		var result = await userManager.CreateAsync(user, request.Password);
 
 		// jeśli coś jednak pójdzie nie tak to zwróć te informacje użytkownikowi
 		if (!result.Succeeded)
@@ -56,7 +44,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
 		}
 
 		// jeśli wszystko pójdzie dobrze, to generowanie tokena wysyłanego w mailu potwierdzającym w celu aktywowania konta
-		var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+		var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
 		Dictionary<string, string> param = new()
 			{
@@ -68,9 +56,9 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
 
 		var body = $"<p><span style=\"font-size: 14px;\">Dzień dobry {user.Email}.</span></p><p><span style=\"font-size: 14px;\">Dziękujemy za założenie konta w aplikacji SimpleShop.pl.</span></p><p><span style=\"font-size: 14px;\">Aby aktywować swoje konto kliknij w poniższy link:</span></p><p><span style=\"font-size: 14px;\"><a href='{callback}'>kliknij tutaj</a></span></p><p><span style=\"font-size: 14px;\">Pozdrawiam,</span><br /><span style=\"font-size: 14px;\">Kazimierz Szpin.</span><br /><span style=\"font-size: 14px;\">SimpleShop.pl</span>";
 
-		await _emailSender.Send(
-				"Aktywuj swoje konto",
-				body,
-				user.Email);
+		await emailSender.Send(
+			"Aktywuj swoje konto",
+			body,
+			user.Email);
 	}
 }

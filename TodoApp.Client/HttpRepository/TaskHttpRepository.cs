@@ -6,36 +6,34 @@ using TodoApp.Shared.Tasks.Dtos;
 
 namespace TodoApp.Client.HttpRepository;
 
-public class TaskHttpRepository : ITaskHttpRepository
+public class TaskHttpRepository(HttpClient httpClient) : ITaskHttpRepository
 {
-	private readonly HttpClient _client;
+	private readonly HttpClient _httpClient = httpClient;
 
-	public TaskHttpRepository(HttpClient client)
-		=> _client = client;
-
+	// https://localhost:7214 - bazowy adres Api pobrany z konfiguracji
+	// /api/ - dodanie tego doklejenia w Program.cs przy konfiguracji serwisów
+	// tasks - nazwa endpointa z WebApi który ma zostać wykonany
+	// command - parametr który ma zostać przekazany
+	// efekt - https://localhost:7214/api/tasks - POST
 	public async Task Add(AddTaskCommand command)
-		// https://localhost:7214 - bazowy adres Api pobrany z konfiguracji
-		// /api/ - dodanie tego doklejenia w Program.cs przy konfiguracji serwisów
-		// tasks - nazwa endpointa z WebApi który ma zostać wykonany
-		// command - parametr który ma zostać przekazany
-		// efekt-https://localhost:7214/api/tasks - POST
-		=> await _client.PostAsJsonAsync("tasks", command);
+		=> await _httpClient.PostAsJsonAsync("tasks", command);
 
 	public async Task Delete(int id)
-		=> await _client.DeleteAsync($"tasks/{id}");
+		=> await _httpClient.DeleteAsync($"tasks/{id}");
 
 	public async Task Edit(EditTaskCommand command)
-		=> await _client.PutAsJsonAsync("tasks", command);
+		=> await _httpClient.PutAsJsonAsync("tasks", command);
 
 	public async Task<IList<TaskDto>> GetAll()
-		=> await _client.GetFromJsonAsync<IList<TaskDto>>("tasks");
+		=> await _httpClient.GetFromJsonAsync<IList<TaskDto>>("tasks");
 
 	public async Task<EditTaskCommand> GetEdit(int id)
-		=> await _client.GetFromJsonAsync<EditTaskCommand>($"tasks/edit/{id}");
+		=> await _httpClient.GetFromJsonAsync<EditTaskCommand>($"tasks/edit/{id}");
 
 	public async Task UploadImage(IBrowserFile file)
 	{
-		var content = new MultipartFormDataContent { { new StreamContent(file.OpenReadStream(file.Size)), "image", file.Name } };
-		await _client.PostAsync("tasks/upload-image", content);
+		MultipartFormDataContent content = new();
+		content.Add(new StreamContent(file.OpenReadStream(file.Size)), "image", file.Name);
+		await _httpClient.PostAsync("tasks/upload-image", content);
 	}
 }

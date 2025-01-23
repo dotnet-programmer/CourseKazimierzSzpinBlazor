@@ -9,22 +9,14 @@ using SimpleShop.Shared.Authentication.Commands;
 namespace SimpleShop.Application.Authentication.Commands;
 
 // resetowanie hasła
-public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordCommand>
+public class ForgotPasswordCommandHandler(
+	UserManager<ApplicationUser> userManager,
+	IEmail emailSender,
+	IApplicationDbContext context) : IRequestHandler<ForgotPasswordCommand>
 {
-	private readonly UserManager<ApplicationUser> _userManager;
-	private readonly IEmail _emailSender;
-	private readonly IApplicationDbContext _context;
-
-	public ForgotPasswordCommandHandler(UserManager<ApplicationUser> userManager, IEmail emailSender, IApplicationDbContext context)
-	{
-		_userManager = userManager;
-		_emailSender = emailSender;
-		_context = context;
-	}
-
 	public async Task Handle(ForgotPasswordCommand request, CancellationToken cancellationToken)
 	{
-		var user = await _userManager.FindByEmailAsync(request.Email);
+		var user = await userManager.FindByEmailAsync(request.Email);
 
 		if (user == null)
 		{
@@ -32,7 +24,7 @@ public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordComman
 		}
 
 		// token przesyłany w wiadomości email dla użytkownika
-		var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+		var token = await userManager.GeneratePasswordResetTokenAsync(user);
 
 		Dictionary<string, string> param = new()
 			{
@@ -44,7 +36,7 @@ public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordComman
 
 		var body = $"<p><span style=\"font-size: 14px;\">Dzień dobry {user.Email}.</span></p><p><span style=\"font-size: 14px;\">W celu zrestowania hasła w aplikacji SimpleShop.pl kliknij w poniższy link:</span></p><p><span style=\"font-size: 14px;\"><a href='{callback}'>kliknij tutaj</a></span></p><p><span style=\"font-size: 14px;\">Pozdrawiam,</span><br /><span style=\"font-size: 14px;\">Kazimierz Szpin.</span><br /><span style=\"font-size: 14px;\">SimpleShop.pl</span>";
 
-		await _emailSender.Send(
+		await emailSender.Send(
 			"Resetowanie hasła",
 			body,
 			user.Email);

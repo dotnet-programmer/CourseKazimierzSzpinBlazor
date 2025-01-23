@@ -11,7 +11,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-// zarejestrowanie serwisu IStudentRepo w DI
+// W Blazorze po stronie klienta nie ma pojêcia zakresu, czyli Scoped, tak jak w aplikacjach serwerowych ASP.NET Core.
+// Przez to Scoped i Singleton zachowuj¹ siê tak samo, a konkretnie jako Singleton.
+
+// zarejestrowanie serwisu IStudentRepo w Dependency Injection
 builder.Services.AddScoped<IStudentRepo, StudentRepo>();
 
 // zarejestrowanie serwisu IToastrService - biblioteka JS - ToastR dzi³aj¹ca w Blazorze

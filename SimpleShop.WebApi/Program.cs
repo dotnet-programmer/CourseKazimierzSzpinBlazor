@@ -55,7 +55,7 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
-// pobranie klucza z ustawieñ
+// pobranie klucza do p³atnoœci Stripe z ustawieñ
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:ApiKey"];
 
 // Configure the HTTP request pipeline.

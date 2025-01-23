@@ -5,9 +5,10 @@ namespace SimpleShop.Client.Shared;
 
 public partial class Pagination
 {
+	// tutaj są wszystkie przyciski paginacji
 	private List<PaginationLink> _links;
 
-	// ilość przycisków w górę i w dół od aktualnej pozycji
+	// ilość przycisków w górę i w dół od aktualnej pozycji, to też mogło by być przekazywane jako parametr
 	private readonly int _linkCount = 2;
 
 	[Parameter]
@@ -21,21 +22,37 @@ public partial class Pagination
 	{
 		_links =
 		[
-			//poprzednia
-			new PaginationLink { Text = "Poprzednia", PageIndex = PaginationInfo.PageIndex - 1, Enabled = PaginationInfo.HasPreviousPage },
+			// poprzednia
+			new PaginationLink 
+			{ 
+				Text = "Poprzednia", 
+				PageIndex = PaginationInfo.PageIndex - 1, 
+				Enabled = PaginationInfo.HasPreviousPage 
+			},
 		];
 
-		//1 2 3 - konkretny przycisk dla każdej z podstron
+		// 1 2 3 - konkretny przycisk dla każdej z podstron
 		for (int i = 1; i <= PaginationInfo.TotalPages; i++)
 		{
 			if (PaginationInfo.PageIndex - _linkCount <= i && PaginationInfo.PageIndex + _linkCount >= i)
 			{
-				_links.Add(new PaginationLink { Text = i.ToString(), PageIndex = i, Enabled = true, Active = PaginationInfo.PageIndex == i });
+				_links.Add(new PaginationLink 
+				{ 
+					Text = i.ToString(), 
+					PageIndex = i, 
+					Enabled = true, 
+					Active = PaginationInfo.PageIndex == i 
+				});
 			}
 		}
 
-		//następna
-		_links.Add(new PaginationLink { Text = "Następna", PageIndex = PaginationInfo.PageIndex + 1, Enabled = PaginationInfo.HasNextPage });
+		// następna
+		_links.Add(new PaginationLink 
+		{ 
+			Text = "Następna", 
+			PageIndex = PaginationInfo.PageIndex + 1, 
+			Enabled = PaginationInfo.HasNextPage 
+		});
 	}
 
 	private async Task OnSelectedPage(PaginationLink item)

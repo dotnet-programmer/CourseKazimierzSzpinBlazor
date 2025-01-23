@@ -31,8 +31,12 @@ public partial class Home : IDisposable
 	[CascadingParameter]
 	public Task<AuthenticationState> AuthState { get; set; }
 
+	// parametry przekazywane do WebApi
+	// numer wyświetlanej strony
 	public int PageNumber { get; set; } = 1;
+	// kolejność sortowania
 	public string OrderInfo { get; set; }
+	// filtrowanie danych
 	public string SearchValue { get; set; }
 
 	protected override async Task OnInitializedAsync()
@@ -56,8 +60,7 @@ public partial class Home : IDisposable
 
 		try
 		{
-			var paginatedList = await ProductRepo
-				.GetAll(PageNumber, OrderInfo, SearchValue);
+			var paginatedList = await ProductRepo.GetAll(PageNumber, OrderInfo, SearchValue);
 
 			_products = paginatedList.Items;
 			_paginationInfo = new PaginationInfo

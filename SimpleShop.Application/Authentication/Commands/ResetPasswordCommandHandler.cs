@@ -9,27 +9,18 @@ using SimpleShop.Shared.Authentication.Commands;
 namespace SimpleShop.Application.Authentication.Commands;
 
 // resetowanie hasła użytkownika i ustawienie nowego
-public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand>
+public class ResetPasswordCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context) : IRequestHandler<ResetPasswordCommand>
 {
-	private readonly UserManager<ApplicationUser> _userManager;
-	private readonly IApplicationDbContext _context;
-
-	public ResetPasswordCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context)
-	{
-		_userManager = userManager;
-		_context = context;
-	}
-
 	public async Task Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
 	{
-		var user = await _userManager.FindByEmailAsync(request.Email);
+		var user = await userManager.FindByEmailAsync(request.Email);
 
 		if (user == null)
 		{
 			throw new ValidationException("Nieprawidłowe dane.");
 		}
 
-		var resetPassResult = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+		var resetPassResult = await userManager.ResetPasswordAsync(user, request.Token, request.Password);
 
 		if (!resetPassResult.Succeeded)
 		{
@@ -37,6 +28,6 @@ public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand>
 			throw new ValidationException(errors);
 		}
 
-		await _userManager.SetLockoutEndDateAsync(user, null);
+		await userManager.SetLockoutEndDateAsync(user, null);
 	}
 }

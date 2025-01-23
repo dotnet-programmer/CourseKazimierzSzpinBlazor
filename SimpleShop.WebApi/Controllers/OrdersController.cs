@@ -13,7 +13,6 @@ public class OrdersController : BaseApiController
 	public async Task<IActionResult> Add(AddOrderCommand command)
 	{
 		await Mediator.Send(command);
-
 		return Ok();
 	}
 

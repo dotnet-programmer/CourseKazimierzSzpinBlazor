@@ -7,18 +7,11 @@ using SimpleShop.Client.Models;
 namespace SimpleShop.Client.AuthStateProviders;
 
 // klasa z definicją jak ma działać uwierzytelnianie w aplikacji
-public class AuthStateProvider : AuthenticationStateProvider
+public class AuthStateProvider(HttpClient httpClient, ILocalStorageService localStorage) : AuthenticationStateProvider
 {
-	private readonly HttpClient _httpClient;
-	private readonly ILocalStorageService _localStorage;
-	private readonly AuthenticationState _anonymous;
-
-	public AuthStateProvider(HttpClient httpClient, ILocalStorageService localStorage)
-	{
-		_httpClient = httpClient;
-		_localStorage = localStorage;
-		_anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
-	}
+	private readonly HttpClient _httpClient = httpClient;
+	private readonly ILocalStorageService _localStorage = localStorage;
+	private readonly AuthenticationState _anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
 
 	public override async Task<AuthenticationState> GetAuthenticationStateAsync()
 	{

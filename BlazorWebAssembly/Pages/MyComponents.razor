@@ -7,19 +7,25 @@
 	Dodaj obramowanie
 </button>
 
+<h4>komponent</h4>
+<Card />
+
 <h3>komponent z parametrami</h3>
 @* <Card Image="files/kowalski.png"
 	  Title="Jak Kowalski"
 	  BtnText="Więcej"
 	  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" /> *@
+
 <h3>Szablon HTML jako parametr przekazywany do komponentu</h3>
-<Card 
-	  @ref="_card"
+<Card @ref="_card"
 	  Image="files/kowalski.png"
 	  BtnText="Więcej">
+	@* jeżeli Title jest typu RenderFragment, to można przekazać dowolny kod HTML, 
+	  wtedy taki parametr należy wpisać w osobnych tagach, tak jak tutaj *@
 	<Title>
 		<b>Jan Kowalski</b>
 	</Title>
+	@* Content też jest typu RenderFragment, dlatego jest w osobnych tagach *@
 	<Content>
 		<u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
 		<br />
@@ -40,9 +46,9 @@
 			<Title>
 				@item.Title
 			</Title>
-			<Title>
+			<Content>
 				@item.Content
-			</Title>
+			</Content>
 		</Card>
 	}
 </div>

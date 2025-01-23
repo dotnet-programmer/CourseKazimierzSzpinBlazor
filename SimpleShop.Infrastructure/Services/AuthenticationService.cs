@@ -10,18 +10,11 @@ using SimpleShop.Domain.Entities;
 
 namespace SimpleShop.Infrastructure.Services;
 
-public class AuthenticationService : IAuthenticationService
+public class AuthenticationService(UserManager<ApplicationUser> userManager, IConfiguration configuration) : IAuthenticationService
 {
-	private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
-	private readonly UserManager<ApplicationUser> _userManager;
-	private readonly IConfiguration _configuration;
-
-	public AuthenticationService(UserManager<ApplicationUser> userManager, IConfiguration configuration)
-	{
-		_jwtSecurityTokenHandler = new();
-		_userManager = userManager;
-		_configuration = configuration;
-	}
+	private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler = new();
+	private readonly UserManager<ApplicationUser> _userManager = userManager;
+	private readonly IConfiguration _configuration = configuration;
 
 	// logika pobierająca token dla użytkownika
 	public async Task<string> GetToken(ApplicationUser user)

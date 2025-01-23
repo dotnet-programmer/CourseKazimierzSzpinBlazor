@@ -1,6 +1,6 @@
-//Klasa startowa ca³ej aplikacji, 
-//Konfiguruje serwer ASP.NET Core, zawiera logikê uruchamiania aplikacji, 
-//tutaj równie¿ rejestruje siê ró¿ne us³ugi (dependency injection).
+// Klasa startowa ca³ej aplikacji,
+// Konfiguruje serwer ASP.NET Core, zawiera logikê uruchamiania aplikacji,
+// tutaj równie¿ rejestruje siê ró¿ne us³ugi (dependency injection).
 
 using BlazorServer.Data;
 

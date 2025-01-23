@@ -9,22 +9,13 @@ namespace SimpleShop.Application.Authentication.Commands;
 
 // komenda pobierająca nowy token dostępu i refresh token i aktualizuje bazę danych i zwraca te dane do użytkownika,
 // tak żeby można było z aplikacji po stronie przegladarki zaktualizować wartości dla użytkownika 
-public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, LoginUserDto>
+public class RefreshTokenCommandHandler(UserManager<ApplicationUser> userManager, IAuthenticationService authenticationService) : IRequestHandler<RefreshTokenCommand, LoginUserDto>
 {
-	private readonly UserManager<ApplicationUser> _userManager;
-	private readonly IAuthenticationService _authenticationService;
-
-	public RefreshTokenCommandHandler(UserManager<ApplicationUser> userManager, IAuthenticationService authenticationService)
-	{
-		_userManager = userManager;
-		_authenticationService = authenticationService;
-	}
-
 	public async Task<LoginUserDto> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
 	{
-		var principal = _authenticationService.GetPrincipalFromExpiredToken(request.Token);
+		var principal = authenticationService.GetPrincipalFromExpiredToken(request.Token);
 		var name = principal.Identity.Name;
-		var user = await _userManager.FindByEmailAsync(name);
+		var user = await userManager.FindByEmailAsync(name);
 
 		if (user == null || user.Email != name)
 		{
@@ -36,9 +27,9 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
 			return new LoginUserDto { ErrorMessage = "Nieprawidłowe żądanie." };
 		}
 
-		var token = await _authenticationService.GetToken(user);
-		user.RefreshToken = _authenticationService.GenerateRefreshToken();
-		await _userManager.UpdateAsync(user);
+		var token = await authenticationService.GetToken(user);
+		user.RefreshToken = authenticationService.GenerateRefreshToken();
+		await userManager.UpdateAsync(user);
 
 		return new LoginUserDto
 		{

@@ -8,7 +8,7 @@ namespace TodoApp.Client.Pages;
 public partial class TaskEdit
 {
 	private bool _isLoading = false;
-	private EditTaskCommand _editTaskCommand = new() { Term = DateTime.Now };
+	private EditTaskCommand _editTaskCommand = new();
 
 	[Parameter]
 	public int Id { get; set; }
@@ -22,7 +22,8 @@ public partial class TaskEdit
 	[Inject]
 	public IToastrService ToastrService { get; set; }
 
-	protected override async Task OnInitializedAsync() => _editTaskCommand = await TaskHttpRepository.GetEdit(Id);
+	protected override async Task OnInitializedAsync() 
+		=> _editTaskCommand = await TaskHttpRepository.GetEdit(Id);
 
 	private async Task Save()
 	{

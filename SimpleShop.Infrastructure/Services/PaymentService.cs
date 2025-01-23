@@ -43,7 +43,7 @@ internal class PaymentService : IPaymentService
 	// na podstawie przekazanego identyfikatora sesji zwraca info czy zamówienie jest zapłacone 
 	public bool IsPaid(string sessionId)
 	{
-		var service = new SessionService();
+		SessionService service = new();
 		var sessionDetails = service.Get(sessionId);
 		return sessionDetails.PaymentStatus == "paid";
 	}

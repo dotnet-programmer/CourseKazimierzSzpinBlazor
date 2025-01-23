@@ -1,5 +1,6 @@
 ﻿namespace SimpleShop.Client.Models;
 
+// informacje o paginacji, te same info jest zwracane z web api
 public class PaginationInfo
 {
 	public int PageIndex { get; set; }

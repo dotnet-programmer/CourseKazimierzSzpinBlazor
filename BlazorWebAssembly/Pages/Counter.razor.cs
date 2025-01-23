@@ -11,16 +11,22 @@ public partial class Counter
 	// Parametr przekazywanego do strony poprzez ścieżkę:
 	[Parameter]
 	public int Header { get; set; }
+
 	[Parameter]
 	public bool? IsDeleted { get; set; }
-	// ta właściwość z takm atrybutem służy do przekazywania parametrów przez adres doklejając po znaku zapytania jego nazwę z przypisaniem wartości:
-	// localhost/counter-par?arg1=1
+
+	// ta właściwość z takm atrybutem służy do przekazywania parametrów przez adres
+	// doklejając po znaku zapytania jego nazwę z przypisaniem wartości:
+	// localhost/counter?arg1=1
 	[SupplyParameterFromQuery(Name = "Header2")]
 	public string Header2 { get; set; }
 
-	// atrybut DI [Inject] - oznacza wstrzyknięcie/użycie implementacji serwisu zarejestrowanego w Program.cs
+	// atrybut Dependency Injection [Inject] - dodać aby użyć w klasie implementacji interfejsu/serwisu
+	// Oznacza wstrzyknięcie/użycie implementacji serwisu zarejestrowanego w Program.cs:
+	//		builder.Services.AddScoped<IStudentRepo, StudentRepo>();
 	[Inject]
 	public IStudentRepo StudentRepo { get; set; }
+
 	private void AddStudent()
 		=> StudentRepo.Add();
 
@@ -40,14 +46,23 @@ public partial class Counter
 	private void ToggleActive()
 		=> _isActive = !_isActive;
 
-	// Navigation Manager - przemieszczanie się w kodzie między stronami
+	#region Navigation Manager - przemieszczanie się w kodzie między stronami
+
 	// atrybut [Inject] - używanie DI
+	// nie trzeba było rejestrować tego serwisu w Program.cs bo jest on wbudowany w Blazora i od razu dostępny
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }
+
+	// powrót na stronę główną
 	private void GoToIndex()
-		// powrót na stronę główną
 		=> NavigationManager.NavigateTo("/");
+
+	// przejdź na stronę "counter-parameter" podając 2 argumenty: 999 i true
 	private void GoToSiteWithParameters()
-		// przejdź na stronę "counter-par" podając 2 argumenty: 999 i true
-		=> NavigationManager.NavigateTo("/counter-par/666/false");
+		=> NavigationManager.NavigateTo("/counter-parameter/666/false");
+
+	private void GoToSiteWithParametersFromQuery()
+		=> NavigationManager.NavigateTo("counter?header2=69");
+
+	#endregion Navigation Manager - przemieszczanie się w kodzie między stronami
 }

@@ -6,19 +6,13 @@ using TodoApp.Shared.Tasks.Queries;
 
 namespace TodoApp.Application.Tasks.Queries;
 
-public class GetEditTaskQueryHandler : IRequestHandler<GetEditTaskQuery, EditTaskCommand>
+public class GetEditTaskQueryHandler(IApplicationDbContext context) : IRequestHandler<GetEditTaskQuery, EditTaskCommand>
 {
-	private readonly IApplicationDbContext _context;
-
-	public GetEditTaskQueryHandler(IApplicationDbContext context)
-		=> _context = context;
-
 	public async Task<EditTaskCommand> Handle(GetEditTaskQuery request, CancellationToken cancellationToken)
 	{
-		var task = await _context
-			.Tasks
+		var task = await context.Tasks
 			.AsNoTracking()
-			.FirstOrDefaultAsync(x => x.Id == request.Id);
+			.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
 		if (task == null)
 		{

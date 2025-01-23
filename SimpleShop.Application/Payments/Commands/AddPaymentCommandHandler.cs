@@ -4,14 +4,9 @@ using SimpleShop.Shared.Payments.Commands;
 
 namespace SimpleShop.Application.Payments.Commands;
 
-internal class AddPaymentCommandHandler : IRequestHandler<AddPaymentCommand, string>
+internal class AddPaymentCommandHandler(IPaymentService paymentService) : IRequestHandler<AddPaymentCommand, string>
 {
-	private readonly IPaymentService _paymentService;
-
-	public AddPaymentCommandHandler(IPaymentService paymentService)
-		=> _paymentService = paymentService;
-
+	// metoda Create zwraca SessionId
 	public async Task<string> Handle(AddPaymentCommand request, CancellationToken cancellationToken)
-		// metoda Create zwraca SessionId
-		=> _paymentService.Create(request.ClientUrl, request.Value);
+		=> paymentService.Create(request.ClientUrl, request.Value);
 }

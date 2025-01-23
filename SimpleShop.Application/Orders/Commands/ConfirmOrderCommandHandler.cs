@@ -5,27 +5,16 @@ using SimpleShop.Shared.Orders.Commands;
 
 namespace SimpleShop.Application.Orders.Commands;
 
-internal class ConfirmOrderCommandHandler : IRequestHandler<ConfirmOrderCommand>
+internal class ConfirmOrderCommandHandler(IApplicationDbContext context, IPaymentService paymentService) : IRequestHandler<ConfirmOrderCommand>
 {
-	private readonly IApplicationDbContext _context;
-	private readonly IPaymentService _paymentService;
-
-	public ConfirmOrderCommandHandler(IApplicationDbContext context, IPaymentService paymentService)
-	{
-		_context = context;
-		_paymentService = paymentService;
-	}
-
 	public async Task Handle(ConfirmOrderCommand request, CancellationToken cancellationToken)
 	{
-		if (!_paymentService.IsPaid(request.SessionId))
+		if (!paymentService.IsPaid(request.SessionId))
 		{
 			throw new Exception("Payment pending...");
 		}
 
-		var orderToConfirm = await _context
-				.Orders
-				.FirstOrDefaultAsync(x => x.SessionId == request.SessionId);
+		var orderToConfirm = await context.Orders.FirstOrDefaultAsync(x => x.SessionId == request.SessionId, cancellationToken);
 
 		if (orderToConfirm == null)
 		{
@@ -34,6 +23,6 @@ internal class ConfirmOrderCommandHandler : IRequestHandler<ConfirmOrderCommand>
 
 		orderToConfirm.IsPaid = true;
 
-		await _context.SaveChangesAsync(cancellationToken);
+		await context.SaveChangesAsync(cancellationToken);
 	}
 }

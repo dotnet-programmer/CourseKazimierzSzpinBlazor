@@ -1,8 +1,14 @@
 ﻿@* Strona główna aplikacji, tutaj jest szkielet strony w HTML i wskazuje główny komponent App *@
 
+@* oznaczenie że jest to strona, dostępna pod adresem głównym strony *@
 @page "/"
+
+@* Import przestrzeni nazw *@
 @using Microsoft.AspNetCore.Components.Web
+
 @namespace BlazorServer.Pages
+
+@* Dodanie poprawnej obsługi tagów TagHelper np. <component ... /> *@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
@@ -18,6 +24,7 @@
 	<component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
+	@* wskazanie głównego komponentu App *@
 	<component type="typeof(App)" render-mode="ServerPrerendered" />
 
 	<div id="blazor-error-ui">

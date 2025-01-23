@@ -26,11 +26,13 @@ public partial class Product
 	private async Task OnAddProductToCart()
 	{
 		var products = await LocalStorage.GetItemAsync<List<ProductDto>>("cart");
+
 		//if (products == null)
 		//{
 		//	products = [];
 		//}
 		products ??= [];
+
 		products.Add(ProductModel);
 		await LocalStorage.SetItemAsync("cart", products);
 		NavigationManager.NavigateTo("/koszyk");

@@ -6,25 +6,17 @@ using Toolbelt.Blazor;
 
 namespace SimpleShop.Client.HttpInterceptor;
 
-// INFO - logika Interceptora
-public class HttpInterceptorService
+// logika Interceptora
+public class HttpInterceptorService(
+	HttpClientInterceptor interceptor,
+	NavigationManager navigationManager,
+	RefreshTokenService refreshTokenService,
+	NavigationManager navManager)
 {
-	private readonly HttpClientInterceptor _interceptor;
-	private readonly NavigationManager _navigationManager;
-	private readonly RefreshTokenService _refreshTokenService;
-	private readonly NavigationManager _navManager;
-
-	public HttpInterceptorService(
-		HttpClientInterceptor interceptor,
-		NavigationManager navigationManager,
-		RefreshTokenService refreshTokenService,
-		NavigationManager navManager)
-	{
-		_interceptor = interceptor;
-		_navigationManager = navigationManager;
-		_refreshTokenService = refreshTokenService;
-		_navManager = navManager;
-	}
+	private readonly HttpClientInterceptor _interceptor = interceptor;
+	private readonly NavigationManager _navigationManager = navigationManager;
+	private readonly RefreshTokenService _refreshTokenService = refreshTokenService;
+	private readonly NavigationManager _navManager = navManager;
 
 	// w komponentach gdzie zostanie wywołana ta metoda, to logika z HandleResponse zostanie wykonana po każdym requeście
 	public void RegisterEvent()
@@ -60,17 +52,18 @@ public class HttpInterceptorService
 	// metoda, która będzie wywoływana po każdym requeście, czyli będzie sprawdzana odpowiedź i odpowiednio obsługiwany w zależności od odpowiedzi
 	private async Task HandleResponse(object sender, HttpClientInterceptorEventArgs e)
 	{
+		// weryfikacja odpowiedzi, jeśli jest nullem to przekierowanie to strony (widoku) błędu
 		if (e.Response == null)
 		{
 			_navigationManager.NavigateTo("/error");
 			return;
 		}
 
-		var message = string.Empty;
-
-		// jeśli odpowiedź nie jest pozytywna
+		// jeśli odpowiedź nie jest pozytywna - request nie zakończył się sukcesem, czyli był jkaiś błąd w odpowiedzi
 		if (!e.Response.IsSuccessStatusCode)
 		{
+			string message;
+
 			switch (e.Response.StatusCode)
 			{
 				case System.Net.HttpStatusCode.NotFound:

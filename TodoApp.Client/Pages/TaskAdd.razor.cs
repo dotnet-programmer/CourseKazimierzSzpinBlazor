@@ -41,7 +41,7 @@ public partial class TaskAdd
 
 	private async Task LoadFiles(InputFileChangeEventArgs e)
 	{
-		var selectedFile = e.File;
+		IBrowserFile selectedFile = e.File;
 
 		if (selectedFile == null)
 		{

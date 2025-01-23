@@ -5,18 +5,12 @@ using TodoApp.Shared.Tasks.Commands;
 
 namespace TodoApp.Application.Tasks.Commands;
 
-public class EditTaskCommandHandler : IRequestHandler<EditTaskCommand>
+public class EditTaskCommandHandler(IApplicationDbContext context) : IRequestHandler<EditTaskCommand>
 {
-	private readonly IApplicationDbContext _context;
-
-	public EditTaskCommandHandler(IApplicationDbContext context)
-		=> _context = context;
-
 	public async Task Handle(EditTaskCommand request, CancellationToken cancellationToken)
 	{
-		var task = await _context
-			.Tasks
-			.FirstOrDefaultAsync(x => x.Id == request.Id);
+		var task = await context.Tasks
+			.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
 		if (task == null)
 		{
@@ -28,6 +22,6 @@ public class EditTaskCommandHandler : IRequestHandler<EditTaskCommand>
 		task.Title = request.Title;
 		task.Term = request.Term;
 
-		await _context.SaveChangesAsync(cancellationToken);
+		await context.SaveChangesAsync(cancellationToken);
 	}
 }

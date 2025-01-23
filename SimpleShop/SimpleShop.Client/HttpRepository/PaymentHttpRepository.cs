@@ -4,16 +4,11 @@ using SimpleShop.Shared.Payments.Commands;
 
 namespace SimpleShop.Client.HttpRepository;
 
-public class PaymentHttpRepository : IPaymentHttpRepository
+public class PaymentHttpRepository(HttpClient client) : IPaymentHttpRepository
 {
-	private readonly HttpClient _client;
-
-	public PaymentHttpRepository(HttpClient client)
-		=> _client = client;
-
 	public async Task<string> Add(AddPaymentCommand command)
 	{
-		var response = await _client.PostAsJsonAsync("payments", command);
+		var response = await client.PostAsJsonAsync("payments", command);
 		return await response.Content.ReadAsStringAsync();
 	}
 }

@@ -1,5 +1,6 @@
 ﻿namespace SimpleShop.Client.Models;
 
+// każdy przycisk na paginacji będzie modelem PaginationLink
 public class PaginationLink
 {
 	public string Text { get; set; }

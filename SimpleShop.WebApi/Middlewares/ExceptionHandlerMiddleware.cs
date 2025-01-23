@@ -3,18 +3,12 @@ using SimpleShop.Shared.Common.Models;
 
 namespace SimpleShop.WebApi.Middlewares;
 
-public class ExceptionHandlerMiddleware
+public class ExceptionHandlerMiddleware(
+	RequestDelegate next,
+	ILogger<ExceptionHandlerMiddleware> logger)
 {
-	private readonly RequestDelegate _next;
-	private readonly ILogger<ExceptionHandlerMiddleware> _logger;
-
-	public ExceptionHandlerMiddleware(
-		RequestDelegate next,
-		ILogger<ExceptionHandlerMiddleware> logger)
-	{
-		_next = next;
-		_logger = logger;
-	}
+	private readonly RequestDelegate _next = next;
+	private readonly ILogger<ExceptionHandlerMiddleware> _logger = logger;
 
 	public async Task Invoke(HttpContext context)
 	{

@@ -5,8 +5,11 @@ function addNumberJS(number1, number2) {
 
 // wywo³anie funkcji C# w JS
 function addNumberCSharp(number1, number2) {
-	// pierwszy argument to namespace aplikacji, drugi to metoda do wywo³ania, kolejne to argumenty tej metody
+	// pierwszy argument to namespace aplikacji, 
+	// drugi to nazwa metody C# do wywo³ania, 
+	// kolejne to argumenty tej metody
 	DotNet.invokeMethodAsync("BlazorWebAssembly", "Add", parseInt(number1), parseInt(number2))
+		// jeœli zostanie wykonane, to wyœwietl alert z wynikiem
 		.then(result => { alert(result); });
 }
 

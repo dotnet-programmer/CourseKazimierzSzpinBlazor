@@ -14,25 +14,17 @@ using SimpleShop.Shared.Common.Models;
 
 namespace SimpleShop.Client.HttpRepository;
 
-public class AuthenticationHttpRepository : IAuthenticationHttpRepository
+public class AuthenticationHttpRepository(
+	HttpClient client,
+	ILocalStorageService localStorage,
+	NavigationManager navManager,
+	AuthenticationStateProvider authStateProvider) : IAuthenticationHttpRepository
 {
-	private readonly HttpClient _client;
-	private readonly ILocalStorageService _localStorage;
-	private readonly NavigationManager _navManager;
-	private readonly AuthenticationStateProvider _authStateProvider;
+	private readonly HttpClient _client = client;
+	private readonly ILocalStorageService _localStorage = localStorage;
+	private readonly NavigationManager _navManager = navManager;
+	private readonly AuthenticationStateProvider _authStateProvider = authStateProvider;
 	private readonly JsonSerializerOptions _options = new() { PropertyNameCaseInsensitive = true };
-
-	public AuthenticationHttpRepository(
-		HttpClient client,
-		ILocalStorageService localStorage,
-		NavigationManager navManager,
-		AuthenticationStateProvider authStateProvider)
-	{
-		_client = client;
-		_localStorage = localStorage;
-		_navManager = navManager;
-		_authStateProvider = authStateProvider;
-	}
 
 	public async Task<string> RefreshToken()
 	{

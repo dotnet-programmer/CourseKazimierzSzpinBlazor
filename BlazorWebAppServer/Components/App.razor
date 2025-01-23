@@ -10,25 +10,25 @@
     <link rel="stylesheet" href="BlazorWebAppServer.styles.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
 
-	@* INFO - określenie interaktywności - Server - dla całej aplikacji *@
+	@* określenie interaktywności - Server - globalnie dla całej aplikacji *@
 	@* <HeadOutlet @rendermode="RenderMode.InteractiveServer" /> *@
 
-	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania *@
+	@* globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania *@
 	@* <HeadOutlet @rendermode="new InteractiveServerRenderMode(prerender: false)" /> *@
 
-	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania używając zmiennej z kodu C# *@
+	@* globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania używając zmiennej z kodu C# *@
 	<HeadOutlet @rendermode="_renderMode" />
 
 </head>
 
 <body>
-	@* INFO - określenie interaktywności - Server - globalnie dla całej aplikacji *@
+	@* określenie interaktywności - Server - globalnie dla całej aplikacji *@
 	@* <Routes @rendermode="RenderMode.InteractiveServer" /> *@
 
-	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania *@
-	<Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
+	@* globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania *@
+	@* <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" /> *@
 	
-	@* INFO - globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania używając zmiennej z kodu C# *@
+	@* globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania używając zmiennej z kodu C# *@
 	<Routes @rendermode="_renderMode" />
 
     <script src="_framework/blazor.web.js"></script>
@@ -37,5 +37,6 @@
 </html>
 
 @code {
+	// globalne ustawienie interaktywności + wyłączenie Prerendering - wstępnego renderowania używając zmiennej z kodu C#
 	private static IComponentRenderMode _renderMode = new InteractiveServerRenderMode(prerender: false);
 }

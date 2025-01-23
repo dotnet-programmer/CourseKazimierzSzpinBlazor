@@ -14,7 +14,6 @@
 		</tr>
 	</thead>
 	<tbody>
-
 		@if (_products == null)
 		{
 			<tr><td colspan="4">Trwa ładowanie...</td></tr>
@@ -46,6 +45,7 @@
 </table>
 
 <div class="d-flex justify-content-between px-5">
+
 	<button class="btn btn-secondary btn-lg" @onclick="GoHome">Kontynuuj zakupy</button>
 
 	@if (_products != null && _products.Any())

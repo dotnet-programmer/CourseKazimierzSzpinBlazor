@@ -20,7 +20,6 @@ public class TokenController : BaseApiController
 		}
 
 		var result = await Mediator.Send(command);
-
 		return Ok(result);
 	}
 }

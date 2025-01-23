@@ -6,16 +6,10 @@ using TodoApp.Shared.Tasks.Queries;
 
 namespace TodoApp.Application.Tasks.Queries;
 
-public class GetTasksQueryHandler : IRequestHandler<GetTasksQuery, IEnumerable<TaskDto>>
+public class GetTasksQueryHandler(IApplicationDbContext context) : IRequestHandler<GetTasksQuery, IEnumerable<TaskDto>>
 {
-	private readonly IApplicationDbContext _context;
-
-	public GetTasksQueryHandler(IApplicationDbContext context)
-		=> _context = context;
-
 	public async Task<IEnumerable<TaskDto>> Handle(GetTasksQuery request, CancellationToken cancellationToken)
-		=> await _context
-			.Tasks
+		=> await context.Tasks
 			.AsNoTracking()
 			.OrderByDescending(x => x.Term)
 			.ThenBy(x => x.Id)
@@ -26,5 +20,5 @@ public class GetTasksQueryHandler : IRequestHandler<GetTasksQuery, IEnumerable<T
 				IsExecuted = x.IsExecuted,
 				Term = x.Term,
 			})
-			.ToListAsync();
+			.ToListAsync(cancellationToken);
 }

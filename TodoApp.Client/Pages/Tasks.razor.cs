@@ -22,21 +22,29 @@ public partial class Tasks
 	protected override async Task OnInitializedAsync()
 		=> await RefreshTasks();
 
-	private async Task RefreshTasks() => _tasks = await TaskHttpRepository.GetAll();// do pokazania jak działa wirtualizacja danych //var tasks = await TaskHttpRepository.GetAll();//_tasks = [];//for (int i = 0; i < 100; i++)//{//	_tasks.AddRange(tasks);//}
+	private async Task RefreshTasks() 
+		=> _tasks = await TaskHttpRepository.GetAll();
+	// do pokazania jak działa wirtualizacja danych 
+	//var tasks = await TaskHttpRepository.GetAll();
+	//_tasks = [];
+	//for (int i = 0; i < 100; i++)
+	//{
+	//	_tasks.AddRange(tasks);
+	//}
 
 	private void DeleteTask(int id, string title)
 	{
 		_deleteDialogBody = $"Czy na pewno chcesz usunąć zadanie: {title}";
-		_showDeleteDialog = true;
 		_deleteTaskId = id;
+		_showDeleteDialog = true;
 	}
 
 	private async Task DeleteConfirmed(MouseEventArgs e)
 	{
 		await TaskHttpRepository.Delete(_deleteTaskId);
-		await ToastrService.ShowSuccessMessage("Zadanie zostało usunięte.");
 		await RefreshTasks();
 		_showDeleteDialog = false;
+		await ToastrService.ShowSuccessMessage("Zadanie zostało usunięte.");
 	}
 
 	private void DeleteCanceled(MouseEventArgs e)

@@ -6,23 +6,14 @@ using SimpleShop.Application.Common.Interfaces;
 
 namespace SimpleShop.Infrastructure.Services;
 
-public class Email : IEmail
+// dane o wysyłce mailowej zapisane w pliku konfiguracyjnym
+public class Email(IConfiguration configuration) : IEmail
 {
-	private readonly string _hostSmtp;
-	private readonly int _port;
-	private readonly string _senderEmail;
-	private readonly string _senderEmailPassword;
-	private readonly string _senderName;
-
-	public Email(IConfiguration configuration)
-	{
-		// dane o wysyłce mailowej zapisane w pliku konfiguracyjnym
-		_hostSmtp = configuration["Email:HostSmtp"];
-		_port = int.Parse(configuration["Email:Port"]);
-		_senderEmail = configuration["Email:SenderEmail"];
-		_senderEmailPassword = configuration["Email:SenderEmailPassword"];
-		_senderName = configuration["Email:SenderName"];
-	}
+	private readonly string _hostSmtp = configuration["Email:HostSmtp"];
+	private readonly int _port = int.Parse(configuration["Email:Port"]);
+	private readonly string _senderEmail = configuration["Email:SenderEmail"];
+	private readonly string _senderEmailPassword = configuration["Email:SenderEmailPassword"];
+	private readonly string _senderName = configuration["Email:SenderName"];
 
 	public async Task Send(string subject, string body, string to, string attachmentPath = null)
 	{

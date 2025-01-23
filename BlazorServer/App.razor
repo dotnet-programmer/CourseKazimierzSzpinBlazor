@@ -1,15 +1,13 @@
 ﻿@* Główny składnik aplikacji. *@
+@* Konfiguruje m.in. routing klienta, dzięki temu można poprawnie wyświetlić szukaną stronę w przeglądarce. *@
 
 <Router AppAssembly="@typeof(App).Assembly">
-
-	@* Konfiguruje routing klienta, dzięki temu można poprawnie wyświetlić szukaną stronę w przeglądarce. *@
+	
+	@*  Wygląd aplikacji gdy uda się odnaleźć szukany adres *@
 	<Found Context="routeData">
-
 		@* Definicja domyślnego Layoutu *@
 		<RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-
 		<FocusOnNavigate RouteData="@routeData" Selector="h1" />
-
 	</Found>
 
 	@*  Wygląd aplikacji gdy nie uda się odnaleźć szukanego adresu (404 not found) *@

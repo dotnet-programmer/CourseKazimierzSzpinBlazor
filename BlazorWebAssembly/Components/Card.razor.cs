@@ -19,7 +19,6 @@ public partial class Card
 	[Parameter]
 	public string BtnText { get; set; }
 
-
 	// do komponentów można przekazywać różne atrybuty HTML i jest na to kilka sposobów
 	// pierwszy - najprostszy - dodanie nowych parametrów, wada tego rozwiązania że trzeba później każdy taki atrybut przypisywać osobno
 	[Parameter]
@@ -39,21 +38,21 @@ public partial class Card
 	[Parameter(CaptureUnmatchedValues = true)]
 	public Dictionary<string, object> BtnAttributes { get; set; }
 
-
 	// parametr kaskadowy
 	private readonly string _info = "Komunikat z CARD";
+	private readonly string _title = "Tytuł z CARD";
 
 	// zdarzenie w komponencie
-	// komponent wywołujący jako parametr może przekazać metodę, która ma zostać wywołana po kliknięciu danego przycisku
+	// komponent wywołujący (nadrzędny) jako parametr może przekazać metodę, która ma zostać wywołana po kliknięciu danego przycisku
 	// tutaj właściwość typu EventCallback na tą metodę
 	[Parameter]
 	public EventCallback OnClickMore { get; set; }
 	// zazwyczaj potrzeba poinformować komponent nadrzędny, czyli ten wywołujący dany komponent, o tym że dany przycisk został kliknięty
 	private void ClickMore(MouseEventArgs e) =>
-		// logika
-
-		// poinformowanie elementu nadrzędnego że ten przycisk został kliknięty
+		// poinformowanie elementu nadrzędnego że ten przycisk został kliknięty,
+		// umożliwia to też komponentowi nadrzędnemu obsługę swojej metody po kliknięciu na ten przycisk
 		OnClickMore.InvokeAsync();
+
 	// jeżeli komponent wywołujący przekazuje jakieś parametry do metody, to trzeba użyć typa generycznego
 	[Parameter]
 	public EventCallback<string> OnClickMoreString { get; set; }

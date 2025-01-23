@@ -1,17 +1,19 @@
+<!--Strona główna aplikacji, tutaj jest szkielet strony internetowej w HTML-->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlazorWebAssembly</title>
-    <base href="/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BlazorWebAssembly</title>
+	<base href="/" />
+	<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
 	<link href="bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
 	<link href="lib/toastr.js/toastr.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link href="BlazorWebAssembly.styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/app.css" />
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<link href="BlazorWebAssembly.styles.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -30,10 +32,12 @@
 		<a class="dismiss">🗙</a>
 	</div>-->
 	<script src="_framework/blazor.webassembly.js"></script>
+
+	<!--dodanie własnych funkcji JS-->
 	<script src="scripts/jsFunctions.js"></script>
-	<script src="lib/jquery/jquery.min.js"></script>
 
 	<!--używanie bibliotek JS w C#-->
+	<script src="lib/jquery/jquery.min.js"></script>
 	<script src="lib/toastr.js/toastr.min.js"></script>
 	<script src="scripts/toastrWrapper.js"></script>
 

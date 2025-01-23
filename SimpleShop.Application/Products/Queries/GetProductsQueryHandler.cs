@@ -9,18 +9,11 @@ using SimpleShop.Shared.Products.Queries;
 
 namespace SimpleShop.Application.Products.Queries;
 
-internal class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, PaginatedList<ProductDto>>
+internal class GetProductsQueryHandler(IApplicationDbContext context) : IRequestHandler<GetProductsQuery, PaginatedList<ProductDto>>
 {
-	private readonly IApplicationDbContext _context;
-
-	public GetProductsQueryHandler(IApplicationDbContext context)
-		=> _context = context;
-
 	public async Task<PaginatedList<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
 	{
-		var tasksQuery = _context
-			.Products
-			.AsNoTracking();
+		var tasksQuery = context.Products.AsNoTracking();
 
 		if (!string.IsNullOrWhiteSpace(request.SearchValue))
 		{

@@ -1,3 +1,4 @@
+using BlazorWebAppWebAssembly.Client.Pages;
 using BlazorWebAppWebAssembly.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +28,9 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
 	.AddInteractiveWebAssemblyRenderMode()
-	// INFO - dziêki temu wpisowi mo¿na tworzyæ oddzielne strony wraz z routingiem w aplikacji klienta i bêdzie to dzia³a³o
+	// dziêki temu wpisowi mo¿na tworzyæ oddzielne strony wraz z routingiem w aplikacji klienta i bêdzie to dzia³a³o
 	// bez tej linni serwer nie widzia³by routingu klienta
-	.AddAdditionalAssemblies(typeof(BlazorWebAppWebAssembly.Client._Imports).Assembly);
+	//.AddAdditionalAssemblies(typeof(BlazorWebAppWebAssembly.Client._Imports).Assembly);
+	.AddAdditionalAssemblies(typeof(Counter).Assembly);
 
 app.Run();

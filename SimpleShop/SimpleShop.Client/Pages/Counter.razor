@@ -5,8 +5,6 @@
 
 <PageTitle>Counter</PageTitle>
 
-<Product ProductModel="_product"></Product>
-
 <h1>Counter</h1>
 
 <p role="status">Current count: @currentCount</p>
@@ -16,14 +14,7 @@
 @code {
 	private int currentCount = 0;
 
-	private ProductDto _product = new()
-		{
-			Name = "Rower 1",
-			Price = 10,
-			ImageUrl = "content/images/rower-1.png"
-		};
-
-	// INFO - Local Storage
+	// Local Storage
 	[Inject]
 	public ILocalStorageService LocalStorage { get; set; }
 
@@ -47,6 +38,8 @@
 		{
 			var counter = await LocalStorage.GetItemAsync<int>("counter");
 			currentCount = counter;
+			
+			// wywołanie tej metody spowoduje zaktualizowanie wartości na widoku
 			StateHasChanged();
 		}
 	}

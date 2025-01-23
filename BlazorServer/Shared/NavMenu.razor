@@ -1,8 +1,9 @@
 ﻿@*
 	Komponent z rozszerzeniem .razor. Jest to połączenie HTML z C#.
-	Wstawiany bezposrenio na stronę w znaczniku <NazwaKomponentu />
+	Wstawiany bezpośrenio na stronę w znaczniku <NazwaKomponentu />
 *@
 
+@* Obsługa małych ekranów i przycisku "hamburger" *@
 <div class="top-row ps-3 navbar navbar-dark">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="">BlazorServer</a>
@@ -12,7 +13,7 @@
 	</div>
 </div>
 
-@* Obsługa małych ekranów i przycisku "hamburger" *@
+@* Linki na panelu bocznym *@
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
 	<nav class="flex-column">
 		<div class="nav-item px-3">
@@ -37,7 +38,8 @@
 @code {
 	private bool collapseNavMenu = true;
 
-	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+	private string? NavMenuCssClass 
+		=> collapseNavMenu ? "collapse" : null;
 
 	private void ToggleNavMenu()
 	{

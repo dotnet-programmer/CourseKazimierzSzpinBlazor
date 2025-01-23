@@ -3,12 +3,9 @@ using TodoApp.Client.Services.Interfaces;
 
 namespace TodoApp.Client.Services;
 
-public class ToastrService : IToastrService
+public class ToastrService(IJSRuntime jsRuntime) : IToastrService
 {
-	private readonly IJSRuntime _jsRuntime;
-
-	public ToastrService(IJSRuntime jSRuntime)
-		=> _jsRuntime = jSRuntime;
+	private readonly IJSRuntime _jsRuntime = jsRuntime;
 
 	public async Task ShowInfoMessage(string message)
 		=> await _jsRuntime.InvokeVoidAsync("toastrFunctions.showToastrInfo", message);

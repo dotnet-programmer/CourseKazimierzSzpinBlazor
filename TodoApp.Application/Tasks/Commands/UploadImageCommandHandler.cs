@@ -4,13 +4,8 @@ using TodoApp.Shared.Tasks.Commands;
 
 namespace TodoApp.Application.Tasks.Commands;
 
-public class UploadImageCommandHandler : IRequestHandler<UploadImageCommand>
+public class UploadImageCommandHandler(IFileService fileService) : IRequestHandler<UploadImageCommand>
 {
-	private readonly IFileService _fileService;
-
-	public UploadImageCommandHandler(IFileService fileService)
-		=> _fileService = fileService;
-
 	public async Task Handle(UploadImageCommand request, CancellationToken cancellationToken)
-		=> await _fileService.Upload(request.File);
+		=> await fileService.Upload(request.File);
 }

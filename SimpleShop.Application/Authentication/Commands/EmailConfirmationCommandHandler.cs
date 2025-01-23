@@ -8,20 +8,11 @@ using SimpleShop.Shared.Authentication.Commands;
 namespace SimpleShop.Application.Authentication.Commands;
 
 // potwierdzenie adresu email
-public class EmailConfirmationCommandHandler : IRequestHandler<EmailConfirmationCommand>
+public class EmailConfirmationCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context) : IRequestHandler<EmailConfirmationCommand>
 {
-	private readonly UserManager<ApplicationUser> _userManager;
-	private readonly IApplicationDbContext _context;
-
-	public EmailConfirmationCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context)
-	{
-		_userManager = userManager;
-		_context = context;
-	}
-
 	public async Task Handle(EmailConfirmationCommand request, CancellationToken cancellationToken)
 	{
-		var user = await _userManager.FindByEmailAsync(request.Email);
+		var user = await userManager.FindByEmailAsync(request.Email);
 
 		if (user == null)
 		{
@@ -33,7 +24,7 @@ public class EmailConfirmationCommandHandler : IRequestHandler<EmailConfirmation
 			return;
 		}
 
-		var confirmResult = await _userManager.ConfirmEmailAsync(user, request.Token);
+		var confirmResult = await userManager.ConfirmEmailAsync(user, request.Token);
 
 		if (!confirmResult.Succeeded)
 		{

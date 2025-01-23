@@ -10,6 +10,7 @@ public partial class MyComponents
 	// utworzenie listy autorów - normalnie pobieranie z bazy danych,
 	// potrzebne do pokazania użycia przekazania parametrów do komponentu w pętli
 	private List<CardModel> _authors = [];
+
 	// w tej metodzie najlepiej robić inicjalizację list pobieranych z bazy danych
 	protected override async Task OnInitializedAsync()
 	{
@@ -29,12 +30,14 @@ public partial class MyComponents
 
 
 	private string _btnText = "Więcej";
-	private void ChangeBtnText() => _btnText = "Mniej";
+	private void ChangeBtnText() 
+		=> _btnText = "Mniej";
 
 
 	// zdarzenia w komponentach
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }
+
 	// metoda która ma zostać wykonana w komponencie nadrzędnym po kliknięciu przycisku w komponencie podrzędnym
 	private void MyClickMore() =>
 		// po kliknięciu przekierowanie na stronę główną

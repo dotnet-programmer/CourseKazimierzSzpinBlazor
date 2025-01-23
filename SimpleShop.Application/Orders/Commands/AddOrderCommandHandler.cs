@@ -5,16 +5,11 @@ using SimpleShop.Shared.Orders.Commands;
 
 namespace SimpleShop.Application.Orders.Commands;
 
-internal class AddOrderCommandHandler : IRequestHandler<AddOrderCommand>
+internal class AddOrderCommandHandler(IApplicationDbContext context) : IRequestHandler<AddOrderCommand>
 {
-	private readonly IApplicationDbContext _context;
-
-	public AddOrderCommandHandler(IApplicationDbContext context)
-		=> _context = context;
-
 	public async Task Handle(AddOrderCommand request, CancellationToken cancellationToken)
 	{
-		var order = new Order
+		Order order = new()
 		{
 			IsPaid = false,
 			SessionId = request.SessionId,
@@ -22,7 +17,7 @@ internal class AddOrderCommandHandler : IRequestHandler<AddOrderCommand>
 			Value = request.Value
 		};
 
-		_context.Orders.Add(order);
-		await _context.SaveChangesAsync(cancellationToken);
+		context.Orders.Add(order);
+		await context.SaveChangesAsync(cancellationToken);
 	}
 }
