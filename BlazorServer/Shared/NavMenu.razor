@@ -34,15 +34,8 @@
 	</nav>
 </div>
 
-@* Kod w C# *@
+@* Kod w C# - unikać takiego zapisu, lepiej zrobić nowy plik o nazwie takiej jak komponent z dopiskiem rozszerzenia .cs
+taka klasa musi mieć nazwę taką jak komponent i być oznaczona jako partial *@
 @code {
-	private bool collapseNavMenu = true;
-
-	private string? NavMenuCssClass 
-		=> collapseNavMenu ? "collapse" : null;
-
-	private void ToggleNavMenu()
-	{
-		collapseNavMenu = !collapseNavMenu;
-	}
+    // tutaj można umieścić kod C# dla tego komponentu
 }
