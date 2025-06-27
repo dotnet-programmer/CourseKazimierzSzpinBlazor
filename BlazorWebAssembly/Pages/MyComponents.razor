@@ -3,7 +3,7 @@
 <h3>Komponenty</h3>
 
 <h3>odwołanie do podrzędnego komponentu</h3>
-<button class="btn btn-secondary my-2" @onclick="AddCardBorder">
+<button class="btn btn-secondary my-2" @onclick="AddCardBorderFromMyComponents">
 	Dodaj obramowanie
 </button>
 
@@ -17,6 +17,7 @@
 	  Content="Programista C#/.NET z 20 letnim doświadczeniem. Specjalizacje: Blazor i ASP.NET Core" /> *@
 
 <h3>Szablon HTML jako parametr przekazywany do komponentu</h3>
+@* dodatkowo odwołanie do komponentu podrzędnego poprzez przypisanie referencji do obiektu tego typu: Card @ref="_card" *@
 <Card @ref="_card"
 	  Image="files/kowalski.png"
 	  BtnText="Więcej">
@@ -43,6 +44,7 @@
 	{
 		<Card Image="@item.Image"
 			  BtnText="@item.BtnText">
+            @* Title i Content są w osobnych blokach, bo to parametry typu RenderFragment, dzięki czemu można przekazać dowolny kod HTML *@
 			<Title>
 				@item.Title
 			</Title>
@@ -57,7 +59,9 @@
 	Zmień tekst przycisku
 </button>
 
-<h3>komponent z argumentem kaskadowym - przekazana wartość z elementu nadrzędnego</h3>
+<h3>
+    komponent z 1 argumentem kaskadowym - przekazana wartość z elementu będącego 2 poziomy wyżej w hierarchii
+</h3>
 <CascadingValue Value="@_info">
 	<Card Image="files/kowalski.png"
 		  BtnText="@_btnText">
@@ -76,7 +80,10 @@
 	</Card>
 </CascadingValue>
 
-<h3>komponent z wieloma argumentami kaskadowymi - przekazana wartość z elementu nadrzędnego</h3>
+<h3>
+    komponent z wieloma argumentami kaskadowymi - przekazana wartość z elementu będącego 2 poziomy wyżej w hierarchii
+    W tym przypadku trzeba dodatkowo jawnie zdefiniować nazwy parametrów kaskadowych (jeśli mają ten sam typ)
+</h3>
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
@@ -97,7 +104,10 @@
 	</CascadingValue>
 </CascadingValue>
 
-<h3>zdarzenia w komponentach - wywołanie metody</h3>
+<h3>
+    zdarzenia w komponentach - wywołanie metody: dodanie powiązania, które określa jaka metoda ma zostać wywołana
+    trzeba przypisać metodę z komponentu nadrzędnego do właściwości typu EventCallback OnClickMore z komponentu podrzędnego: OnClickMore="MyClickMore"
+</h3>
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
@@ -119,14 +129,16 @@
 	</CascadingValue>
 </CascadingValue>
 
-<h3>zdarzenia w komponentach - wywołanie metody z parametrem</h3>
+<h3>
+    zdarzenia w komponentach - wywołanie metody z parametrem
+    dodatkowo przekazanie atrybutów HTML poprzez parametry - BtnClass, BtnTitle
+</h3>
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"
 			  BtnText="Więcej"
 			  BtnClass="btn btn-danger"
 			  BtnTitle="BtnTitle"
-			  @attributes="_cardAttributes"
 			  OnClickMoreString="MyClickMoreString">
 			<Title>
 				<b>Jan Kowalski</b>
@@ -144,6 +156,33 @@
 	</CascadingValue>
 </CascadingValue>
 
+@* żeby uprościć powyższy zapis i nie wywoływać osobno każdego parametru, 
+   można użyć parametru @attributes z przypisaniem do niego słownika _cardAttributes typu Dictionary<string, object> 
+   w komponencie podrzędnym nie trzeba nic zmieniać *@
+<CascadingValue Name="Title" Value="@_title">
+    <CascadingValue Name="Info" Value="@_info">
+        <Card Image="files/kowalski.png"
+              BtnText="Więcej"
+              @attributes="_cardAttributes"
+              OnClickMoreString="MyClickMoreString">
+            <Title>
+                <b>Jan Kowalski</b>
+            </Title>
+            <Content>
+                <u>Programista C#/.NET</u> z 20 letnim doświadczeniem.
+                <br />
+                <u>Specjalizacje:</u>
+                <ul>
+                    <li>Blazor</li>
+                    <li>ASP.NET Core</li>
+                </ul>
+            </Content>
+        </Card>
+    </CascadingValue>
+</CascadingValue>
+
+@* można też pozwolić na przekazanie dowolnych atrybutów komponentu nadrzędnego, nawet takich, które nie są zaimplementowane w komponencie 
+    BtnAttributes="_cardBtnAttributes" przypisuje słownik z elementu nadrzędnego do parametru-słownika z elementu podrzędnego *@
 <CascadingValue Name="Title" Value="@_title">
 	<CascadingValue Name="Info" Value="@_info">
 		<Card Image="files/kowalski.png"

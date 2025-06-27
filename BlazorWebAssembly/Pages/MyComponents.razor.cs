@@ -38,19 +38,17 @@ public partial class MyComponents
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }
 
-	// metoda która ma zostać wykonana w komponencie nadrzędnym po kliknięciu przycisku w komponencie podrzędnym
-	private void MyClickMore() =>
-		// po kliknięciu przekierowanie na stronę główną
-		NavigationManager.NavigateTo("/");
+	// metoda która ma zostać wykonana w komponencie nadrzędnym po kliknięciu przycisku w komponencie podrzędnym,
+	// tutaj przekierowanie do strony głównej
+	private void MyClickMore()
+		=> NavigationManager.NavigateTo("/");
 	// metoda z parametrem, która ma zostać wywołana w komponencie podrzędnym
-	private void MyClickMoreString(string message) =>
-		// po kliknięciu przekierowanie na stronę główną
-		NavigationManager.NavigateTo($"/{message}");
+	private void MyClickMoreString(string message)
+		=> NavigationManager.NavigateTo($"/{message}");
 	// jeżeli są parametry a w komponencie podrzędnym nie ma metody tylko bezpośrednie przypisanie właściwości wywołującej metodę, 
 	// to trzeba tu dodać parametr odpowiadający typowi konkretnego zdarzenia
-	private void MyClickMoreWithoutMethodWithParameter(MouseEventArgs e) =>
-		// po kliknięciu przekierowanie na stronę główną
-		NavigationManager.NavigateTo("/");
+	private void MyClickMoreWithoutMethodWithParameter(MouseEventArgs e)
+		=> NavigationManager.NavigateTo("/");
 
 	// przekazanie atrybutów HTML
 	// wywołanie w HTML: @attributes="_cardAttributes"
@@ -73,7 +71,10 @@ public partial class MyComponents
 	};
 
 
-	//odwołanie do podrzędnego komponentu
+	// w komponencie nadrzędnym można odwołać się do podrzędnego komponentu i wywołać jego właściwość albo metodę publicznę
+	// żeby to zrobić trzeba skorzystać ze słowa kluczowego ref (np. w MainLayout.razor - <ErrorBoundary @ref="_errorBoundary">)
+	// tutaj komponent nadrzędny może dodawać obramowanie do komponentu podrzędnego
 	private Card _card;
-	private void AddCardBorder() => _card.AddCardBorder();
+	private void AddCardBorderFromMyComponents()
+		=> _card.AddCardBorderFromCard();
 }

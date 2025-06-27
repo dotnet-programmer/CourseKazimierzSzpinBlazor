@@ -22,17 +22,21 @@
 				@* <button @onclick="JustParameterWithoutMethod" class="btn btn-primary">@BtnText</button> *@
 				<button @onclick="JustParameterWithoutMethod" class="@BtnClass">@BtnText</button>
 
-				@* można też pozwolić na przekazanie dowolnych atrybutów komponentu nadrzędnego, nawet takich, które nie są zaimplementowane w komponencie *@
+				@* można też pozwolić na przekazanie dowolnych atrybutów komponentu nadrzędnego, nawet takich, które nie są zaimplementowane w komponencie 
+                    trzeba powiązać parametr @attributes ze słownikiem Dictionary<string, object> *@
 				<button @attributes="BtnAttributes" @onclick="JustParameterWithoutMethod">@BtnText</button>
 			</div>
 
 		</div>
 
 		@* parametr kaskadowy *@
+        @* zakomentowane, bo tutaj tylko pokazanie jak mogłoby to wygladać z poziomu bezpośredniego rodzica, parametry przekazywane są jeszcze z poziomu wyżej *@
+        @* przekazanie wartości z Card do AdditionalInfo poprzez parametr kaskadowy, gdy jest tylko 1 parametr *@
 		@* 	<CascadingValue Value="@_info">
 		<AdditionalInfo />
 		</CascadingValue> *@
 
+        @* przekazanie wartości z Card do AdditionalInfo poprzez parametr kaskadowy, gdy są 2 lub więcej parametry *@
 		@* <CascadingValue Name="Title" Value="@_title">
 			<CascadingValue Name="Info" Value="@_info">
 				<AdditionalInfo />
@@ -44,8 +48,8 @@
 
 </div>
 
-@* 
-<div class="card" style="width: 18rem;">
+@* pierwsza wersja komponentu, która nie korzysta z parametrów *@
+@* <div class="card" style="width: 18rem;">
 	<img src="/files/kowalski.png" alt="Jan Kowalski" class="card-img-top" />
 	<div class="card-body">
 		<h5 class="card-title">Jan Kowalski</h5>

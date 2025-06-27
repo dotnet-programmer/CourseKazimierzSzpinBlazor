@@ -5,20 +5,18 @@
 <button class="btn btn-primary" @onclick="ShowModalWindow">Pokaż moje okno modalne</button>
 <button class="btn btn-primary" @onclick="ShowModalWindowCourse">Pokaż okno modalne z kursu</button>
 
-<ModalWindow Show="_showModalWindow"
-			 Title="Nowe okno modalne"
-			 Content="Jakiś tekst, najczęściej pytanie o potwierdzenie czegoś."
-			 OnConfirm="ModalAccept"
-			 OnCancel="ModalCancel">
+<ModalWindow 
+    Show="_showModalWindow"
+	Title="Nowe okno modalne"
+	Content="Jakiś tekst, najczęściej pytanie o potwierdzenie czegoś."
+	OnConfirm="ModalAccept"
+	OnCancel="ModalCancel">
 </ModalWindow>
 
-<ModalWindowCourse Show="_showModalWindowCourse"
-				   OnAccept="ModalAccept"
-				   OnCancel="ModalCancel">
-	<Title>
-		Potwierdź operację
-	</Title>
-	<Body>
-		Czy na pewno chcesz usunąć?
-	</Body>
+<ModalWindowCourse 
+    Show="_showModalWindowCourse"
+	OnAccept="ModalAccept"
+	OnCancel="ModalCancel">
+	<Title> Potwierdź operację </Title>
+	<Body> Czy na pewno chcesz usunąć? </Body>
 </ModalWindowCourse>

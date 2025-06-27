@@ -6,7 +6,6 @@ namespace BlazorWebAssembly.Components;
 public partial class Card
 {
 	// żeby przekazać parametry do komponentu trzeba zrobić właściwość z atrybutem [Parameter]
-
 	// jako parametr do komponentu można przekazać szablony czyli kod w HTML,
 	// czyli lista, tabela, nagłówek itp jako parametr, który zostanie wyrenderowany wewnątrz komponentu
 	// w tym przypadku trzeba użyć typu RenderFragment zamiast np. string
@@ -30,6 +29,7 @@ public partial class Card
 	// atrybut title w THML oznacza dymek po najechaniu kursorem
 	[Parameter]
 	public string BtnTitle { get; set; }
+
 	// druga metoda to przekazanie słownika C# z parami klucz-wartość, gdzie klucz to string, a wartość to object
 	// taki słownik jest utworzony w komponencie nadrzędnym w jego code-behind
 
@@ -48,17 +48,18 @@ public partial class Card
 	[Parameter]
 	public EventCallback OnClickMore { get; set; }
 	// zazwyczaj potrzeba poinformować komponent nadrzędny, czyli ten wywołujący dany komponent, o tym że dany przycisk został kliknięty
-	private void ClickMore(MouseEventArgs e) =>
+	private void ClickMore(MouseEventArgs e)
 		// poinformowanie elementu nadrzędnego że ten przycisk został kliknięty,
 		// umożliwia to też komponentowi nadrzędnemu obsługę swojej metody po kliknięciu na ten przycisk
-		OnClickMore.InvokeAsync();
+		=> OnClickMore.InvokeAsync();
 
 	// jeżeli komponent wywołujący przekazuje jakieś parametry do metody, to trzeba użyć typa generycznego
 	[Parameter]
 	public EventCallback<string> OnClickMoreString { get; set; }
-	private void ClickMoreString(MouseEventArgs e) =>
+	private void ClickMoreString(MouseEventArgs e)
 		// przekazanie argumentu do wywoływanej metody
-		OnClickMoreString.InvokeAsync("ABC");
+		=> OnClickMoreString.InvokeAsync("ABC");
+
 	// jeżeli logika komponentu niczego nie robi w wywoływanej metodzie, to można pominąć tworzenie metody i przypisać tu bezpośrednio właściwość typu EventCallback
 	[Parameter]
 	public EventCallback JustParameterWithoutMethod { get; set; }
@@ -69,6 +70,8 @@ public partial class Card
 	public EventCallback<MouseEventArgs> JustParameterWithoutMethodWithParameter { get; set; }
 
 
+
+	// cykl życia komponentu
 	// kolejność metod wywoływanych podczas cyklu życia komponentu
 	// ta metoda ustawia parametry, które zostały przekazane przez nadrzędny komponent
 	public override async Task SetParametersAsync(ParameterView parameters)
@@ -96,13 +99,16 @@ public partial class Card
 		if (firstRender)
 		{
 			Console.WriteLine("OnAfterRenderAsync - firstRender");
+			// żeby wymusić odświeżenie komponentu wystarczy wywołaś funkcję StateHasChanged();
 		}
 		Console.WriteLine("OnAfterRenderAsync");
 		await base.OnAfterRenderAsync(firstRender);
 	}
 
 
-	//odwołanie do podrzędnego komponentu
-	private string _additionalCardClasses;
-	public void AddCardBorder() => _additionalCardClasses = "border-3 border-success";
+
+	// odwołanie do podrzędnego komponentu
+	private string _additionalCardClasses = string.Empty;
+	public void AddCardBorderFromCard()
+		=> _additionalCardClasses = "border-3 border-success";
 }

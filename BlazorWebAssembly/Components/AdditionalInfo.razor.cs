@@ -5,6 +5,8 @@ namespace BlazorWebAssembly.Components;
 public partial class AdditionalInfo
 {
 	// parametr kaskadowy, można go przekazać z dowolnego elementu nadrzędnego do tego komponentu
+	// jego wartość można przekazać nie tylko bezpośrednio z komponentu nadrzędnego,
+	// ale też z komponentów czy stron kilka poziomów wyżej w hierarchii
 	[CascadingParameter(Name = "Info")]
 	public string Info { get; set; }
 
