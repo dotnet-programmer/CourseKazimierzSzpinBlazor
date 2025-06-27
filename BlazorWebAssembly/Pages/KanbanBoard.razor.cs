@@ -5,11 +5,14 @@ namespace BlazorWebAssembly.Pages;
 public partial class KanbanBoard
 {
 	private Item _newItem = new();
+
+	// tutaj jest zadanie które zostało złapane myszką i jest przeciągane
 	private Item _currentItem;
+
 	private List<Item> _items = [];
 
-	protected override void OnInitialized() => _items =
-		[
+	protected override void OnInitialized()
+		=> _items = [
 			new Item
 			{
 				Description = "Logowanie użytkowników",
@@ -32,9 +35,11 @@ public partial class KanbanBoard
 			},
 		];
 
-	private void OnDrop(State state) => _currentItem.State = state;
+	private void OnDrop(State state)
+		=> _currentItem.State = state;
 
-	private void OnStartDrag(Item item) => _currentItem = item;
+	private void OnStartDrag(Item item)
+		=> _currentItem = item;
 
 	private void Save()
 	{

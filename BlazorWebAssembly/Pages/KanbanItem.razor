@@ -1,12 +1,14 @@
 ﻿@using BlazorWebAssembly.Extensions
 
 <div class="col-4">
+    @* metoda GetDisplayName jest rozszerzeniem dla typu enum, która pobiera wartość z atrybutu [Display(Name = "JakaśWartość")] *@
 	<h2>@State.GetDisplayName()</h2>
 	<div class="dropzone bg-light p-3 my-3 border border-1 rounded"
 		 ondragover="event.preventDefault();"
 		 @ondrop="OnDropHandler">
 		@foreach (var item in Items.Where(x => x.State == State))
 		{
+            @* _classes - tutaj nadawane są klasy CSS w zależności od stanu elementu *@
 			<div class="draggable alert @_classes"
 				 draggable="true"
 				 @ondragstart="@(() => OnStartDragHandler(item))">
