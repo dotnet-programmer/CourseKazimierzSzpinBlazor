@@ -14,8 +14,9 @@ public partial class Forms
 
 	private bool _isLoading = false;
 
-	// to jest onew-way binding - zmiana w kodzie powoduje zmianę na widoku
-	private void ChangeHeader() => _header = "Nowy nagłówek";
+	// to jest one-way binding - zmiana w kodzie powoduje zmianę na widoku
+	private void ChangeHeader()
+		=> _header = "Nowy nagłówek";
 
 	private readonly IEnumerable<Position> _positions =
 	[
@@ -26,6 +27,7 @@ public partial class Forms
 
 	[Inject]
 	public IToastrService ToastrService { get; set; }
+
 	private async Task Save()
 	{
 		try
@@ -37,17 +39,18 @@ public partial class Forms
 
 			var json = JsonSerializer.Serialize(_employee);
 			await ToastrService.ShowInfoMessage($"Dane zostały zapisane. Użytkownik: {json}");
+
+			// wyczyść dane na formularzu
 			_employee = new Employee { DateOfEmployment = DateTime.Now };
 		}
-		//catch (Exception)
-		//{
-		//	// obsługa wyjątku
-		//	throw;
-		//}
+		catch (Exception)
+		{
+			// obsługa wyjątku
+			throw;
+		}
 		finally
 		{
 			_isLoading = false;
-
 		}
 	}
 }

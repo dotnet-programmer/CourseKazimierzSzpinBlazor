@@ -1,15 +1,14 @@
 ﻿@page "/forms"
 
+@* to jest one-way binding - zmiana w kodzie powoduje zmianę na widoku *@
 <h3>@_header</h3>
-
+<button @onclick="ChangeHeader" class="btn btn-primary">Zmień nagłówek</button>
+<br/>
 
 @* zwykłe inputy HTML: *@
 
-<button @onclick="ChangeHeader" class="btn btn-primary">Zmień nagłówek</button>
-<br />
 @* po wpisaniu danych do inputa aktualizacja danych w polu nastąpi po opuszczeniu focusa (czyli kliknięcie gdziekolwiek poza inputem) *@
 <input @bind="_name" />
-<br />
 @* zapis powyżej to skrót od: *@
 <input @bind-value="_name" @bind-value:event="onchange" />
 @*
@@ -17,33 +16,37 @@
 	zdarzenie - onchange - wywołuje się po utracie fokusa kontrolki, czyli dopiero po kliknięciu poza nią
 	zdarzenie - oninput - wywołuje się po każdej zmianie wartości
 *@
-<br />
 <input @bind-value="_name" @bind-value:event="oninput" />
-<br />
+
+<br/>
 <p>Wartość pola _name: @_name</p>
-<br />
 
-
-
+@* FORMULARZ *@
 <div class="row my-4">
 	<h4>Nowy pracownik</h4>
 	<div class="col-6">
 
 		@* komponent formularza *@
+        @* OnValidSubmit - powoduje że metoda Save zostanie wywołana tylko wtedy, gdy nie ma błędów walidacji *@
 		<EditForm Model="_employee" OnValidSubmit="Save">
 
+            @* włączenie walidacji danych *@
 			<DataAnnotationsValidator />
 
+            @* // wyświetlenie wszystkich błędów walidacji w formularzu *@
 			<ValidationSummary />
 
 			<div class="form-group mt-3">
 				<label class="form-label">Nazwa</label>
+
 				@* <input type="text" class="form-control" value="@_employee.Name"/> *@
 				@*
 				dedykowana kontrolka Blazora do wprowadzania danych tekstowych,
 				do bindowania używa się @bind-Value (Value musi być z dużej litery)
 				*@
 				<InputText @bind-Value="_employee.Name" class="form-control" />
+
+                @* wyświetlenie błędów walidacji dla konkretnego pola *@
 				<ValidationMessage For="() => _employee.Name" />
 			</div>
 
@@ -80,7 +83,7 @@
 			</div>
 
 			<div class="form-group mt-3">
-				@if (true)
+                @if (_isLoading)
 				{
 					<button class="btn btn-primary btn-lg btn-spinner" disabled>
 						<img src="~/loading.gif" />
