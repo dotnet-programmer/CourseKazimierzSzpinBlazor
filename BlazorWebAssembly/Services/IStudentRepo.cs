@@ -4,7 +4,7 @@ namespace BlazorWebAssembly.Services;
 
 public interface IStudentRepo
 {
-	List<Student> Get();
+	List<Student> GetAllStudents();
 
-	void Add();
+	void AddStudent();
 }

@@ -1,8 +1,13 @@
-﻿@* Takie oznaczenie "/" oznacza, ze to strona główna - brak adresu tylko główny katalog *@
+﻿@* Takie oznaczenie "/" oznacza, ze to strona główna - brak adresu tylko główny katalog 
+    Strony w Blazorze są tworzone poprzez dodanie atrybutu @page i podanie ścieżki, która będzie odpowiadała za wyświetlanie tej strony.
+    Zawartość strony trafia do szablonu głównego i kod HTML wstawiany jest tam, gdzie jest znacznik @Body
+
+    Komponenty nie mają atrybutu @page, są to po prostu elementy, które można wstawiać do innych stron w postaci znacznikówm np. tak: <NavMenu />
+*@
 @page "/"
 
 @* Tytuł strony wyświetlanej w zakładce przeglądarki, trafia też do HTML do znacznika <title> w <head> *@
-<PageTitle>Home</PageTitle>
+<PageTitle>Hello World!</PageTitle>
 
 <SectionContent SectionId="MainLayout.TopSection">
 	<p>Strona główna. @DateTime.Now.ToString("d")</p>

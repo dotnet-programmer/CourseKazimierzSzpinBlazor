@@ -3,13 +3,13 @@
 namespace BlazorWebAssembly.Services;
 
 // używanie bibliotek JS w C#
-public class ToastrService : IToastrService
+// ta klasa jest po to żeby ułatwić dostę do funkcji Toastr
+// dzięki niej wystarczy wywołać metodę np. ShowInfoMessage i nie trzeba pisać całego kodu JS w komponentach Blazora
+public class ToastrService(IJSRuntime jSRuntime) : IToastrService
 {
-	private readonly IJSRuntime _jSRuntime;
-
-	public ToastrService(IJSRuntime jSRuntime)
-		=> _jSRuntime = jSRuntime;
-
 	public async Task ShowInfoMessage(string message)
-		=> await _jSRuntime.InvokeVoidAsync("toastrFunctions.showToastrInfo", message);
+		=> await jSRuntime.InvokeVoidAsync("toastrFunctions.showToastrInfo", message);
+
+	public async Task ShowErrorMessage(string message)
+		=> await jSRuntime.InvokeVoidAsync("toastrFunctions.showToastrError", message);
 }

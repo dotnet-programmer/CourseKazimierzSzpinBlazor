@@ -28,7 +28,7 @@ public partial class Counter
 	public IStudentRepo StudentRepo { get; set; }
 
 	private void AddStudent()
-		=> StudentRepo.Add();
+		=> StudentRepo.AddStudent();
 
 	private void IncrementCount()
 	{

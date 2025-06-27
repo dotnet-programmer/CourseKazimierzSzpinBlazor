@@ -6,9 +6,9 @@ public class StudentRepo : IStudentRepo
 {
 	private readonly List<Student> _students = [];
 
-	public List<Student> Get()
+	public List<Student> GetAllStudents()
 		=> _students;
 
-	public void Add()
+	public void AddStudent()
 		=> _students.Add(new Student { Name = Guid.NewGuid().ToString() });
 }

@@ -1,6 +1,5 @@
 ﻿namespace BlazorWebAssembly.Models;
 
-// klasa - model używana  
 public class CardModel
 {
 	public string Image { get; set; }

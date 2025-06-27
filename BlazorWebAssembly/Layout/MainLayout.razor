@@ -13,7 +13,7 @@
 				sekcje - można je tworzyć na 2 sposoby:
 				- używając nazwy - SectionName, np. <SectionOutlet SectionName="top" />
 				- używając Id (lepsza rozwiązanie) np. <SectionOutlet SectionId="TopSection" />
-					najpierw stworzyć nowy obiekt z odpowiednią nazwą w kodzie C#
+					najpierw stworzyć nowy obiekt z odpowiednią nazwą w kodzie C# - public static object TopSection = new();
 					dzięki temu można odnosić się do tej konkretnej sekcji nie po stringu tylko po nazwie obiektu
 				SectionOutlet oznacza utworzenie takiego miejsca na sekcję, w którym na pozostałych stronach można wyświetlić ich własne sekcje za pomocą SectionContent
 				czyli to taki placeholder mówiący że tutaj można dodać własną sekcję
@@ -30,6 +30,7 @@
 			@*
 				@ref - wiązanie pola z komponentem, czyli ustawienie referencji do komponentu podrzędnego i przypisanie do pola _errorBoundary
 				Odwołanie z komponentu nadrzędnego (MainLayout) do komponentu podrzędnego (ErrorBoundary)
+                poza wyświetleniem strony z błędem, trzeba stłumić ten wyjątek i przywrócić normalny tryb działania aplikacji
 			*@
 			<ErrorBoundary @ref="_errorBoundary">
 

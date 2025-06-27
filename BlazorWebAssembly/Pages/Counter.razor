@@ -62,12 +62,8 @@ else
 
 @* Powiązanie zdarzenia onclick z metodą stworzoną w C# *@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
 <br />
-
-<button class="btn btn-primary my-3" @onclick="ToggleActive">
-	Przełącz tryb
-</button>
+<button class="btn btn-primary my-3" @onclick="ToggleActive">Przełącz tryb</button>
 @if (_isActive)
 {
 	<p class="text-light bg-success p-2">AKTYWNY</p>
@@ -95,10 +91,10 @@ else
 <hr />
 
 <button class="btn btn-primary mb-3" @onclick="AddStudent">Dodaj studenta</button>
-<p>Ilość uczniów: @StudentRepo.Get().Count</p>
+<p>Ilość uczniów: @StudentRepo.GetAllStudents().Count</p>
 <h3>Studenci:</h3>
 <ul>
-	@foreach (var item in StudentRepo.Get())
+	@foreach (var item in StudentRepo.GetAllStudents())
 	{
 		<li>@item.Name</li>
 	}
@@ -112,3 +108,4 @@ else
 <button class="btn btn-primary my-3" @onclick="GoToSiteWithParametersFromQuery">Przekaż parametry przez scieżkę po znaku zapytania</button>
 
 @* Sekcja @code przeniesiona do pliku code-behind: Counter.razor.cs *@
+@* @code {} *@

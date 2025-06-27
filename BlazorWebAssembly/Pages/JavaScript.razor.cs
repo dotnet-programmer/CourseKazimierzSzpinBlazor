@@ -11,13 +11,12 @@ public partial class JavaScript
 	public IJSRuntime JSRuntime { get; set; }
 
 	// wywołanie funkcji JS bez zwracanych danych
-	// pierwszy parametr to nazwa funkcji JS która ma zostać wywołana, a kolenje to lista parametrów przekazanych do tej metody
+	// pierwszy parametr to nazwa funkcji JS która ma zostać wywołana, a kolejne to lista parametrów przekazanych do tej metody
 	private async Task DisplayAlert()
 		=> await JSRuntime.InvokeVoidAsync("alert", "Przykładowa wiadomość");
 
 	// wywołanie funkcji JS ze zwracaniem danych
 	private bool _dialogResult = false;
-
 	// wywołanie funkcji JS ze zwracaniem danych
 	// typ generyczny TValue oznacza typ wartości zwracanej
 	private async Task DisplayConfirmDialog()
@@ -62,6 +61,9 @@ public partial class JavaScript
 	#region używanie bibliotek JS w C#
 	[Inject]
 	public IToastrService ToastrService { get; set; }
+	// w przypadku gdy nie ma interfejsu IToastrService, można wstrzyknąć bezpośrednio klasę ToastrService:
+	// [Inject]
+	// public ToastrService ToastrService { get; set; }
 
 	private async Task DisplayToastrNotification()
 		=> await ToastrService.ShowInfoMessage("Toastr wywołany w Blazor!");
