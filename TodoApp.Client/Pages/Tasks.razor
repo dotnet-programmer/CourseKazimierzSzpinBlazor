@@ -1,8 +1,8 @@
 ﻿@page "/"
 
-<PageTitle>Moje zadania</PageTitle>
+<PageTitle>@Title</PageTitle>
 
-<h1>Moje zadania</h1>
+<h1>@Title</h1>
 
 @if (_tasks == null)
 {
@@ -27,7 +27,6 @@ else
 
 			@* @foreach (var item in _tasks) *@
 			@* { *@
-
 			@*
 				wyświetlenie tabeli z zastosowanie wirtualizacji, 
 				pozwala na wyświetlenie tylko tego fragmentu, który jest widoczny u użytkownika, zamiast ładować wszystkie dane od razu
@@ -52,11 +51,11 @@ else
 					</td>
 					<td>
 						<a href="/task/edit/@item.Id" class="btn btn-warning btn-sm me-2 my-1">Edytuj</a>
+                        @* żeby do metody przekazać parametr, trzeba użyć wyrażenia lambda *@
 						<button @onclick="() => DeleteTask(item.Id, item.Title)" type="button" class="btn btn-danger btn-sm my-1">Usuń</button>
 					</td>
 				</tr>
 			</Virtualize>
-
 			@* } *@
 
 		</tbody>
@@ -65,7 +64,7 @@ else
 
 <Modal Show="_showDeleteDialog" OnAccept="DeleteConfirmed" OnCancel="DeleteCanceled">
 	<Title>
-		Potwierdź proszę
+		Potwierdź usuwanie
 	</Title>
 	<Body>
 		@_deleteDialogBody

@@ -1,12 +1,12 @@
 ﻿@page "/task/add"
 
-<PageTitle>Dodaj zadanie</PageTitle>
+<PageTitle>@Title</PageTitle>
 
-<h1>Dodaj zadanie</h1>
+<h1>@Title</h1>
 
 <div class="row my-4">
 	<div class="col-6">
-		<EditForm Model="_addTaskCommand" OnValidSubmit="Save">
+        <EditForm Model="_addTaskCommand" OnValidSubmit="SaveAsync">
 			
 			@* włączenie sprawdzania poprawności danych (walidacja) *@
 			<DataAnnotationsValidator />

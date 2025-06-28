@@ -8,12 +8,19 @@ namespace TodoApp.Client.Pages;
 
 public partial class TaskAdd
 {
-	private bool _isLoading = false;
-	private string _imageFullUrl;
+	private const string Title = "Dodaj nowe zadanie";
+
+	// model dla widoku z projektu Shared
 	private readonly AddTaskCommand _addTaskCommand = new() { Term = DateTime.Now };
 
+	// pole potrzebne do zmiany stanu przycisku Zapisz
+	private bool _isLoading = false;
+
+	// do wyświetlenia zdjęcia na formularzu
+	private string _imageFullUrl;
+
 	[Inject]
-	public ITaskHttpRepository TaskHttpRepository { get; set; }
+	public ITasksHttpRepository TasksHttpRepository { get; set; }
 
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }
@@ -24,14 +31,14 @@ public partial class TaskAdd
 	[Inject]
 	public IConfiguration Configuration { get; set; }
 
-	private async Task Save()
+	private async Task SaveAsync()
 	{
 		try
 		{
 			_isLoading = true;
-			await TaskHttpRepository.Add(_addTaskCommand);
+			await TasksHttpRepository.AddAsync(_addTaskCommand);
 			NavigationManager.NavigateTo("/");
-			await ToastrService.ShowSuccessMessage("Nowe zadanie zostało dodane.");
+			await ToastrService.ShowSuccessMessageAsync("Nowe zadanie zostało dodane.");
 		}
 		finally
 		{
@@ -48,8 +55,9 @@ public partial class TaskAdd
 			return;
 		}
 
-		await TaskHttpRepository.UploadImage(selectedFile);
+		await TasksHttpRepository.UploadImageAsync(selectedFile);
 
+		// wyświetlenie zdjęcia z serwera innego projektu na formularzu
 		_imageFullUrl = $"{Configuration["ApiConfiguration:BaseAddress"]}/content/files/{selectedFile.Name}";
 
 		_addTaskCommand.ImageUrl = _imageFullUrl;

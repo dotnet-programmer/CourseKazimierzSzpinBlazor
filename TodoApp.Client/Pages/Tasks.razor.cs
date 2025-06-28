@@ -8,13 +8,15 @@ namespace TodoApp.Client.Pages;
 
 public partial class Tasks
 {
+	private const string Title = "Moje zadania";
+
 	private IList<TaskDto> _tasks;
 	private bool _showDeleteDialog;
 	private string _deleteDialogBody;
 	private int _deleteTaskId;
 
 	[Inject]
-	public ITaskHttpRepository TaskHttpRepository { get; set; }
+	public ITasksHttpRepository TasksHttpRepository { get; set; }
 
 	[Inject]
 	public IToastrService ToastrService { get; set; }
@@ -23,13 +25,15 @@ public partial class Tasks
 		=> await RefreshTasks();
 
 	private async Task RefreshTasks() 
-		=> _tasks = await TaskHttpRepository.GetAll();
+		=> _tasks = await TasksHttpRepository.GetAllAsync();
 	// do pokazania jak działa wirtualizacja danych 
+	//{
 	//var tasks = await TaskHttpRepository.GetAll();
 	//_tasks = [];
 	//for (int i = 0; i < 100; i++)
 	//{
 	//	_tasks.AddRange(tasks);
+	//}
 	//}
 
 	private void DeleteTask(int id, string title)
@@ -41,10 +45,10 @@ public partial class Tasks
 
 	private async Task DeleteConfirmed(MouseEventArgs e)
 	{
-		await TaskHttpRepository.Delete(_deleteTaskId);
+		await TasksHttpRepository.DeleteAsync(_deleteTaskId);
 		await RefreshTasks();
 		_showDeleteDialog = false;
-		await ToastrService.ShowSuccessMessage("Zadanie zostało usunięte.");
+		await ToastrService.ShowSuccessMessageAsync("Zadanie zostało usunięte.");
 	}
 
 	private void DeleteCanceled(MouseEventArgs e)

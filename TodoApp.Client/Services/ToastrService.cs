@@ -7,12 +7,12 @@ public class ToastrService(IJSRuntime jsRuntime) : IToastrService
 {
 	private readonly IJSRuntime _jsRuntime = jsRuntime;
 
-	public async Task ShowInfoMessage(string message)
+	public async Task ShowInfoMessageAsync(string message)
 		=> await _jsRuntime.InvokeVoidAsync("toastrFunctions.showToastrInfo", message);
 
-	public async Task ShowSuccessMessage(string message)
+	public async Task ShowSuccessMessageAsync(string message)
 		=> await _jsRuntime.InvokeVoidAsync("toastrFunctions.showToastrSuccess", message);
 
-	public async Task ShowErrorMessage(string message)
+	public async Task ShowErrorMessageAsync(string message)
 		=> await _jsRuntime.InvokeVoidAsync("toastrFunctions.showToastrError", message);
 }

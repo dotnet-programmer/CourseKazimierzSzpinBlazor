@@ -12,7 +12,8 @@ internal class TaskConfiguration : IEntityTypeConfiguration<Domain.Entities.Task
 
 		builder
 			.Property(x => x.Title)
-			.HasMaxLength(100);
+			.HasMaxLength(100)
+			.IsRequired();
 
 		builder
 			.Property(x => x.Description)

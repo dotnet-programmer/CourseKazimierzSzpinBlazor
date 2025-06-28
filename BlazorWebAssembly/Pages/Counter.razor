@@ -64,14 +64,8 @@ else
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 <br />
 <button class="btn btn-primary my-3" @onclick="ToggleActive">Przełącz tryb</button>
-@if (_isActive)
-{
-	<p class="text-light bg-success p-2">AKTYWNY</p>
-}
-else
-{
-	<p class="text-light bg-danger p-2">NIEAKTYWNY</p>
-}
+@* rzutowanie tekstu na MarkupString, żeby HTML był potraktowany jako znacznik HTML, a nie zwykły tekst: *@
+@(_isActive ? (MarkupString)"<p class='text - light bg - success p - 2'>AKTYWNY</p>" : (MarkupString)"<p class='text - light bg - danger p - 2'>NIEAKTYWNY</p>")
 <p class="text-light bg-info p-2">Ten produkt jest: @(_isActive ? "AKTYWNY" : "NIEAKTYWNY") </p>
 <p class="text-light @(_isActive ? "bg-success" : "bg-danger") p-2">Ten produkt jest: @(_isActive ? "AKTYWNY" : "NIEAKTYWNY") </p>
 

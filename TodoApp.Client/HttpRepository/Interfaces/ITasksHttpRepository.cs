@@ -10,12 +10,12 @@ namespace TodoApp.Client.HttpRepository.Interfaces;
 // dzięki temu jest porządek w kodzie, a samo użycie będzie prostsze, można też operować na interfejsach
 // a serwisy można używać w dowolnych komponentach
 // tutaj są wszystkie metody, które będą pracować z WebApi, czyli będą wywoływać różne endpointy z WebApi
-public interface ITaskHttpRepository
+public interface ITasksHttpRepository
 {
-	Task Add(AddTaskCommand command);
-	Task Edit(EditTaskCommand command);
-	Task Delete(int id);
-	Task<IList<TaskDto>> GetAll();
-	Task<EditTaskCommand> GetEdit(int id);
-	Task UploadImage(IBrowserFile file);
+	Task AddAsync(AddTaskCommand command);
+	Task EditAsync(EditTaskCommand command);
+	Task DeleteAsync(int id);
+	Task<IList<TaskDto>> GetAllAsync();
+	Task<EditTaskCommand> GetEditAsync(int id);
+	Task UploadImageAsync(IBrowserFile file);
 }

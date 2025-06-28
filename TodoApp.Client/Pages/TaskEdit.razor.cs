@@ -7,6 +7,8 @@ namespace TodoApp.Client.Pages;
 
 public partial class TaskEdit
 {
+	private const string Title = "Edytuj zadanie";
+
 	private bool _isLoading = false;
 	private EditTaskCommand _editTaskCommand = new();
 
@@ -14,7 +16,7 @@ public partial class TaskEdit
 	public int Id { get; set; }
 
 	[Inject]
-	public ITaskHttpRepository TaskHttpRepository { get; set; }
+	public ITasksHttpRepository TasksHttpRepository { get; set; }
 
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }
@@ -23,16 +25,16 @@ public partial class TaskEdit
 	public IToastrService ToastrService { get; set; }
 
 	protected override async Task OnInitializedAsync() 
-		=> _editTaskCommand = await TaskHttpRepository.GetEdit(Id);
+		=> _editTaskCommand = await TasksHttpRepository.GetEditAsync(Id);
 
-	private async Task Save()
+	private async Task SaveAsync()
 	{
 		try
 		{
 			_isLoading = true;
-			await TaskHttpRepository.Edit(_editTaskCommand);
+			await TasksHttpRepository.EditAsync(_editTaskCommand);
 			NavigationManager.NavigateTo("/");
-			await ToastrService.ShowSuccessMessage("Zadanie zostało zaktualizowane.");
+			await ToastrService.ShowSuccessMessageAsync("Zadanie zostało zaktualizowane.");
 		}
 		finally
 		{

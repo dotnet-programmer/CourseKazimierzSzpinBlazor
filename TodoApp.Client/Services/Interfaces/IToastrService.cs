@@ -2,7 +2,7 @@
 
 public interface IToastrService
 {
-	Task ShowInfoMessage(string message);
-	Task ShowSuccessMessage(string message);
-	Task ShowErrorMessage(string message);
+	Task ShowInfoMessageAsync(string message);
+	Task ShowSuccessMessageAsync(string message);
+	Task ShowErrorMessageAsync(string message);
 }

@@ -1,14 +1,12 @@
 ﻿@page "/task/edit/{id:int}"
 
-@* TODO - zrobić komponent z całą tą stroną umożliwiając przekazanie parametrów, żeby można było rozróżnić Add od Edit *@
+<PageTitle>Title</PageTitle>
 
-<PageTitle>Edytuj zadanie</PageTitle>
-
-<h1>Edytuj zadanie</h1>
+<h1>Title</h1>
 
 <div class="row my-4">
 	<div class="col-6">
-		<EditForm Model="_editTaskCommand" OnValidSubmit="Save">
+        <EditForm Model="_editTaskCommand" OnValidSubmit="SaveAsync">
 			<DataAnnotationsValidator />
 			<ValidationSummary />
 
