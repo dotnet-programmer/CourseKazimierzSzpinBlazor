@@ -1,10 +1,11 @@
 ﻿@rendermode InteractiveAuto
 
 <section>
+    @* @onkeyup - po wpisaniu dowolnego znaku powiadomienie komponentu nadrzędnego o tym że coś zostało wpisane *@
     <input type="text" 
 		class="form-control form-control-lg" 
 		placeholder="Szukaj produktu..." 
 		@bind-value="SearchValue" 
-		@bind-value:event="oninput" 
+		@bind-value:event="oninput"
 		@onkeyup="OnSearchValueChanged" />
 </section>

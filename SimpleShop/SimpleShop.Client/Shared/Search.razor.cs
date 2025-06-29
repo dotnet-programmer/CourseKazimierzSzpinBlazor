@@ -17,11 +17,7 @@ public partial class Search
 
 	private void OnSearchValueChanged(KeyboardEventArgs e)
 	{
-		if (_timer != null)
-		{
-			_timer.Dispose();
-		}
-
+		_timer?.Dispose();
 		_timer = new Timer(OnTimerCallback, null, 500, 0);
 	}
 

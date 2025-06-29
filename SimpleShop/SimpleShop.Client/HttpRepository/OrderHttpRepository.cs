@@ -6,11 +6,9 @@ namespace SimpleShop.Client.HttpRepository;
 
 public class OrderHttpRepository(HttpClient client) : IOrderHttpRepository
 {
-	private readonly HttpClient _client = client;
-
 	public async Task Add(AddOrderCommand command)
-		=> await _client.PostAsJsonAsync("orders", command);
+		=> await client.PostAsJsonAsync("orders", command);
 
 	public async Task Confirm(ConfirmOrderCommand command)
-		=> await _client.PostAsJsonAsync("orders/confirm", command);
+		=> await client.PostAsJsonAsync("orders/confirm", command);
 }

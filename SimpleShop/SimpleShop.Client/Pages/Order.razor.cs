@@ -12,6 +12,7 @@ using SimpleShop.Shared.Products.Dtos;
 
 namespace SimpleShop.Client.Pages;
 
+// jeśli używany Interceptor to klasa musi implementować IDisposable
 public partial class Order : IDisposable
 {
 	// wyłączenie prerenderingu żeby można było używać zalogowanych użytkowników
@@ -78,10 +79,16 @@ public partial class Order : IDisposable
 			return;
 		}
 
+		// mowa płatność
 		var sesionId = await PaymentRepo.Add(new AddPaymentCommand { Value = _command.Value, ClientUrl = NavigationManager.BaseUri });
 		_command.SessionId = sesionId;
+
+		// nowe zamówienie
 		await OrderRepo.Add(_command);
+
 		await LocalStorage.SetItemAsync("sessionId", sesionId);
+
+		// przekierowanie klienta do płatności
 		await JS.InvokeVoidAsync("redirectToCheckout", sesionId);
 	}
 

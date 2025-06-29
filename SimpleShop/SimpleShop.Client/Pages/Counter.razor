@@ -12,15 +12,18 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-	private int currentCount = 0;
+    private int currentCount = 0;
 
-	// Local Storage
-	[Inject]
-	public ILocalStorageService LocalStorage { get; set; }
+    // Local Storage
+    [Inject]
+    public ILocalStorageService LocalStorage { get; set; }
 
-	private async Task IncrementCount()
-	{
-		currentCount++;
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        // zapisanie aktualnej wartości licznika do LocalStorage
+        // key - "counter" jest kluczem (nazwą), pod którym przechowujemy wartość
+        // data - tutaj będą dane do zapisania, w tym przypadku aktualna wartość licznika
 		await LocalStorage.SetItemAsync("counter", currentCount);
 	}
 

@@ -6,7 +6,11 @@ using Toolbelt.Blazor;
 
 namespace SimpleShop.Client.HttpInterceptor;
 
-// logika Interceptora
+// logika Interceptora - nuget: Toolbelt.Blazor.HttpClientInterceptor
+// Interceptor będzie przechwytywał odpowiedzi z WebApi i będzie je obsługiwał w zależności od odpowiedzi
+// wywołując request do WebAPI dobrze jest mieć możliwość wywołania odpowiedniego zachowania na podstawie odpowiedzi jaką otrzymamy z API
+// np. jeśli zostanie zwrócony Bad Request to wyświetli się informacja użytkownikowi w toastr,
+// albo w przypadku błędu autoryzacji przenieść użyszkodnika do ekranu logowania
 public class HttpInterceptorService(
 	HttpClientInterceptor interceptor,
 	NavigationManager navigationManager,
@@ -18,6 +22,7 @@ public class HttpInterceptorService(
 	private readonly RefreshTokenService _refreshTokenService = refreshTokenService;
 	private readonly NavigationManager _navManager = navManager;
 
+	// udostępnienie metody HandleResponse, żeby można było zarejestrować zdarzenie AfterSendAsync
 	// w komponentach gdzie zostanie wywołana ta metoda, to logika z HandleResponse zostanie wykonana po każdym requeście
 	public void RegisterEvent()
 		=> _interceptor.AfterSendAsync += HandleResponse;
@@ -59,7 +64,7 @@ public class HttpInterceptorService(
 			return;
 		}
 
-		// jeśli odpowiedź nie jest pozytywna - request nie zakończył się sukcesem, czyli był jkaiś błąd w odpowiedzi
+		// jeśli odpowiedź nie jest pozytywna - request nie zakończył się sukcesem, czyli był jakiś błąd w odpowiedzi
 		if (!e.Response.IsSuccessStatusCode)
 		{
 			string message;

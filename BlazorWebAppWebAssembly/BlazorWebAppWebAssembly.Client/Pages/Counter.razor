@@ -1,4 +1,7 @@
 ﻿@page "/counter"
+
+@* w przypadku gdy interaktywność jest ustawiona na WebAssembly jako osobno dla każdej strony/komponentu a nie globalnie, to na każdym komponencie trzeba ustawiać tryb rendermode,
+strony/komponenty bez interaktywności znajdują się w głównym projekcie (serwerowym), a te z interaktywnością trafiają do podprojektu Client, który jest ładowany w przeglądarce *@
 @rendermode InteractiveWebAssembly
 
 <PageTitle>Counter</PageTitle>

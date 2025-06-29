@@ -33,7 +33,7 @@ internal class PaymentService : IPaymentService
 			Mode = "payment"
 		};
 
-		var service = new SessionService();
+		SessionService service = new();
 		var session = service.Create(options);
 
 		// identyfikator sesji, czyli płatności

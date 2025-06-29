@@ -7,6 +7,7 @@ using SimpleShop.Shared.Products.Dtos;
 
 namespace SimpleShop.Client.Pages;
 
+// jeśli używany Interceptor to klasa musi implementować IDisposable
 public partial class Home : IDisposable
 {
 	// wyłączenie prerenderowania

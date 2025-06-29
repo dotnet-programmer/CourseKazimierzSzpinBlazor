@@ -4,6 +4,7 @@ using SimpleShop.Client.HttpRepository.Interfaces;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+// pobranie adresu uri obecnego projektu ¿eby przekazaæ go do konfiguracji HttpClient
 var uri = new Uri(builder.Configuration["ApiConfiguration:BaseAddress"] + "api/");
 
 // je¿eli jest w³¹czony prerendering, to ta konfiguracja nie zadzia³a,

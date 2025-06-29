@@ -8,7 +8,10 @@ builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents()
 	.AddInteractiveWebAssemblyComponents();
 
+// pobranie adresu uri obecnego projektu ¿eby przekazaæ go do konfiguracji HttpClient
 var uri = new Uri(builder.Configuration["ApiConfiguration:BaseAddress"] + "api/");
+
+// dodanie konfiguracji DI z SimpleShop.Client
 builder.Services.AddClient(uri);
 
 var app = builder.Build();
