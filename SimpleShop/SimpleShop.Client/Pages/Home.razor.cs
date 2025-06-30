@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using SimpleShop.Client.HttpInterceptor;
 using SimpleShop.Client.HttpRepository.Interfaces;
@@ -19,7 +20,7 @@ public partial class Home : IDisposable
 
 	private bool _isLoading = false;
 
-	private readonly string _userName;
+	//private string _userName;
 
 	// do pobierania danych przez WebApi
 	[Inject]
@@ -29,6 +30,7 @@ public partial class Home : IDisposable
 	public HttpInterceptorService Interceptor { get; set; }
 
 	// potrzebne żeby dostać się do danych użytkownika w kodzie C#
+	// żeby używać tego parametru CascadingParameter, musi być dodany znacznik CascadingAuthenticationState w DependencyInjection.cs lub na widoku
 	[CascadingParameter]
 	public Task<AuthenticationState> AuthState { get; set; }
 
@@ -42,7 +44,7 @@ public partial class Home : IDisposable
 
 	protected override async Task OnInitializedAsync()
 	{
-		Interceptor.RegisterEvent();
+		Interceptor.RegisterAfterSendEvent();
 		await RefreshProducts();
 
 		//var authState = await AuthState;

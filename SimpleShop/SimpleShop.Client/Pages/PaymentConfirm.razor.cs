@@ -20,7 +20,7 @@ public partial class PaymentConfirm : IDisposable
 	public IOrderHttpRepository OrderRepo { get; set; }
 
 	protected override async Task OnInitializedAsync()
-		=> Interceptor.RegisterEvent();
+		=> Interceptor.RegisterAfterSendEvent();
 
 	// musi być OnAfterRenderAsync bo LocalStorage nie zadziała w OnInitializedAsync
 	protected override async Task OnAfterRenderAsync(bool firstRender)

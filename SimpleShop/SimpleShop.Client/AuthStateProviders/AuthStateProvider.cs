@@ -7,6 +7,7 @@ using SimpleShop.Client.Models;
 namespace SimpleShop.Client.AuthStateProviders;
 
 // klasa z definicją jak ma działać uwierzytelnianie w aplikacji
+// musi dziedziczyć po AuthenticationStateProvider i implementować metodę GetAuthenticationStateAsync
 public class AuthStateProvider(HttpClient httpClient, ILocalStorageService localStorage) : AuthenticationStateProvider
 {
 	private readonly HttpClient _httpClient = httpClient;
@@ -15,16 +16,18 @@ public class AuthStateProvider(HttpClient httpClient, ILocalStorageService local
 
 	public override async Task<AuthenticationState> GetAuthenticationStateAsync()
 	{
-		////sztuczny użytkownik do testów
+		//sztuczny użytkownik do testów
+		//informacje o niezalogowanym użytkowniku, czyli stan domyślny
 		//var anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
-		////return await Task.FromResult(anonymous);
+		//return await Task.FromResult(anonymous);
+
+		// zwrócenie informacji o zalogowanym użytkowniku
 		//var claims = new List<Claim>
 		//{
-		//	new(ClaimTypes.Name, "k.szpin@wp.pl"),
+		//	new(ClaimTypes.Name, "mail@test.pl"),
 		//	new(ClaimTypes.Role, "Administrator")
 		//};
 		//var auth = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, "test")));
-		//// zwrócenie informacji o tym czy użytkownik zalgowany czy nie
 		//return await Task.FromResult(auth);
 
 		var token = await _localStorage.GetItemAsync<string>("authToken");

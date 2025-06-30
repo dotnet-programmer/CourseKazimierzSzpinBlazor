@@ -50,6 +50,7 @@ public static class DependencyInjection
 		services.AddOptions();
 		services.AddAuthorizationCore();
 		services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
+		//znacznik CascadingAuthenticationState może być dodany lokalnie na widoku, lub w DependencyIndection.cs globalnie
 		services.AddCascadingAuthenticationState();
 
 		return services;

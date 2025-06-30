@@ -44,7 +44,7 @@ public partial class Order : IDisposable
 	// przechwycenie wszystkich requestów do API
 	protected override async Task OnInitializedAsync()
 	{
-		Interceptor.RegisterEvent();
+		Interceptor.RegisterAfterSendEvent();
 		Interceptor.RegisterBeforeSendEvent();
 	}
 

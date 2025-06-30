@@ -14,29 +14,28 @@ namespace SimpleShop.Client.HttpInterceptor;
 public class HttpInterceptorService(
 	HttpClientInterceptor interceptor,
 	NavigationManager navigationManager,
-	RefreshTokenService refreshTokenService,
-	NavigationManager navManager)
+	RefreshTokenService refreshTokenService)
 {
 	private readonly HttpClientInterceptor _interceptor = interceptor;
 	private readonly NavigationManager _navigationManager = navigationManager;
 	private readonly RefreshTokenService _refreshTokenService = refreshTokenService;
-	private readonly NavigationManager _navManager = navManager;
+
+	public void RegisterBeforeSendEvent()
+	=> _interceptor.BeforeSendAsync += InterceptBeforeSendAsync;
 
 	// udostępnienie metody HandleResponse, żeby można było zarejestrować zdarzenie AfterSendAsync
 	// w komponentach gdzie zostanie wywołana ta metoda, to logika z HandleResponse zostanie wykonana po każdym requeście
-	public void RegisterEvent()
+	public void RegisterAfterSendEvent()
 		=> _interceptor.AfterSendAsync += HandleResponse;
-
-	public void RegisterBeforeSendEvent()
-		=> _interceptor.BeforeSendAsync += InterceptBeforeSendAsync;
 
 	// odpięcie zdarzenia na dispose
 	public void DisposeEvent()
 	{
-		_interceptor.AfterSendAsync -= HandleResponse;
 		_interceptor.BeforeSendAsync -= InterceptBeforeSendAsync;
+		_interceptor.AfterSendAsync -= HandleResponse;
 	}
 
+	// zdarzenie wykonywane przed requestem, czyli przed wysłaniem żądania do WebApi, żeby zaktualizować tokena jeśli będzie taka potrzeba
 	private async Task InterceptBeforeSendAsync(object sender, HttpClientInterceptorEventArgs e)
 	{
 		// sprawdzenie scieżki, która została wywołana
@@ -76,7 +75,7 @@ public class HttpInterceptorService(
 					message = "Nie znaleziono zasobu.";
 					break;
 				case HttpStatusCode.Unauthorized:
-					_navManager.NavigateTo("/logowanie");
+					_navigationManager.NavigateTo("/logowanie");
 					message = "Dostęp zabroniony";
 					break;
 				default:

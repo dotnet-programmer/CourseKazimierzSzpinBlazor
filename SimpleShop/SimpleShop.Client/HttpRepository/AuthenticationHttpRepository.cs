@@ -18,7 +18,8 @@ public class AuthenticationHttpRepository(
 	HttpClient client,
 	ILocalStorageService localStorage,
 	NavigationManager navManager,
-	AuthenticationStateProvider authStateProvider) : IAuthenticationHttpRepository
+	AuthenticationStateProvider authStateProvider
+) : IAuthenticationHttpRepository
 {
 	private readonly HttpClient _client = client;
 	private readonly ILocalStorageService _localStorage = localStorage;
